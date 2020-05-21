@@ -25,7 +25,6 @@ namespace DesignPatterns.Tests.Creational.AbstractFactory
             };
         }
 
-
         [TestCase(WindowsOsName, typeof(Windows.ConcreteGuiComponentFactory))]
         [TestCase(MacOsName, typeof(Mac.ConcreteGuiComponentFactory))]
         public void Should_Be_Correct_Factory_Type(string os, Type expectedfactoryType)
@@ -67,8 +66,9 @@ namespace DesignPatterns.Tests.Creational.AbstractFactory
         {
             IAbstractGuiComponentFactory factory = GetFactory(os);
             var methodInfo = GetCreateGenericMethod(factory, expectedComponentType);
+            var methodArgs = new object[] { Type.Missing };
 
-            var component = Convert.ChangeType(methodInfo.Invoke(factory, new object[] { new object[] { Type.Missing, Type.Missing, Type.Missing } }), expectedComponentType);
+            var component = Convert.ChangeType(methodInfo.Invoke(factory, new object[] { methodArgs }), expectedComponentType);
 
             Assert.AreEqual(component.GetType(), expectedComponentType);
         }
@@ -81,12 +81,11 @@ namespace DesignPatterns.Tests.Creational.AbstractFactory
         {
             IAbstractGuiComponentFactory factory = GetFactory(os);
             var methodInfo = GetCreateGenericMethod(factory, otherOsComponentType);
-            var methodArgs = new object[] { Type.Missing, Type.Missing, Type.Missing };
+            var methodArgs = new object[] { Type.Missing };
 
             var ex = Assert.Throws(typeof(TargetInvocationException), () => Convert.ChangeType(methodInfo.Invoke(factory, new object[] { methodArgs }), otherOsComponentType));
             Assert.That(ex.InnerException, Is.TypeOf<NotSupportedException>());
         }
-
 
         private MethodInfo GetCreateGenericMethod(IAbstractGuiComponentFactory factory, Type methodReturnType) => 
             factory.GetType().GetMethod(nameof(factory.Create)).MakeGenericMethod(methodReturnType);
