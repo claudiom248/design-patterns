@@ -4,8 +4,8 @@
     {
         TComponent Create<TComponent>(params object[] args) where TComponent : class, IGuiComponent;
 
-        public IButtonComponent CreateButton(int width = 0, int height = 0, string text = "");
+        public IButtonComponent CreateButton(string text = "");
 
-        public ITextBoxComponent CreateTextBox(int width = 0, int height = 0, string value = "");
+        public ITextBoxComponent CreateTextBox(string value = "");
     }
 }

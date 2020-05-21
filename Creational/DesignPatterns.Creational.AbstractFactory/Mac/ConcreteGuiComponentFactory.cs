@@ -29,22 +29,18 @@ namespace DesignPatterns.Creational.AbstractFactory.Mac
             return (TComponent)componentResolver.Invoke(this, args);
         }
 
-        public IButtonComponent CreateButton(int width = 0, int height = 0, string text = "")
+        public IButtonComponent CreateButton(string text = "")
         {
-            return new ButtonComponent()
+            return new ButtonComponent
             {
-                Width = width,
-                Height = height,
                 Text = text
             };
         }
 
-        public ITextBoxComponent CreateTextBox(int width = 0, int height = 0, string value = "")
+        public ITextBoxComponent CreateTextBox(string value = "")
         {
-            return new TextBoxComponent()
+            return new TextBoxComponent
             {
-                Width = width,
-                Height = height,
                 Value = value
             };
         }
