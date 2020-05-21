@@ -1,20 +1,29 @@
-﻿using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.Extensions.Logging;
+﻿using DesignPatterns.Creational.AbstractFactory.RealWorldExample.Domain;
+using DesignPatterns.Creational.AbstractFactory.RealWorldExample.Factory.Abstract;
+using DesignPatterns.Creational.AbstractFactory.RealWorldExample.Service;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.Extensions.FileProviders;
 
 namespace DesignPatterns.Creational.AbstractFactory.RealWorldExample.Pages
 {
     public class IndexModel : PageModel
     {
-        private readonly ILogger<IndexModel> _logger;
+        private const string ContentType = "application/octet-stream";
+        private readonly IReportService _reportService;
+        private readonly IFileProvider _fileProvider;
 
-        public IndexModel(ILogger<IndexModel> logger)
+        public IndexModel(IReportService reportService, IFileProvider fileProvider)
         {
-            _logger = logger;
+            _reportService = reportService;
+            _fileProvider = fileProvider;
         }
 
-        public void OnGet()
+        public ActionResult OnGet()
         {
-
+            IReport report = _reportService.CreateBooksReport(ExportFormatType.Csv);
+            var generatedReportFile = _fileProvider.GetFileInfo(report.Path);
+            return File(generatedReportFile.CreateReadStream(), ContentType, report.Name);
         }
     }
 }

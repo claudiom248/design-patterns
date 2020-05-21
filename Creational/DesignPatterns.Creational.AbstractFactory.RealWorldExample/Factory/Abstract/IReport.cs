@@ -2,7 +2,7 @@
 
 namespace DesignPatterns.Creational.AbstractFactory.RealWorldExample.Factory.Abstract
 {
-    internal interface IReport
+    public interface IReport
     {
         public string Name { get; set; }
 

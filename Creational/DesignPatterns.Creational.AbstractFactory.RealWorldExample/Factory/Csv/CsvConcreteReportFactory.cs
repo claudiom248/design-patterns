@@ -1,5 +1,7 @@
 ﻿using DesignPatterns.Creational.AbstractFactory.RealWorldExample.Domain;
 using DesignPatterns.Creational.AbstractFactory.RealWorldExample.Factory.Abstract;
+using DesignPatterns.Creational.AbstractFactory.RealWorldExample.Utility;
+using Microsoft.Extensions.FileProviders;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -10,15 +12,17 @@ namespace DesignPatterns.Creational.AbstractFactory.RealWorldExample.Factory.Csv
 {
     internal class CsvConcreteReportFactory : IAbstractReportFactory
     {
-        private string _stagingFolderPath;
+        private readonly IFileProvider _fileProvider;
+        private readonly string _stagingFolderPath;
 
-        public CsvConcreteReportFactory(string stagingFolderPath)
+        public CsvConcreteReportFactory(IFileProvider fileProvider, string stagingFolderPath)
         {
             _stagingFolderPath = stagingFolderPath;
+            _fileProvider = fileProvider;
 
-            if (!Directory.Exists(_stagingFolderPath))
+            if (!_fileProvider.GetFileInfo(stagingFolderPath).Exists)
             {
-                Directory.CreateDirectory(stagingFolderPath);
+                Directory.CreateDirectory(_fileProvider.GetCombinedPath(stagingFolderPath));
             }
         }
 
@@ -28,7 +32,7 @@ namespace DesignPatterns.Creational.AbstractFactory.RealWorldExample.Factory.Csv
             {
                 Name = GenerateBooksReportName(),
                 Path = CreateBooksReportFile(books)
-            }; 
+            };
         }
 
         public string GenerateBooksReportName()
@@ -38,14 +42,14 @@ namespace DesignPatterns.Creational.AbstractFactory.RealWorldExample.Factory.Csv
 
         private string CreateBooksReportFile(IEnumerable<Book> books)
         {
-            string filePath = GetTempFilePath();
-            File.WriteAllText(filePath, GetBooksReportCsv(books));
-            return filePath;
+            var relativePath = GetTempFilePath();
+            File.WriteAllText(_fileProvider.GetCombinedPath(relativePath), GetBooksReportCsv(books));
+            return relativePath;
         }
 
         private string GetBooksReportCsv(IEnumerable<Book> books)
         {
-            var csvBuilder = new StringBuilder();
+            StringBuilder csvBuilder = new StringBuilder();
             csvBuilder.Append(GetBooksReportHeader());
             AppendLinesToStringBuilder(GetBooksAsStrings(books), csvBuilder);
 
@@ -64,7 +68,7 @@ namespace DesignPatterns.Creational.AbstractFactory.RealWorldExample.Factory.Csv
 
         private void AppendLinesToStringBuilder(IEnumerable<string> lines, StringBuilder stringBuilder)
         {
-            foreach (var line in lines)
+            foreach (string line in lines)
             {
                 stringBuilder.Append($"{line}\n");
             }
@@ -72,8 +76,7 @@ namespace DesignPatterns.Creational.AbstractFactory.RealWorldExample.Factory.Csv
 
         private string GetTempFilePath()
         {
-            string fileName = $"{Guid.NewGuid()}.csv";
-            return Path.Combine(_stagingFolderPath, fileName);
+            return Path.Combine(_stagingFolderPath, $"{Guid.NewGuid()}.csv");
         }
     }
 }
