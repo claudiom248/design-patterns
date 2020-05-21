@@ -9,12 +9,12 @@ namespace DesignPatterns.Creational.AbstractFactory.Windows
         {
             Type componentType = typeof(TComponent);
 
-            if (typeof(ButtonComponent).IsAssignableFrom(componentType))
+            if (typeof(ButtonComponent) == componentType)
             {
                 return (TComponent)CreateButton();
             }
 
-            if (typeof(TextBoxComponent).IsAssignableFrom(componentType))
+            if (typeof(TextBoxComponent) == componentType)
             {
                 return (TComponent)CreateTextBox();
             }
