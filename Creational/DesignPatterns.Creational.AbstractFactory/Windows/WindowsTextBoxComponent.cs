@@ -1,9 +1,9 @@
 ﻿using DesignPatterns.Creational.AbstractFactory.Abstract;
 using System;
 
-namespace DesignPatterns.Creational.AbstractFactory.Mac
+namespace DesignPatterns.Creational.AbstractFactory.Windows
 {
-    public class TextBoxComponent : BaseComponent, ITextBoxComponent
+    public class WindowsTextBoxComponent : WindowsBaseComponent, ITextBoxComponent
     {
         public string Value { get; set; }
 

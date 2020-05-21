@@ -1,9 +1,9 @@
 ﻿using DesignPatterns.Creational.AbstractFactory.Abstract;
 using System;
 
-namespace DesignPatterns.Creational.AbstractFactory.Windows
+namespace DesignPatterns.Creational.AbstractFactory.Mac
 {
-    public class ButtonComponent : BaseComponent, IButtonComponent
+    public class MacButtonComponent : MacBaseComponent, IButtonComponent
     {
         public string Text { get; set; }
 

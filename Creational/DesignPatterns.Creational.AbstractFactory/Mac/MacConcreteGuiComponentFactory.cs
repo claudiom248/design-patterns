@@ -5,17 +5,17 @@ using System.Reflection;
 
 namespace DesignPatterns.Creational.AbstractFactory.Mac
 {
-    public class ConcreteGuiComponentFactory : IAbstractGuiComponentFactory
+    public class MacConcreteGuiComponentFactory : IAbstractGuiComponentFactory
     {
-        private static readonly Type _type = typeof(ConcreteGuiComponentFactory);
+        private static readonly Type _type = typeof(MacConcreteGuiComponentFactory);
         private readonly IDictionary<Type, MethodBase> _componentResolvers;
 
-        public ConcreteGuiComponentFactory()
+        public MacConcreteGuiComponentFactory()
         {
             _componentResolvers = new Dictionary<Type, MethodBase>
             {
-                [typeof(ButtonComponent)] = _type.GetMethod(nameof(this.CreateButton)),
-                [typeof(TextBoxComponent)] = _type.GetMethod(nameof(this.CreateTextBox))
+                [typeof(MacButtonComponent)] = _type.GetMethod(nameof(this.CreateButton)),
+                [typeof(MacTextBoxComponent)] = _type.GetMethod(nameof(this.CreateTextBox))
             };
         }
 
@@ -31,7 +31,7 @@ namespace DesignPatterns.Creational.AbstractFactory.Mac
 
         public IButtonComponent CreateButton(string text = "")
         {
-            return new ButtonComponent
+            return new MacButtonComponent
             {
                 Text = text
             };
@@ -39,7 +39,7 @@ namespace DesignPatterns.Creational.AbstractFactory.Mac
 
         public ITextBoxComponent CreateTextBox(string value = "")
         {
-            return new TextBoxComponent
+            return new MacTextBoxComponent
             {
                 Value = value
             };

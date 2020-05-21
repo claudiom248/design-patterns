@@ -1,6 +1,6 @@
 ﻿namespace DesignPatterns.Creational.AbstractFactory.Abstract
 {
-    public abstract class SharedBaseComponent : IGuiComponent
+    public abstract class BaseComponent : IGuiComponent
     {
         public virtual string OperatingSystem { get; set; }
 

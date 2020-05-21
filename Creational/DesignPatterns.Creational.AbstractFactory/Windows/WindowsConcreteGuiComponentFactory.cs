@@ -3,18 +3,18 @@ using System;
 
 namespace DesignPatterns.Creational.AbstractFactory.Windows
 {
-    public class ConcreteGuiComponentFactory : IAbstractGuiComponentFactory
+    public class WindowsConcreteGuiComponentFactory : IAbstractGuiComponentFactory
     {
         public TComponent Create<TComponent>(params object[] args) where TComponent : class, IGuiComponent
         {
             Type componentType = typeof(TComponent);
 
-            if (typeof(ButtonComponent) == componentType)
+            if (typeof(WindowsButtonComponent) == componentType)
             {
                 return (TComponent)CreateButton();
             }
 
-            if (typeof(TextBoxComponent) == componentType)
+            if (typeof(WindowsTextBoxComponent) == componentType)
             {
                 return (TComponent)CreateTextBox();
             }
@@ -24,7 +24,7 @@ namespace DesignPatterns.Creational.AbstractFactory.Windows
 
         public IButtonComponent CreateButton(string text = "")
         {
-            return new ButtonComponent
+            return new WindowsButtonComponent
             {
                 Text = text
             };
@@ -32,7 +32,7 @@ namespace DesignPatterns.Creational.AbstractFactory.Windows
 
         public ITextBoxComponent CreateTextBox(string value = "")
         {
-            return new TextBoxComponent
+            return new WindowsTextBoxComponent
             {
                 Value = value
             };
