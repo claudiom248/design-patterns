@@ -10,6 +10,6 @@ namespace DesignPatterns.Creational.AbstractFactory.RealWorldExample.Factory.Abs
 
         public DateTime CreationDate { get; set; }
 
-        public byte[] Data { get; set; }
+        public string Path { get; set; }
     }
 }

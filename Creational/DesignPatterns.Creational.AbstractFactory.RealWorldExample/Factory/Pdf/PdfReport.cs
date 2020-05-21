@@ -11,6 +11,6 @@ namespace DesignPatterns.Creational.AbstractFactory.RealWorldExample.Factory.Pdf
 
         public DateTime CreationDate { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
 
-        public byte[] Data { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        public string Path { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
     }
 }

@@ -5,12 +5,18 @@ namespace DesignPatterns.Creational.AbstractFactory.RealWorldExample.Factory.Csv
 {
     public class CsvReport : IReport
     {
-        public string Name { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        public string Name { get; set; }
 
-        public string Extension { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        public string Extension { get; set; }
 
-        public DateTime CreationDate { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        public DateTime CreationDate { get; set; }
 
-        public byte[] Data { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        public string Path { get; set; }
+
+        public CsvReport()
+        {
+            Extension = ".csv";
+            CreationDate = DateTime.Now;
+        }
     }
 }
