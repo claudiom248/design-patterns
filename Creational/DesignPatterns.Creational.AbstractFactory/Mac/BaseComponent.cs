@@ -4,6 +4,6 @@ namespace DesignPatterns.Creational.AbstractFactory.Mac
 {
     public abstract class BaseComponent : SharedBaseComponent
     {
-        public string OperatingSystem => "Mac";
+        public override string OperatingSystem => "Mac";
     }
 }

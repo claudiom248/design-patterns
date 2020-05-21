@@ -4,6 +4,6 @@ namespace DesignPatterns.Creational.AbstractFactory.Windows
 {
     public abstract class BaseComponent : SharedBaseComponent
     {
-        public string OperatingSystem => "Windows";
+        public override string OperatingSystem => "Windows";
     }
 }
