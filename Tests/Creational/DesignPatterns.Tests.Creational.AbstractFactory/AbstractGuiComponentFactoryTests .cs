@@ -1,10 +1,10 @@
 ﻿using DesignPatterns.Creational.AbstractFactory.Abstract;
+using DesignPatterns.Creational.AbstractFactory.Mac;
+using DesignPatterns.Creational.AbstractFactory.Windows;
 using NUnit.Framework;
 using System;
 using System.Collections.Generic;
 using System.Reflection;
-using Mac = DesignPatterns.Creational.AbstractFactory.Mac;
-using Windows = DesignPatterns.Creational.AbstractFactory.Windows;
 
 namespace DesignPatterns.Tests.Creational.AbstractFactory
 {
@@ -20,13 +20,13 @@ namespace DesignPatterns.Tests.Creational.AbstractFactory
         {
             factories = new Dictionary<string, IAbstractGuiComponentFactory>
             {
-                [WindowsOsName] = new Windows.WindowsConcreteGuiComponentFactory(),
-                [MacOsName] = new Mac.MacConcreteGuiComponentFactory()
+                [WindowsOsName] = new WindowsConcreteGuiComponentFactory(),
+                [MacOsName] = new MacConcreteGuiComponentFactory()
             };
         }
 
-        [TestCase(WindowsOsName, typeof(Windows.WindowsConcreteGuiComponentFactory))]
-        [TestCase(MacOsName, typeof(Mac.MacConcreteGuiComponentFactory))]
+        [TestCase(WindowsOsName, typeof(WindowsConcreteGuiComponentFactory))]
+        [TestCase(MacOsName, typeof(MacConcreteGuiComponentFactory))]
         public void Should_Be_Correct_Factory_Type(string os, Type expectedfactoryType)
         {
             IAbstractGuiComponentFactory factory = GetFactory(os);
@@ -34,8 +34,8 @@ namespace DesignPatterns.Tests.Creational.AbstractFactory
             Assert.AreEqual(factory.GetType(), expectedfactoryType);
         }
 
-        [TestCase(WindowsOsName, typeof(Windows.WindowsButtonComponent))]
-        [TestCase(MacOsName, typeof(Mac.MacButtonComponent))]
+        [TestCase(WindowsOsName, typeof(WindowsButtonComponent))]
+        [TestCase(MacOsName, typeof(MacButtonComponent))]
         public void Should_Create_Correct_Button_Type_Depending_On_Operating_System(string os, Type expectedButtonType)
         {
             IAbstractGuiComponentFactory factory = GetFactory(os);
@@ -46,8 +46,8 @@ namespace DesignPatterns.Tests.Creational.AbstractFactory
             Assert.AreEqual(button.OperatingSystem, os);
         }
 
-        [TestCase(WindowsOsName, typeof(Windows.WindowsTextBoxComponent))]
-        [TestCase(MacOsName, typeof(Mac.MacTextBoxComponent))]
+        [TestCase(WindowsOsName, typeof(WindowsTextBoxComponent))]
+        [TestCase(MacOsName, typeof(MacTextBoxComponent))]
         public void Should_Create_Correct_TextBox_Type_Depending_On_Operating_System(string os, Type expectedTextBoxType)
         {
             IAbstractGuiComponentFactory factory = GetFactory(os);
@@ -58,10 +58,10 @@ namespace DesignPatterns.Tests.Creational.AbstractFactory
             Assert.AreEqual(textBox.OperatingSystem, os);
         }
 
-        [TestCase(WindowsOsName, typeof(Windows.WindowsTextBoxComponent))]
-        [TestCase(WindowsOsName, typeof(Windows.WindowsButtonComponent))]
-        [TestCase(MacOsName, typeof(Mac.MacTextBoxComponent))]
-        [TestCase(MacOsName, typeof(Mac.MacButtonComponent))]
+        [TestCase(WindowsOsName, typeof(WindowsTextBoxComponent))]
+        [TestCase(WindowsOsName, typeof(WindowsButtonComponent))]
+        [TestCase(MacOsName, typeof(MacTextBoxComponent))]
+        [TestCase(MacOsName, typeof(MacButtonComponent))]
         public void Should_Create_Correct_Component_Type_Depending_On_Operating_System(string os, Type expectedComponentType)
         {
             IAbstractGuiComponentFactory factory = GetFactory(os);
@@ -73,10 +73,10 @@ namespace DesignPatterns.Tests.Creational.AbstractFactory
             Assert.AreEqual(component.GetType(), expectedComponentType);
         }
 
-        [TestCase(WindowsOsName, typeof(Mac.MacTextBoxComponent))]
-        [TestCase(WindowsOsName, typeof(Mac.MacButtonComponent))]
-        [TestCase(MacOsName, typeof(Windows.WindowsTextBoxComponent))]
-        [TestCase(MacOsName, typeof(Windows.WindowsButtonComponent))]
+        [TestCase(WindowsOsName, typeof(MacTextBoxComponent))]
+        [TestCase(WindowsOsName, typeof(MacButtonComponent))]
+        [TestCase(MacOsName, typeof(WindowsTextBoxComponent))]
+        [TestCase(MacOsName, typeof(WindowsButtonComponent))]
         public void Should_Fail_Creating_Component_Type_Of_Another_Operating_System(string os, Type otherOsComponentType)
         {
             IAbstractGuiComponentFactory factory = GetFactory(os);
