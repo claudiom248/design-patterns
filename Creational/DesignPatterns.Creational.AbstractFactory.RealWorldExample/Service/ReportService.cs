@@ -22,7 +22,7 @@ namespace DesignPatterns.Creational.AbstractFactory.RealWorldExample.Service
         {
             IEnumerable<Book> books = _bookService.GetAll();
             IAbstractReportFactory factory = _reportFactoryActivator.GetFactory(format);
-            return factory.CreateBooksReport(books); ;
+            return factory.CreateBooksReport(books);
         }
     }
 }

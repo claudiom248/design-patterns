@@ -13,6 +13,5 @@ namespace DesignPatterns.Creational.AbstractFactory.RealWorldExample.Domain
         public decimal Price { get; set; }
 
         public int CopiesSold { get; set; }
-
     }
 }
