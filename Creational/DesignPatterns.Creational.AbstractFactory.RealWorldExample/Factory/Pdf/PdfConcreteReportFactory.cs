@@ -35,7 +35,7 @@ namespace DesignPatterns.Creational.AbstractFactory.RealWorldExample.Factory.Pdf
         {
             return new PdfReport()
             {
-                Name = GenerateBooksReportName(),
+                Name = ReportType.AllBooks.GetFileName(ReportFormatType.Pdf),
                 Path = CreateBooksReportFile(books)
             };
         }
@@ -51,11 +51,6 @@ namespace DesignPatterns.Creational.AbstractFactory.RealWorldExample.Factory.Pdf
         private string GetBooksTemplateFile()
         {
             return Path.Combine(_templatesFolderPath, AllBooksTemplateFilePath);
-        }
-
-        public string GenerateBooksReportName()
-        {
-            return $"AllBooks-{DateTime.Now.ToString("yyyyMMddHHmmss")}.pdf";
         }
 
         private string GetTempFilePath()

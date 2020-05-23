@@ -30,14 +30,9 @@ namespace DesignPatterns.Creational.AbstractFactory.RealWorldExample.Factory.Csv
         {
             return new CsvReport()
             {
-                Name = GenerateBooksReportName(),
+                Name = ReportType.AllBooks.GetFileName(ReportFormatType.Csv),
                 Path = CreateBooksReportFile(books)
             };
-        }
-
-        private string GenerateBooksReportName()
-        {
-            return $"AllBooks-{DateTime.Now.ToString("yyyyMMddHHmmss")}.csv";
         }
 
         private string CreateBooksReportFile(IEnumerable<Book> books)
