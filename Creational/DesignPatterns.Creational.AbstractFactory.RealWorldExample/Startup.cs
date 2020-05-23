@@ -36,6 +36,7 @@ namespace DesignPatterns.Creational.AbstractFactory.RealWorldExample
             AddReportFactories(services);
             services.AddSingleton<IBookService, BookService>();
             services.AddScoped<IReportService, ReportService>();
+            //services.AddScoped<ServiceProvider>(sp => sp.get);
         }
 
         public void AddReportFactories(IServiceCollection services)
@@ -59,20 +60,7 @@ namespace DesignPatterns.Creational.AbstractFactory.RealWorldExample
                     reportsStagingFolderPath);
             });
 
-            services.AddScoped<ReportFactoryActivator>(serviceProvider => reportFormatType =>
-            {
-                if (reportFormatType == Domain.ReportFormatType.Csv)
-                {
-                    return serviceProvider.GetService<CsvConcreteReportFactory>();
-                }
-
-                if (reportFormatType == Domain.ReportFormatType.Pdf)
-                {
-                    return serviceProvider.GetService<PdfConcreteReportFactory>();
-                }
-
-                throw new ArgumentException(nameof(reportFormatType));
-            });
+            services.AddScoped<IReportFactoryGenerator, ContainerBasedReportFactoryGenerator>();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
