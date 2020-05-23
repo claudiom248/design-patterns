@@ -37,7 +37,7 @@ namespace DesignPatterns.Creational.AbstractFactory.RealWorldExample.Factory.Csv
 
         private string GenerateBooksReportName()
         {
-            return $"AllBooks-{DateTime.Now.ToString("yyyy-MM-dd-HH-mm-ss")}.csv";
+            return $"AllBooks-{DateTime.Now.ToString("yyyyMMddHHmmss")}.csv";
         }
 
         private string CreateBooksReportFile(IEnumerable<Book> books)

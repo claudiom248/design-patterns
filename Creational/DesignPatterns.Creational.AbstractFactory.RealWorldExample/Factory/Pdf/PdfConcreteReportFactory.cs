@@ -55,7 +55,7 @@ namespace DesignPatterns.Creational.AbstractFactory.RealWorldExample.Factory.Pdf
 
         public string GenerateBooksReportName()
         {
-            return $"AllBooks-{DateTime.Now.ToString("yyyy-MM-dd-HH-mm-ss")}.pdf";
+            return $"AllBooks-{DateTime.Now.ToString("yyyyMMddHHmmss")}.pdf";
         }
 
         private string GetTempFilePath()
