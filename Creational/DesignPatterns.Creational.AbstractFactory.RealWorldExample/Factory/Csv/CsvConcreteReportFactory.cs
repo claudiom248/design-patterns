@@ -26,14 +26,11 @@ namespace DesignPatterns.Creational.AbstractFactory.RealWorldExample.Factory.Csv
             }
         }
 
-        public IReport CreateBooksReport(IEnumerable<Book> books)
-        {
-            return new CsvReport()
-            {
+        public IReport CreateBooksReport(IEnumerable<Book> books) => 
+            new CsvReport {
                 Name = ReportType.AllBooks.GetFileName(ReportFormatType.Csv),
                 Path = CreateBooksReportFile(books)
             };
-        }
 
         private string CreateBooksReportFile(IEnumerable<Book> books)
         {
@@ -51,15 +48,10 @@ namespace DesignPatterns.Creational.AbstractFactory.RealWorldExample.Factory.Csv
             return csvBuilder.ToString();
         }
 
-        private string GetBooksReportHeader()
-        {
-            return "ISBN,Title,Price,Author,CopiesSold\n";
-        }
+        private string GetBooksReportHeader() => "ISBN,Title,Price,Author,CopiesSold\n";
 
-        private string[] GetBooksAsStrings(IEnumerable<Book> books)
-        {
-            return books.Select(b => string.Join(",", b.Isbn, b.Title, b.Price, b.Author, b.CopiesSold)).ToArray();
-        }
+        private string[] GetBooksAsStrings(IEnumerable<Book> books) => 
+            books.Select(b => string.Join(",", b.Isbn, b.Title, b.Price, b.Author, b.CopiesSold)).ToArray();
 
         private void AppendLinesToStringBuilder(IEnumerable<string> lines, StringBuilder stringBuilder)
         {
@@ -69,9 +61,6 @@ namespace DesignPatterns.Creational.AbstractFactory.RealWorldExample.Factory.Csv
             }
         }
 
-        private string GetTempFilePath()
-        {
-            return Path.Combine(_stagingFolderPath, $"{Guid.NewGuid()}.csv");
-        }
+        private string GetTempFilePath() => Path.Combine(_stagingFolderPath, $"{Guid.NewGuid()}.csv");
     }
 }

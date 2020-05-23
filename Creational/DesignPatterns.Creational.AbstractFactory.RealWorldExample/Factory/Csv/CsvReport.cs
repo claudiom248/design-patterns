@@ -1,4 +1,5 @@
-﻿using DesignPatterns.Creational.AbstractFactory.RealWorldExample.Factory.Abstract;
+﻿using DesignPatterns.Creational.AbstractFactory.RealWorldExample.Domain;
+using DesignPatterns.Creational.AbstractFactory.RealWorldExample.Factory.Abstract;
 using System;
 
 namespace DesignPatterns.Creational.AbstractFactory.RealWorldExample.Factory.Csv
@@ -7,16 +8,12 @@ namespace DesignPatterns.Creational.AbstractFactory.RealWorldExample.Factory.Csv
     {
         public string Name { get; set; }
 
-        public string Extension { get; set; }
+        public ReportFormatType Format { get; set; }
 
         public DateTime CreationDate { get; set; }
 
         public string Path { get; set; }
 
-        public CsvReport()
-        {
-            Extension = ".csv";
-            CreationDate = DateTime.Now;
-        }
+        public CsvReport() => Format = ReportFormatType.Csv;
     }
 }

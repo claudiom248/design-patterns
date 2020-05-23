@@ -5,9 +5,8 @@ namespace DesignPatterns.Creational.AbstractFactory.RealWorldExample.Service
 {
     public class BookService : IBookService
     {
-        public IEnumerable<Book> GetAll()
-        {
-            return new List<Book>
+        public IEnumerable<Book> GetAll() =>
+            new List<Book>
             {
                 new Book()
                 {
@@ -32,7 +31,7 @@ namespace DesignPatterns.Creational.AbstractFactory.RealWorldExample.Service
                     Isbn = "ISBN3",
                     Price = 25.70M,
                     Title = "Title3"
-                },                
+                },
                 new Book()
                 {
                     Author = "Author4",
@@ -42,6 +41,5 @@ namespace DesignPatterns.Creational.AbstractFactory.RealWorldExample.Service
                     Title = "Title4"
                 }
             };
-        }
     }
 }

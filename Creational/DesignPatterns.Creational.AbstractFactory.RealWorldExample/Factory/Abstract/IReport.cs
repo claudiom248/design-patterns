@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DesignPatterns.Creational.AbstractFactory.RealWorldExample.Domain;
+using System;
 
 namespace DesignPatterns.Creational.AbstractFactory.RealWorldExample.Factory.Abstract
 {
@@ -6,7 +7,7 @@ namespace DesignPatterns.Creational.AbstractFactory.RealWorldExample.Factory.Abs
     {
         public string Name { get; set; }
 
-        public string Extension { get; set; }
+        public ReportFormatType Format { get; set; }
 
         public DateTime CreationDate { get; set; }
 

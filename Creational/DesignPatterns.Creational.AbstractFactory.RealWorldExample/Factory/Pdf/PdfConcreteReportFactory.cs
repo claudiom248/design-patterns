@@ -31,14 +31,12 @@ namespace DesignPatterns.Creational.AbstractFactory.RealWorldExample.Factory.Pdf
             }
         }
 
-        public IReport CreateBooksReport(IEnumerable<Book> books)
-        {
-            return new PdfReport()
+        public IReport CreateBooksReport(IEnumerable<Book> books) =>
+            new PdfReport()
             {
                 Name = ReportType.AllBooks.GetFileName(ReportFormatType.Pdf),
                 Path = CreateBooksReportFile(books)
             };
-        }
 
         private string CreateBooksReportFile(IEnumerable<Book> books)
         {
@@ -48,14 +46,8 @@ namespace DesignPatterns.Creational.AbstractFactory.RealWorldExample.Factory.Pdf
             return relativePath;
         }
 
-        private string GetBooksTemplateFile()
-        {
-            return Path.Combine(_templatesFolderPath, AllBooksTemplateFilePath);
-        }
+        private string GetBooksTemplateFile() => Path.Combine(_templatesFolderPath, AllBooksTemplateFilePath);
 
-        private string GetTempFilePath()
-        {
-            return Path.Combine(_stagingFolderPath, $"{Guid.NewGuid()}.pdf");
-        }
+        private string GetTempFilePath() => Path.Combine(_stagingFolderPath, $"{Guid.NewGuid()}.pdf");
     }
 }

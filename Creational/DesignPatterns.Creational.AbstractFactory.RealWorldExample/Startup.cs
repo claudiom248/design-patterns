@@ -8,7 +8,6 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.FileProviders;
 using Microsoft.Extensions.Hosting;
-using System;
 using System.IO;
 using Wkhtmltopdf.NetCore;
 
@@ -36,7 +35,6 @@ namespace DesignPatterns.Creational.AbstractFactory.RealWorldExample
             AddReportFactories(services);
             services.AddSingleton<IBookService, BookService>();
             services.AddScoped<IReportService, ReportService>();
-            //services.AddScoped<ServiceProvider>(sp => sp.get);
         }
 
         public void AddReportFactories(IServiceCollection services)

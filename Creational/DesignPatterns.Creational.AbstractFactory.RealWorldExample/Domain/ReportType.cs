@@ -4,10 +4,7 @@ namespace DesignPatterns.Creational.AbstractFactory.RealWorldExample.Domain
 {
     public class ReportType
     {
-        public static ReportType AllBooks = new ReportType()
-        {
-            ReportId = "AllBooks", ReportName = "AllBooks"
-        };
+        public static ReportType AllBooks => new ReportType { ReportId = "AllBooks", ReportName = "AllBooks" };
 
         public string ReportId { get; set; }
 
