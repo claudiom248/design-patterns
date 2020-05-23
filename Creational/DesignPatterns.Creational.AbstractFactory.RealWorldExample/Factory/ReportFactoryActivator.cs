@@ -18,14 +18,14 @@ namespace DesignPatterns.Creational.AbstractFactory.RealWorldExample.Factory
             _stagingFolderPath = stagingFolderPath;
         }
 
-        public IAbstractReportFactory GetReportFactory(ExportFormatType format)
+        public IAbstractReportFactory GetReportFactory(ReportFormatType format)
         {
-            if (format == ExportFormatType.Csv)
+            if (format == ReportFormatType.Csv)
             {
                 return new CsvConcreteReportFactory(_fileProvider, _stagingFolderPath);
             }
 
-            if (format == ExportFormatType.Pdf)
+            if (format == ReportFormatType.Pdf)
             {
                 return new PdfConcreteReportFactory(_fileProvider, _stagingFolderPath);
             }

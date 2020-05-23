@@ -1,6 +1,6 @@
 ﻿namespace DesignPatterns.Creational.AbstractFactory.RealWorldExample.Domain
 {
-    public enum ExportFormatType
+    public enum ReportFormatType
     {
         Csv, Pdf
     }

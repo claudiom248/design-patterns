@@ -18,7 +18,7 @@ namespace DesignPatterns.Creational.AbstractFactory.RealWorldExample.Service
             _reportFactoryActivator = reportFactoryActivator;
         }
 
-        public IReport CreateBooksReport(ExportFormatType format)
+        public IReport CreateBooksReport(ReportFormatType format)
         {
             IEnumerable<Book> books = _bookService.GetAll();
             IAbstractReportFactory factory = _reportFactoryActivator.GetReportFactory(format);

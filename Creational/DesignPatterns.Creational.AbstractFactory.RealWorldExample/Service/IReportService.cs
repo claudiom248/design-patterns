@@ -5,6 +5,6 @@ namespace DesignPatterns.Creational.AbstractFactory.RealWorldExample.Service
 {
     public interface IReportService
     {
-        IReport CreateBooksReport(ExportFormatType format);
+        IReport CreateBooksReport(ReportFormatType format);
     }
 }

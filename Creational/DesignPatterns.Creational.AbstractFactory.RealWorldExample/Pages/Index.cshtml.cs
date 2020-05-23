@@ -21,7 +21,7 @@ namespace DesignPatterns.Creational.AbstractFactory.RealWorldExample.Pages
 
         public ActionResult OnGet()
         {
-            IReport report = _reportService.CreateBooksReport(ExportFormatType.Csv);
+            IReport report = _reportService.CreateBooksReport(ReportFormatType.Csv);
             var generatedReportFile = _fileProvider.GetFileInfo(report.Path);
             return File(generatedReportFile.CreateReadStream(), ContentType, report.Name);
         }
