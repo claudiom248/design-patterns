@@ -11,16 +11,17 @@ namespace DesignPatterns.Creational.AbstractFactory.RealWorldExample.Infrastruct
     {
         private readonly IServiceProvider _serviceProvider;
 
-        public ContainerBasedReportFactoryGenerator(IServiceProvider serviceProvider) => _serviceProvider = serviceProvider;
-
-        public IAbstractReportFactory GetFactory(ReportFormatType format)
+        public ContainerBasedReportFactoryGenerator(IServiceProvider serviceProvider)
         {
-            if (format == ReportFormatType.Csv)
-            {
-                return _serviceProvider.GetService<CsvConcreteReportFactory>();
-            }
-
-            return _serviceProvider.GetService<PdfConcreteReportFactory>();
+            _serviceProvider = serviceProvider;
         }
+
+        public IAbstractReportFactory GetFactory(ReportFormatType format) =>
+            format switch
+            {
+                ReportFormatType.Csv => _serviceProvider.GetService<CsvConcreteReportFactory>(),
+                ReportFormatType.Pdf => _serviceProvider.GetService<PdfConcreteReportFactory>(),
+                _ => throw new ArgumentException(nameof(format))
+            };
     }
 }
