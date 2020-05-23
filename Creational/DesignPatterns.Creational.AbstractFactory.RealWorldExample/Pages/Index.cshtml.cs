@@ -4,26 +4,36 @@ using DesignPatterns.Creational.AbstractFactory.RealWorldExample.Service;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.FileProviders;
+using System.Collections.Generic;
 
 namespace DesignPatterns.Creational.AbstractFactory.RealWorldExample.Pages
 {
     public class IndexModel : PageModel
     {
         private const string ContentType = "application/octet-stream";
+        private readonly IBookService _bookService;
         private readonly IReportService _reportService;
         private readonly IFileProvider _fileProvider;
 
-        public IndexModel(IReportService reportService, IFileProvider fileProvider)
+        public IEnumerable<Book> Books { get; set; }
+
+        public IndexModel(IBookService bookService, IReportService reportService, IFileProvider fileProvider)
         {
+            _bookService = bookService;
             _reportService = reportService;
             _fileProvider = fileProvider;
         }
 
-        public ActionResult OnGet()
+        public void OnGet()
         {
-            IReport report = _reportService.CreateBooksReport(ReportFormatType.Csv);
-            var generatedReportFile = _fileProvider.GetFileInfo(report.Path);
-            return File(generatedReportFile.CreateReadStream(), ContentType, report.Name);
+            Books = _bookService.GetAll();
+        }
+
+        public ActionResult OnGetExportReport(ReportFormatType format)
+        {
+            IReport report = _reportService.CreateBooksReport(format);
+            var file = _fileProvider.GetFileInfo(report.Path);
+            return File(file.CreateReadStream(), ContentType, report.Name);
         }
     }
 }

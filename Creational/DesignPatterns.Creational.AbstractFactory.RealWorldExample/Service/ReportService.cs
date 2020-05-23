@@ -1,6 +1,6 @@
 ﻿using DesignPatterns.Creational.AbstractFactory.RealWorldExample.Domain;
-using DesignPatterns.Creational.AbstractFactory.RealWorldExample.Factory;
 using DesignPatterns.Creational.AbstractFactory.RealWorldExample.Factory.Abstract;
+using DesignPatterns.Creational.AbstractFactory.RealWorldExample.Infrastructure;
 using System.Collections.Generic;
 
 namespace DesignPatterns.Creational.AbstractFactory.RealWorldExample.Service
@@ -8,11 +8,11 @@ namespace DesignPatterns.Creational.AbstractFactory.RealWorldExample.Service
     public class ReportService : IReportService
     {
         private readonly IBookService _bookService;
-        private readonly IReportFactoryActivator _reportFactoryActivator;
+        private readonly ReportFactoryActivator _reportFactoryActivator;
 
         public ReportService(
             IBookService bookService,
-            IReportFactoryActivator reportFactoryActivator)
+            ReportFactoryActivator reportFactoryActivator)
         {
             _bookService = bookService;
             _reportFactoryActivator = reportFactoryActivator;
@@ -21,7 +21,7 @@ namespace DesignPatterns.Creational.AbstractFactory.RealWorldExample.Service
         public IReport CreateBooksReport(ReportFormatType format)
         {
             IEnumerable<Book> books = _bookService.GetAll();
-            IAbstractReportFactory factory = _reportFactoryActivator.GetReportFactory(format);
+            IAbstractReportFactory factory = _reportFactoryActivator(format);
             return factory.CreateBooksReport(books); ;
         }
     }

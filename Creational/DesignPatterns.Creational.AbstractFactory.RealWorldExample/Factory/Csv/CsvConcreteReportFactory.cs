@@ -35,7 +35,7 @@ namespace DesignPatterns.Creational.AbstractFactory.RealWorldExample.Factory.Csv
             };
         }
 
-        public string GenerateBooksReportName()
+        private string GenerateBooksReportName()
         {
             return $"AllBooks-{DateTime.Now.ToString("yyyy-MM-dd-HH-mm-ss")}.csv";
         }

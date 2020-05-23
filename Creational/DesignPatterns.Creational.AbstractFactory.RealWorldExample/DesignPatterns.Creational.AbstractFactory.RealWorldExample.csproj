@@ -5,7 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Infrastructure\" />
+    <PackageReference Include="Wkhtmltopdf.NetCore" Version="3.0.0" />
   </ItemGroup>
 
 
