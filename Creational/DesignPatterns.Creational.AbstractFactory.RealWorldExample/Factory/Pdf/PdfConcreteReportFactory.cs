@@ -33,9 +33,8 @@ namespace DesignPatterns.Creational.AbstractFactory.RealWorldExample.Factory.Pdf
         }
 
         public IReport CreateBooksReport(IEnumerable<Book> books) =>
-            new PdfReport()
+            new PdfReport(ReportType.AllBooks)
             {
-                Name = ReportType.AllBooks.GetFileName(ReportFormatType.Pdf),
                 Path = CreateBooksReportFile(books)
             };
 

@@ -1,18 +1,11 @@
-﻿using DesignPatterns.Creational.AbstractFactory.RealWorldExample.Domain.Report;
-using System;
-
-namespace DesignPatterns.Creational.AbstractFactory.RealWorldExample.Factory.Pdf
+﻿namespace DesignPatterns.Creational.AbstractFactory.RealWorldExample.Domain.Report
 {
-    public class PdfReport : IReport
+    public class PdfReport : BaseReport
     {
-        public string Name { get; set; }
-
-        public ReportFormatType Format { get; set; }
-
-        public DateTime CreationDate { get; set; }
-
-        public string Path { get; set; }
-
-        public PdfReport() => Format = ReportFormatType.Pdf;
+        public PdfReport(ReportType type)
+            : base(type)
+        {
+            Format = ReportFormatType.Pdf;
+        }
     }
 }

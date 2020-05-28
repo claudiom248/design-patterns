@@ -28,8 +28,7 @@ namespace DesignPatterns.Creational.AbstractFactory.RealWorldExample.Factory.Csv
         }
 
         public IReport CreateBooksReport(IEnumerable<Book> books) => 
-            new CsvReport {
-                Name = ReportType.AllBooks.GetFileName(ReportFormatType.Csv),
+            new CsvReport(ReportType.AllBooks) {
                 Path = CreateBooksReportFile(books)
             };
 
