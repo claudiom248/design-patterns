@@ -6,7 +6,6 @@ namespace DesignPatterns.Creational.AbstractFactory.RealWorldExample.Domain.Repo
     {
         public string Name { get => Type.GetFileName(Format); }
 
-
         public ReportType Type { get; set; }
 
         public ReportFormatType Format { get; set; }
