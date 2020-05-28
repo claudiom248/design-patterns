@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace DesignPatterns.Creational.AbstractFactory.RealWorldExample.Domain
+namespace DesignPatterns.Creational.AbstractFactory.RealWorldExample.Domain.Report
 {
     public class ReportType
     {

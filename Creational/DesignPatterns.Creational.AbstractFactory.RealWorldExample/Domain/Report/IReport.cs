@@ -1,7 +1,7 @@
 ﻿using DesignPatterns.Creational.AbstractFactory.RealWorldExample.Domain;
 using System;
 
-namespace DesignPatterns.Creational.AbstractFactory.RealWorldExample.Factory.Abstract
+namespace DesignPatterns.Creational.AbstractFactory.RealWorldExample.Domain.Report
 {
     public interface IReport
     {

@@ -1,4 +1,5 @@
 ﻿using DesignPatterns.Creational.AbstractFactory.RealWorldExample.Domain;
+using DesignPatterns.Creational.AbstractFactory.RealWorldExample.Domain.Report;
 using DesignPatterns.Creational.AbstractFactory.RealWorldExample.Factory.Abstract;
 using DesignPatterns.Creational.AbstractFactory.RealWorldExample.Utility;
 using Microsoft.Extensions.FileProviders;

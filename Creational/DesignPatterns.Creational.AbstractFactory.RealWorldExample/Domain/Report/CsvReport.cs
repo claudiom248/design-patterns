@@ -1,8 +1,6 @@
-﻿using DesignPatterns.Creational.AbstractFactory.RealWorldExample.Domain;
-using DesignPatterns.Creational.AbstractFactory.RealWorldExample.Factory.Abstract;
-using System;
+﻿using System;
 
-namespace DesignPatterns.Creational.AbstractFactory.RealWorldExample.Factory.Csv
+namespace DesignPatterns.Creational.AbstractFactory.RealWorldExample.Domain.Report
 {
     public class CsvReport : IReport
     {

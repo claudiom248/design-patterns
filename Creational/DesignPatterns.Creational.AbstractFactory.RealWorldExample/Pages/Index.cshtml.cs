@@ -1,5 +1,5 @@
 ﻿using DesignPatterns.Creational.AbstractFactory.RealWorldExample.Domain;
-using DesignPatterns.Creational.AbstractFactory.RealWorldExample.Factory.Abstract;
+using DesignPatterns.Creational.AbstractFactory.RealWorldExample.Domain.Report;
 using DesignPatterns.Creational.AbstractFactory.RealWorldExample.Service;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
