@@ -21,7 +21,7 @@ namespace DesignPatterns.Creational.AbstractFactory.RealWorldExample.Infrastruct
             {
                 ReportFormatType.Csv => _serviceProvider.GetService<CsvConcreteReportFactory>(),
                 ReportFormatType.Pdf => _serviceProvider.GetService<PdfConcreteReportFactory>(),
-                _ => throw new ArgumentException(nameof(format))
+                _ => throw new NotSupportedException($"Invalid format type {format}")
             };
     }
 }
