@@ -24,6 +24,8 @@ namespace DesignPatterns.Creational.FactoryMethod
             _products = products ?? new List<Product>();
         }
 
+        public double TotalWithoutDiscounts => _products.Sum(p => p.BasePrice);
+
         public double Total => _products.Sum(p => p.Price);
 
         public void AddProduct(Product product, IDiscountFactory discountFactory)

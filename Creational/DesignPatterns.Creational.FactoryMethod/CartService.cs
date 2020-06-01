@@ -1,5 +1,4 @@
 ﻿using DesignPatterns.Creational.FactoryMethod.Discount;
-using System.IO.Compression;
 
 namespace DesignPatterns.Creational.FactoryMethod
 {
