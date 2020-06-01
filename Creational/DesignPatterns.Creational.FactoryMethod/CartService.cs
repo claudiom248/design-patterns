@@ -5,9 +5,9 @@ namespace DesignPatterns.Creational.FactoryMethod
     public class CartService
     {
         private Cart _cart;
-        private DiscountFactory _discountFactory;
+        private IDiscountFactory _discountFactory;
 
-        public CartService(Cart cart, DiscountFactory discountFactory)
+        public CartService(Cart cart, IDiscountFactory discountFactory)
         {
             _cart = cart;
             _discountFactory = discountFactory;

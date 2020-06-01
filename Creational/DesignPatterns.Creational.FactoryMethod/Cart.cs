@@ -18,7 +18,7 @@ namespace DesignPatterns.Creational.FactoryMethod
 
         public double Total => _products.Sum(p => p.Price);
 
-        public void AddProduct(Product product, DiscountFactory discountFactory)
+        public void AddProduct(Product product, IDiscountFactory discountFactory)
         {
             _products.Add(product);
 
@@ -28,7 +28,7 @@ namespace DesignPatterns.Creational.FactoryMethod
             }
         }
 
-        public void ApplyPromotion(Promotion promotion, DiscountFactory discountFactory)
+        public void ApplyPromotion(Promotion promotion, IDiscountFactory discountFactory)
         {
             _appliedPromotion = promotion;
             ApplyDiscountOnProducts(GetDiscount(discountFactory));
@@ -61,7 +61,7 @@ namespace DesignPatterns.Creational.FactoryMethod
             }
         }
 
-        private Discount.Discount GetDiscount(DiscountFactory discountFactory)
+        private Discount.Discount GetDiscount(IDiscountFactory discountFactory)
         {
             return discountFactory.GetDiscount(_appliedPromotion);
         }

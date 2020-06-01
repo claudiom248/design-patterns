@@ -2,7 +2,7 @@
 
 namespace DesignPatterns.Creational.FactoryMethod.Discount
 {
-    public class DiscountFactory
+    public class DiscountFactory : IDiscountFactory
     {
         public Discount GetDiscount(Promotion promotion) =>
             promotion.DiscountType switch
