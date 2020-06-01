@@ -16,9 +16,9 @@ namespace DesignPatterns.Creational.FactoryMethod
 
         public IEnumerable<Product> Products => _products.ToList();
 
-        public double TotalWithoutDiscounts => _products.Sum(p => p.BasePrice);
+        public double SubTotal => _products.Sum(p => p.BasePrice);
 
-        public double Total => _products.Sum(p => p.Price);
+        public double GrandTotal => _products.Sum(p => p.Price);
 
         public Cart()
             : this(null) { }

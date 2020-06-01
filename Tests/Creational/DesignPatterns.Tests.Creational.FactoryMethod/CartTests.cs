@@ -13,9 +13,9 @@ namespace DesignPatterns.Tests.Creational.FactoryMethod
         private Promotion _promotionWithAbsoluteValueDiscount;
         private Promotion _promotionWithPercentageDiscount;
 
-        private double CartTotalWithoutDiscounts => _cart.TotalWithoutDiscounts;
+        private double CartSubTotal => _cart.SubTotal;
 
-        private double CartTotal => _cart.Total;
+        private double CartGrandTotal => _cart.GrandTotal;
 
         [OneTimeSetUp]
         public void Setup()
@@ -39,7 +39,7 @@ namespace DesignPatterns.Tests.Creational.FactoryMethod
         [Test]
         public void Cart_Total_Should_Be_Sum_Of_Products_Price_Without_Discount()
         {
-            Assert.AreEqual(CartTotalWithoutDiscounts, CartTotal);
+            Assert.AreEqual(CartSubTotal, CartGrandTotal);
         }
 
         [Test]
@@ -47,8 +47,8 @@ namespace DesignPatterns.Tests.Creational.FactoryMethod
         {
             _cart.ApplyPromotion(_promotionWithPercentageDiscount, _discountFactory);
 
-            Assert.AreNotEqual(CartTotalWithoutDiscounts, CartTotal);
-            Assert.AreEqual(92.15, CartTotal);
+            Assert.AreNotEqual(CartSubTotal, CartGrandTotal);
+            Assert.AreEqual(92.15, CartGrandTotal);
         }
 
         [Test]
@@ -56,8 +56,8 @@ namespace DesignPatterns.Tests.Creational.FactoryMethod
         {
             _cart.ApplyPromotion(_promotionWithAbsoluteValueDiscount, _discountFactory);
 
-            Assert.AreNotEqual(CartTotalWithoutDiscounts, CartTotal);
-            Assert.AreEqual(67, CartTotal);
+            Assert.AreNotEqual(CartSubTotal, CartGrandTotal);
+            Assert.AreEqual(67, CartGrandTotal);
         }
 
         [Test]
