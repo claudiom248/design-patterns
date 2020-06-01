@@ -12,6 +12,10 @@ namespace DesignPatterns.Creational.FactoryMethod
 
         public bool IsPromotionApplied => _appliedPromotion != null;
 
+        public Promotion AppliedPromotion => _appliedPromotion;
+
+        public IEnumerable<Product> Products => _products.ToList();
+
         public Cart()
             : this(null) { }
 
