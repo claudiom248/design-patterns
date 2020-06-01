@@ -1,4 +1,5 @@
 ﻿using DesignPatterns.Creational.FactoryMethod.Discount;
+using System.IO.Compression;
 
 namespace DesignPatterns.Creational.FactoryMethod
 {
@@ -6,6 +7,8 @@ namespace DesignPatterns.Creational.FactoryMethod
     {
         private readonly Cart _cart;
         private readonly IDiscountFactory _discountFactory;
+
+        public Cart Cart => _cart;
 
         public CartService(Cart cart, IDiscountFactory discountFactory)
         {
