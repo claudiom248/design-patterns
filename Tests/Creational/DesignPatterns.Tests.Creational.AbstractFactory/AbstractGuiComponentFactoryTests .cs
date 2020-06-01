@@ -15,7 +15,7 @@ namespace DesignPatterns.Tests.Creational.AbstractFactory
         private const string MacOsName= "Mac";
         private IDictionary<string, IAbstractGuiComponentFactory> factories;
 
-        [SetUp]
+        [OneTimeSetUp]
         public void Setup()
         {
             factories = new Dictionary<string, IAbstractGuiComponentFactory>
@@ -27,42 +27,42 @@ namespace DesignPatterns.Tests.Creational.AbstractFactory
 
         [TestCase(WindowsOsName, typeof(WindowsConcreteGuiComponentFactory))]
         [TestCase(MacOsName, typeof(MacConcreteGuiComponentFactory))]
-        public void Should_Be_Correct_Factory_Type(string os, Type expectedfactoryType)
+        public void Should_Be_Correct_Factory_Type(string os, Type expectedFactoryType)
         {
             IAbstractGuiComponentFactory factory = GetFactory(os);
 
-            Assert.AreEqual(factory.GetType(), expectedfactoryType);
+            Assert.AreEqual(factory.GetType(), expectedFactoryType);
         }
 
         [TestCase(WindowsOsName, typeof(WindowsButtonComponent))]
         [TestCase(MacOsName, typeof(MacButtonComponent))]
-        public void Should_Create_Correct_Button_Type_Depending_On_Operating_System(string os, Type expectedButtonType)
+        public void Should_Create_Correct_Button_Type_Given_On_Operating_System(string os, Type expectedButtonType)
         {
             IAbstractGuiComponentFactory factory = GetFactory(os);
 
             IButtonComponent button = factory.CreateButton();
 
-            Assert.AreEqual(button.GetType(), expectedButtonType);
-            Assert.AreEqual(button.OperatingSystem, os);
+            Assert.AreEqual(expectedButtonType, button.GetType());
+            Assert.AreEqual(os, button.OperatingSystem);
         }
 
         [TestCase(WindowsOsName, typeof(WindowsTextBoxComponent))]
         [TestCase(MacOsName, typeof(MacTextBoxComponent))]
-        public void Should_Create_Correct_TextBox_Type_Depending_On_Operating_System(string os, Type expectedTextBoxType)
+        public void Should_Create_Correct_TextBox_Type_Given_Operating_System(string os, Type expectedTextBoxType)
         {
             IAbstractGuiComponentFactory factory = GetFactory(os);
 
             ITextBoxComponent textBox = factory.CreateTextBox();
 
-            Assert.AreEqual(textBox.GetType(), expectedTextBoxType);
-            Assert.AreEqual(textBox.OperatingSystem, os);
+            Assert.AreEqual(expectedTextBoxType, textBox.GetType());
+            Assert.AreEqual(os, textBox.OperatingSystem);
         }
 
         [TestCase(WindowsOsName, typeof(WindowsTextBoxComponent))]
         [TestCase(WindowsOsName, typeof(WindowsButtonComponent))]
         [TestCase(MacOsName, typeof(MacTextBoxComponent))]
         [TestCase(MacOsName, typeof(MacButtonComponent))]
-        public void Should_Create_Correct_Component_Type_Depending_On_Operating_System(string os, Type expectedComponentType)
+        public void Should_Create_Correct_Component_Type_Given_Operating_System(string os, Type expectedComponentType)
         {
             IAbstractGuiComponentFactory factory = GetFactory(os);
             var methodInfo = GetCreateGenericMethod(factory, expectedComponentType);
@@ -70,7 +70,7 @@ namespace DesignPatterns.Tests.Creational.AbstractFactory
 
             var component = Convert.ChangeType(methodInfo.Invoke(factory, new object[] { methodArgs }), expectedComponentType);
 
-            Assert.AreEqual(component.GetType(), expectedComponentType);
+            Assert.AreEqual(expectedComponentType, component.GetType());
         }
 
         [TestCase(WindowsOsName, typeof(MacTextBoxComponent))]
