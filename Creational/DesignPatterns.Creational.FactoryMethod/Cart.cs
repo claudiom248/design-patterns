@@ -1,4 +1,5 @@
 using DesignPatterns.Creational.FactoryMethod.Discount;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -8,6 +9,8 @@ namespace DesignPatterns.Creational.FactoryMethod
     {
         private Promotion _appliedPromotion;
         private ICollection<Product> _products;
+
+        public bool IsPromotionApplied => _appliedPromotion != null;
 
         public Cart()
             : this(null) { }
@@ -21,7 +24,7 @@ namespace DesignPatterns.Creational.FactoryMethod
         {
             _products.Add(product);
 
-            if (_appliedPromotion != null)
+            if (IsPromotionApplied)
             {
                 ApplyDiscountOnProduct(product, GetDiscount(discountFactory));
             }
@@ -29,12 +32,18 @@ namespace DesignPatterns.Creational.FactoryMethod
 
         public void ApplyPromotion(Promotion promotion, IDiscountFactory discountFactory)
         {
+            if (IsPromotionApplied)
+                throw new InvalidOperationException("A promotion has already been applied to the cart.");
+
             _appliedPromotion = promotion;
             ApplyDiscountOnProducts(GetDiscount(discountFactory));
         }
 
         public void UnapplyPromotion()
         {
+            if (IsPromotionApplied)
+                throw new InvalidOperationException("No promotion applied to the cart.");
+
             _appliedPromotion = null;
             UnapplyDiscountOnProducts();
         }
