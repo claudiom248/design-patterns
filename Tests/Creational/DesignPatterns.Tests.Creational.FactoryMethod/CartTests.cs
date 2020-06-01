@@ -65,7 +65,11 @@ namespace DesignPatterns.Tests.Creational.FactoryMethod
         {
             _cart.ApplyPromotion(_promotionWithAbsoluteValueDiscount, _discountFactory);
 
-            Assert.Throws(typeof(InvalidOperationException), () => _cart.ApplyPromotion(_promotionWithPercentageDiscount, _discountFactory));
+            Assert.Throws(typeof(InvalidOperationException), () =>
+            {
+                _cart.ApplyPromotion(_promotionWithAbsoluteValueDiscount, _discountFactory);
+                _cart.ApplyPromotion(_promotionWithPercentageDiscount, _discountFactory);
+            });
         }
         [Test]
         public void Should_Throw_When_Trying_To_Unapply_Promotion_When_No_Promotion_Is_Applied()
