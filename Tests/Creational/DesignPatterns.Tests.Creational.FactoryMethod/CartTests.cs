@@ -12,7 +12,6 @@ namespace DesignPatterns.Tests.Creational.FactoryMethod
         private IDiscountFactory _discountFactory;
         private Promotion _promotionWithAbsoluteValueDiscount;
         private Promotion _promotionWithPercentageDiscount;
-        private CartService _cartService;
 
         private double CartTotalWithoutDiscounts => _cart.TotalWithoutDiscounts;
 
@@ -23,8 +22,6 @@ namespace DesignPatterns.Tests.Creational.FactoryMethod
         {
             _cart = new Cart();
             _discountFactory = new DiscountFactory();
-
-            _cartService = new CartService(_cart, _discountFactory);
 
             CreatePromotions();
             FillCartWithProducts();
