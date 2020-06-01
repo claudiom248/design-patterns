@@ -8,7 +8,7 @@ namespace DesignPatterns.Creational.FactoryMethod
     public class Cart
     {
         private Promotion _appliedPromotion;
-        private ICollection<Product> _products;
+        private readonly ICollection<Product> _products;
 
         public bool IsPromotionApplied => _appliedPromotion != null;
 
@@ -19,8 +19,10 @@ namespace DesignPatterns.Creational.FactoryMethod
         public Cart()
             : this(null) { }
 
-        public Cart(ICollection<Product> products = null) =>
+        public Cart(ICollection<Product> products = null)
+        {
             _products = products ?? new List<Product>();
+        }
 
         public double Total => _products.Sum(p => p.Price);
 
@@ -37,7 +39,9 @@ namespace DesignPatterns.Creational.FactoryMethod
         public void ApplyPromotion(Promotion promotion, IDiscountFactory discountFactory)
         {
             if (IsPromotionApplied)
+            {
                 throw new InvalidOperationException("A promotion has already been applied to the cart.");
+            }
 
             _appliedPromotion = promotion;
             ApplyDiscountOnProducts(GetDiscount(discountFactory));
@@ -46,7 +50,9 @@ namespace DesignPatterns.Creational.FactoryMethod
         public void UnapplyPromotion()
         {
             if (IsPromotionApplied)
+            {
                 throw new InvalidOperationException("No promotion applied to the cart.");
+            }
 
             _appliedPromotion = null;
             UnapplyDiscountOnProducts();
@@ -54,7 +60,7 @@ namespace DesignPatterns.Creational.FactoryMethod
 
         private void ApplyDiscountOnProducts(Discount.Discount discount)
         {
-            foreach (var product in _products)
+            foreach (Product product in _products)
             {
                 ApplyDiscountOnProduct(product, discount);
             }
@@ -67,7 +73,7 @@ namespace DesignPatterns.Creational.FactoryMethod
 
         private void UnapplyDiscountOnProducts()
         {
-            foreach (var product in _products)
+            foreach (Product product in _products)
             {
                 product.AppliedDiscount = 0;
             }
