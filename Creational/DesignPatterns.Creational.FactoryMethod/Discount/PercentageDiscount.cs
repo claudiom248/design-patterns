@@ -1,4 +1,4 @@
-﻿namespace DesignPatterns.Creational.FactoryMethod.Discount
+namespace DesignPatterns.Creational.FactoryMethod.Discount
 {
     public class PercentageDiscount : Discount
     {
@@ -12,6 +12,4 @@
             return (product.BasePrice * DiscountValue) / 100;
         }
     }
-
-
 }

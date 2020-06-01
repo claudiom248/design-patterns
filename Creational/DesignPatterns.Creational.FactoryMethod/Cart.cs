@@ -1,4 +1,4 @@
-﻿using DesignPatterns.Creational.FactoryMethod.Discount;
+using DesignPatterns.Creational.FactoryMethod.Discount;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -14,7 +14,6 @@ namespace DesignPatterns.Creational.FactoryMethod
 
         public Cart(ICollection<Product> products = null) =>
             _products = products ?? new List<Product>();
-
 
         public double Total => _products.Sum(p => p.Price);
 
