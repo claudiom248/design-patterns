@@ -51,7 +51,7 @@ namespace DesignPatterns.Creational.FactoryMethod
 
         public void UnapplyPromotion()
         {
-            if (IsPromotionApplied)
+            if (!IsPromotionApplied)
             {
                 throw new InvalidOperationException("No promotion applied to the cart.");
             }
