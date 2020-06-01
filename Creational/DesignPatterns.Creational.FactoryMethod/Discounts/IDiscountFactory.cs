@@ -1,4 +1,4 @@
-﻿namespace DesignPatterns.Creational.FactoryMethod.Discount
+﻿namespace DesignPatterns.Creational.FactoryMethod.Discounts
 {
     public interface IDiscountFactory
     {

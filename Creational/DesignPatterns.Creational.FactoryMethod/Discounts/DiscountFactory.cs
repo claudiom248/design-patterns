@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace DesignPatterns.Creational.FactoryMethod.Discount
+namespace DesignPatterns.Creational.FactoryMethod.Discounts
 {
     public class DiscountFactory : IDiscountFactory
     {

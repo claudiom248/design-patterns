@@ -1,4 +1,4 @@
-﻿using DesignPatterns.Creational.FactoryMethod.Discount;
+﻿using DesignPatterns.Creational.FactoryMethod.Discounts;
 
 namespace DesignPatterns.Creational.FactoryMethod
 {

@@ -1,4 +1,4 @@
-using DesignPatterns.Creational.FactoryMethod.Discount;
+using DesignPatterns.Creational.FactoryMethod.Discounts;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -60,7 +60,7 @@ namespace DesignPatterns.Creational.FactoryMethod
             UnapplyDiscountOnProducts();
         }
 
-        private void ApplyDiscountOnProducts(Discount.Discount discount)
+        private void ApplyDiscountOnProducts(Discount discount)
         {
             foreach (Product product in _products)
             {
@@ -68,7 +68,7 @@ namespace DesignPatterns.Creational.FactoryMethod
             }
         }
 
-        private void ApplyDiscountOnProduct(Product product, Discount.Discount discount)
+        private void ApplyDiscountOnProduct(Product product, Discount discount)
         {
             product.AppliedDiscount = discount.GetDiscountValue(product);
         }
@@ -81,7 +81,7 @@ namespace DesignPatterns.Creational.FactoryMethod
             }
         }
 
-        private Discount.Discount GetDiscount(IDiscountFactory discountFactory)
+        private Discount GetDiscount(IDiscountFactory discountFactory)
         {
             return discountFactory.GetDiscount(_appliedPromotion);
         }

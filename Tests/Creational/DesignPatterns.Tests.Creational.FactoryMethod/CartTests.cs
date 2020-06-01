@@ -1,5 +1,5 @@
 ﻿using DesignPatterns.Creational.FactoryMethod;
-using DesignPatterns.Creational.FactoryMethod.Discount;
+using DesignPatterns.Creational.FactoryMethod.Discounts;
 using NUnit.Framework;
 using System;
 
