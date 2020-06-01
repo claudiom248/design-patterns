@@ -76,7 +76,6 @@ namespace DesignPatterns.Tests.Creational.FactoryMethod
             Assert.Throws(typeof(InvalidOperationException), () => _cart.UnapplyPromotion());
         }
 
-
         private void FillCartWithProducts()
         {
             _cart.AddProduct(
@@ -114,7 +113,6 @@ namespace DesignPatterns.Tests.Creational.FactoryMethod
                 DiscountType = DiscountType.Percentage,
                 DiscountValue = 5
             };
-
         }
     }
 }
