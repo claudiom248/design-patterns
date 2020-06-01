@@ -1,4 +1,6 @@
-﻿namespace DesignPatterns.Creational.FactoryMethod
+﻿using DesignPatterns.Creational.FactoryMethod.Discount;
+
+namespace DesignPatterns.Creational.FactoryMethod
 {
     public class Promotion
     {

@@ -7,50 +7,63 @@ namespace DesignPatterns.Creational.FactoryMethod
     public class Cart
     {
         private Promotion _appliedPromotion;
-        private ICollection<Product> _products;   
-        
-        public Cart()
-            : this (null) { }
+        private ICollection<Product> _products;
 
-        public Cart(ICollection<Product> products = null) => 
+        public Cart()
+            : this(null) { }
+
+        public Cart(ICollection<Product> products = null) =>
             _products = products ?? new List<Product>();
 
 
         public double Total => _products.Sum(p => p.Price);
 
-        public void AddProduct(Product product)
+        public void AddProduct(Product product, DiscountFactory discountFactory)
         {
             _products.Add(product);
+
+            if (_appliedPromotion != null)
+            {
+                ApplyDiscountOnProduct(product, GetDiscount(discountFactory));
+            }
         }
 
-        public void ApplyPromotion(Promotion promotion)
+        public void ApplyPromotion(Promotion promotion, DiscountFactory discountFactory)
         {
             _appliedPromotion = promotion;
-            ApplyDiscount();
+            ApplyDiscountOnProducts(GetDiscount(discountFactory));
         }
 
         public void UnapplyPromotion()
         {
             _appliedPromotion = null;
-            UnapplyDiscount();
+            UnapplyDiscountOnProducts();
         }
 
-        private void ApplyDiscount()
+        private void ApplyDiscountOnProducts(Discount.Discount discount)
         {
-            var discount = DiscountFactory.GetDiscount(_appliedPromotion);
-
             foreach (var product in _products)
             {
-                product.AppliedDiscount = discount.GetDiscountValue(product);
+                ApplyDiscountOnProduct(product, discount);
             }
         }
 
-        private void UnapplyDiscount()
+        private void ApplyDiscountOnProduct(Product product, Discount.Discount discount)
+        {
+            product.AppliedDiscount = discount.GetDiscountValue(product);
+        }
+
+        private void UnapplyDiscountOnProducts()
         {
             foreach (var product in _products)
             {
                 product.AppliedDiscount = 0;
             }
+        }
+
+        private Discount.Discount GetDiscount(DiscountFactory discountFactory)
+        {
+            return discountFactory.GetDiscount(_appliedPromotion);
         }
     }
 }

@@ -2,9 +2,9 @@
 
 namespace DesignPatterns.Creational.FactoryMethod.Discount
 {
-    public static class DiscountFactory
+    public class DiscountFactory
     {
-        public static Discount GetDiscount(Promotion promotion) =>
+        public Discount GetDiscount(Promotion promotion) =>
             promotion.DiscountType switch
             {
                 DiscountType.AbsoluteValue => new AbsoluteValueDiscount(promotion.DiscountValue),
