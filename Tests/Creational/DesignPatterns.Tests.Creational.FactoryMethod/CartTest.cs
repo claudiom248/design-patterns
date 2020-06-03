@@ -6,7 +6,7 @@ using System;
 namespace DesignPatterns.Tests.Creational.FactoryMethod
 {
     [TestFixture]
-    public class CartTests
+    public class CartTest
     {
         private Cart _cart;
         private IDiscountFactory _discountFactory;

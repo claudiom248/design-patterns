@@ -9,7 +9,7 @@ using System.Reflection;
 namespace DesignPatterns.Tests.Creational.AbstractFactory
 {
     [TestFixture]
-    public class AbstractFactoryTests
+    public class AbstractFactoryTest
     {
         private const string WindowsOsName = "Windows";
         private const string MacOsName= "Mac";

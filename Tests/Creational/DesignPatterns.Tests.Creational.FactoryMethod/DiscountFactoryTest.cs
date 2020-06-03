@@ -7,7 +7,7 @@ using System.Collections.Generic;
 namespace DesignPatterns.Tests.Creational.FactoryMethod
 {
     [TestFixture]
-    public class IDiscountFactoryTests
+    public class DiscountFactoryTest
     {
         private IDiscountFactory _discountFactory;
 
