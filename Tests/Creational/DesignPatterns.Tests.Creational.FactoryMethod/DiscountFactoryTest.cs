@@ -9,10 +9,9 @@ namespace DesignPatterns.Tests.Creational.FactoryMethod
     [TestFixture]
     public class DiscountFactoryTest
     {
-        private IDiscountFactory _discountFactory;
+        private readonly IDiscountFactory _discountFactory;
 
-        [OneTimeSetUp]
-        public void Setup()
+        public DiscountFactoryTest()
         {
             _discountFactory = new DiscountFactory();
         }

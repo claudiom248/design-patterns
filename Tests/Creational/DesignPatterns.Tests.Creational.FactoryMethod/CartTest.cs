@@ -9,15 +9,16 @@ namespace DesignPatterns.Tests.Creational.FactoryMethod
     [TestFixture]
     public class CartTest
     {
-        private Cart _cart;
-        private IDiscountFactory _discountFactory;
         private const double UndiscountedProductsTotalValue = 97;
 
-        [OneTimeSetUp]
-        public void Setup()
+        private readonly Cart _cart;
+        private readonly IDiscountFactory _discountFactory;
+
+        public CartTest()
         {
             _cart = new Cart();
             _discountFactory = new DiscountFactory();
+
             FillCartWithProducts();
         }
 

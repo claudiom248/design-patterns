@@ -13,17 +13,18 @@ namespace DesignPatterns.Tests.Creational.AbstractFactory
     {
         private const string WindowsOsName = "Windows";
         private const string MacOsName= "Mac";
-        private IDictionary<string, IAbstractGuiComponentFactory> factories;
 
-        [OneTimeSetUp]
-        public void Setup()
+        private readonly IDictionary<string, IAbstractGuiComponentFactory> _factories;
+
+        public AbstractFactoryTest()
         {
-            factories = new Dictionary<string, IAbstractGuiComponentFactory>
+            _factories = new Dictionary<string, IAbstractGuiComponentFactory>
             {
                 [WindowsOsName] = new WindowsConcreteGuiComponentFactory(),
                 [MacOsName] = new MacConcreteGuiComponentFactory()
             };
         }
+
 
         [TestCase(WindowsOsName, typeof(WindowsConcreteGuiComponentFactory))]
         [TestCase(MacOsName, typeof(MacConcreteGuiComponentFactory))]
@@ -90,6 +91,6 @@ namespace DesignPatterns.Tests.Creational.AbstractFactory
         private MethodInfo GetCreateGenericMethod(IAbstractGuiComponentFactory factory, Type methodReturnType) => 
             factory.GetType().GetMethod(nameof(factory.Create)).MakeGenericMethod(methodReturnType);
 
-        private IAbstractGuiComponentFactory GetFactory(string os) => factories[os];
+        private IAbstractGuiComponentFactory GetFactory(string os) => _factories[os];
     }
 }
