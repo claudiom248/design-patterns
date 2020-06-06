@@ -5,11 +5,11 @@ namespace DesignPatterns.Creational.FactoryMethod.Discounts
     public class DiscountFactory : IDiscountFactory
     {
         public Discount GetDiscount(Promotion promotion) =>
-            promotion.DiscountType switch
+            promotion.Type switch
             {
-                DiscountType.AbsoluteValue => new AbsoluteValueDiscount(promotion.DiscountValue),
-                DiscountType.Percentage => new PercentageDiscount(promotion.DiscountValue),
-                _ => throw new NotSupportedException($"Invalid discount type {promotion.DiscountType}")
+                DiscountType.AbsoluteValue => new AbsoluteValueDiscount(promotion.Value),
+                DiscountType.Percentage => new PercentageDiscount(promotion.Value),
+                _ => throw new NotSupportedException($"Invalid discount type {promotion.Type}")
             };
     }
 }

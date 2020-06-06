@@ -2,6 +2,7 @@
 using DesignPatterns.Creational.FactoryMethod.Discounts;
 using NUnit.Framework;
 using System;
+using System.Collections.Generic;
 
 namespace DesignPatterns.Tests.Creational.FactoryMethod
 {
@@ -10,20 +11,13 @@ namespace DesignPatterns.Tests.Creational.FactoryMethod
     {
         private Cart _cart;
         private IDiscountFactory _discountFactory;
-        private Promotion _promotionWithAbsoluteValueDiscount;
-        private Promotion _promotionWithPercentageDiscount;
-
-        private double CartSubTotal => _cart.SubTotal;
-
-        private double CartGrandTotal => _cart.GrandTotal;
+        private const double UndiscountedProductsTotalValue = 97;
 
         [OneTimeSetUp]
         public void Setup()
         {
             _cart = new Cart();
             _discountFactory = new DiscountFactory();
-
-            CreatePromotions();
             FillCartWithProducts();
         }
 
@@ -36,43 +30,66 @@ namespace DesignPatterns.Tests.Creational.FactoryMethod
             }
         }
 
-        [Test]
+        public static IEnumerable<TestCaseData> PromotionExpectedDiscountsTestCaseSource1()
+        {
+            yield return new TestCaseData(
+                new Promotion(DiscountType.AbsoluteValue, 10.00),
+                67.00);
+
+            yield return new TestCaseData(
+                new Promotion(DiscountType.Percentage, 5.00),
+                92.15);
+        }
+
+        public static IEnumerable<TestCaseData> PromotionExpectedDiscountsTestCaseSource2()
+        {
+            yield return new TestCaseData(
+                new Promotion(DiscountType.AbsoluteValue, 10.00),
+                UndiscountedProductsTotalValue);
+
+            yield return new TestCaseData(
+                new Promotion(DiscountType.Percentage, 5.00),
+                UndiscountedProductsTotalValue);
+        }
+
         public void Cart_Total_Should_Be_Sum_Of_Products_Price_Without_Discount()
         {
-            Assert.AreEqual(CartSubTotal, CartGrandTotal);
+            Assert.AreEqual(UndiscountedProductsTotalValue, _cart.GrandTotal);
         }
 
-        [Test]
-        public void Cart_Total_Should_Be_Sum_Of_Products_Prices_Discounted_By_Percentage_Value()
+        [TestCaseSource("PromotionExpectedDiscountsTestCaseSource1")]
+        public void Cart_Total_Should_Be_Sum_Of_Products_Prices_Discounted_By_Applied_Promotion_Discount_Value(Promotion promotion, double expectedGrandTotal)
         {
-            _cart.ApplyPromotion(_promotionWithPercentageDiscount, _discountFactory);
+            _cart.ApplyPromotion(promotion, _discountFactory);
 
-            Assert.AreNotEqual(CartSubTotal, CartGrandTotal);
-            Assert.AreEqual(92.15, CartGrandTotal);
+            Assert.AreNotEqual(UndiscountedProductsTotalValue, _cart.GrandTotal);
+            Assert.AreEqual(expectedGrandTotal, _cart.GrandTotal);
         }
 
-        [Test]
-        public void Cart_Total_Should_Be_Sum_Of_Products_Price_Discounted_By_Absolute_Value()
+        [TestCaseSource("PromotionExpectedDiscountsTestCaseSource2")]
+        public void Cart_Total_Should_Be_Sum_Of_Products_Prices_When_Promotion_Is_Unapplied(Promotion promotion, double expectedGrandTotal)
         {
-            _cart.ApplyPromotion(_promotionWithAbsoluteValueDiscount, _discountFactory);
+            _cart.ApplyPromotion(promotion, _discountFactory);
+            _cart.UnapplyPromotion();
 
-            Assert.AreNotEqual(CartSubTotal, CartGrandTotal);
-            Assert.AreEqual(67, CartGrandTotal);
+            Assert.AreEqual(UndiscountedProductsTotalValue, _cart.GrandTotal);
+            Assert.AreEqual(expectedGrandTotal, _cart.GrandTotal);
         }
 
         [Test]
         public void Should_Throw_When_Trying_To_Apply_Promotion_More_Than_Once()
         {
-            _cart.ApplyPromotion(_promotionWithAbsoluteValueDiscount, _discountFactory);
+            var promotion = new Promotion(DiscountType.Percentage, 10.00);
 
             Assert.Throws(typeof(InvalidOperationException), () =>
             {
-                _cart.ApplyPromotion(_promotionWithAbsoluteValueDiscount, _discountFactory);
-                _cart.ApplyPromotion(_promotionWithPercentageDiscount, _discountFactory);
+                _cart.ApplyPromotion(promotion, _discountFactory);
+                _cart.ApplyPromotion(promotion, _discountFactory);
             });
         }
+
         [Test]
-        public void Should_Throw_When_Trying_To_Unapply_Promotion_When_No_Promotion_Is_Applied()
+        public void Should_Throw_When_Trying_To_Unapply_Promotion_And_No_Promotion_Is_Applied()
         {
             Assert.Throws(typeof(InvalidOperationException), () => _cart.UnapplyPromotion());
         }
@@ -82,38 +99,29 @@ namespace DesignPatterns.Tests.Creational.FactoryMethod
             _cart.AddProduct(
                 new Product()
                 {
-                    BasePrice = 30
+                    BasePrice = 30.00
                 },
                 _discountFactory);
 
             _cart.AddProduct(
                 new Product()
                 {
-                    BasePrice = 42
+                    BasePrice = 42.00
                 },
                 _discountFactory);
 
             _cart.AddProduct(
                 new Product()
                 {
-                    BasePrice = 25
+                    BasePrice = 25.00
                 },
                 _discountFactory);
         }
 
-        private void CreatePromotions()
+        public class PromotionExpectedTotalDiscount
         {
-            _promotionWithAbsoluteValueDiscount = new Promotion()
-            {
-                DiscountType = DiscountType.AbsoluteValue,
-                DiscountValue = 10.00
-            };
-
-            _promotionWithPercentageDiscount = new Promotion()
-            {
-                DiscountType = DiscountType.Percentage,
-                DiscountValue = 5
-            };
+            public Promotion Promotion;
+            public double ExpectedTotalDiscount;
         }
     }
 }

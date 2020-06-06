@@ -17,29 +17,21 @@ namespace DesignPatterns.Tests.Creational.FactoryMethod
             _discountFactory = new DiscountFactory();
         }
 
-        public static IEnumerable<TestCaseData> TestCaseSource
+        public static IEnumerable<TestCaseData> PromotionDiscountTypeTestCaseSource
         {
             get
             {
                 yield return new TestCaseData(
-                    new Promotion()
-                    {
-                        DiscountType = DiscountType.AbsoluteValue,
-                        DiscountValue = 10.00
-                    },
+                    new Promotion(DiscountType.AbsoluteValue, 5.0),
                     typeof(AbsoluteValueDiscount));
 
                 yield return new TestCaseData(
-                    new Promotion()
-                    {
-                        DiscountType = DiscountType.Percentage,
-                        DiscountValue = 5
-                    }, 
+                    new Promotion(DiscountType.Percentage, 5.0),
                     typeof(PercentageDiscount));
             }
         }
 
-        [TestCaseSource("TestCaseSource")]
+        [TestCaseSource("PromotionDiscountTypeTestCaseSource")]
         public void Should_Create_Discount_Of_Correct_Type_Given_Promotion_Discount_Type(Promotion promotion, Type expectedDiscountType)
         {
             var discountType = _discountFactory.GetDiscount(promotion).GetType();
@@ -50,10 +42,7 @@ namespace DesignPatterns.Tests.Creational.FactoryMethod
         [Test]
         public void Should_Throw_When_Promotion_Has_Invalid_Discount_Type()
         {
-            var invalidPromotion = new Promotion()
-            {
-                DiscountType = (DiscountType)10000
-            };
+            var invalidPromotion = new Promotion((DiscountType)10000, 5.0);
 
             Assert.Throws(typeof(NotSupportedException), () => _discountFactory.GetDiscount(invalidPromotion));
         }
