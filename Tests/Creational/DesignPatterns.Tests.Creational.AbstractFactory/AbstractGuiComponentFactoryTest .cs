@@ -25,7 +25,6 @@ namespace DesignPatterns.Tests.Creational.AbstractFactory
             };
         }
 
-
         [TestCase(WindowsOsName, typeof(WindowsConcreteGuiComponentFactory))]
         [TestCase(MacOsName, typeof(MacConcreteGuiComponentFactory))]
         public void Should_Be_Correct_Factory_Type(string os, Type expectedFactoryType)
