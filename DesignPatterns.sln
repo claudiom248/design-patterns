@@ -5,6 +5,8 @@ VisualStudioVersion = 16.0.29728.190
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{A4CC01AA-95A5-4BF0-8360-E241BF602228}"
 	ProjectSection(SolutionItems) = preProject
+		.gitignore = .gitignore
+		LICENSE = LICENSE
 		README.md = README.md
 	EndProjectSection
 EndProject
@@ -18,11 +20,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Creational", "Creational", 
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DesignPatterns.Tests.Creational.AbstractFactory", "Tests\Creational\DesignPatterns.Tests.Creational.AbstractFactory\DesignPatterns.Tests.Creational.AbstractFactory.csproj", "{AF212CF5-4561-48E3-9EF0-84A688681FD7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DesignPatterns.Creational.AbstractFactory.RealWorldExample", "Creational\DesignPatterns.Creational.AbstractFactory.RealWorldExample\DesignPatterns.Creational.AbstractFactory.RealWorldExample.csproj", "{0D0365BC-16DB-46A9-91E5-8F19AE4314D6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DesignPatterns.Creational.AbstractFactory.RealWorldExample", "Creational\DesignPatterns.Creational.AbstractFactory.RealWorldExample\DesignPatterns.Creational.AbstractFactory.RealWorldExample.csproj", "{0D0365BC-16DB-46A9-91E5-8F19AE4314D6}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DesignPatterns.Creational.FactoryMethod", "Creational\DesignPatterns.Creational.FactoryMethod\DesignPatterns.Creational.FactoryMethod.csproj", "{B0C3415C-D6DF-499B-904E-189CF9BA0BA8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DesignPatterns.Tests.Creational.FactoryMethod", "Tests\Creational\DesignPatterns.Tests.Creational.FactoryMethod\DesignPatterns.Tests.Creational.FactoryMethod.csproj", "{492683E6-6804-47F2-8518-7C5A5F7892B8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DesignPatterns.Tests.Creational.FactoryMethod", "Tests\Creational\DesignPatterns.Tests.Creational.FactoryMethod\DesignPatterns.Tests.Creational.FactoryMethod.csproj", "{492683E6-6804-47F2-8518-7C5A5F7892B8}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
