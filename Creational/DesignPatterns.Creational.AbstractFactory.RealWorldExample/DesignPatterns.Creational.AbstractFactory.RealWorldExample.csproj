@@ -8,6 +8,10 @@
     <PackageReference Include="Wkhtmltopdf.NetCore" Version="3.0.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Infrastructure\" />
+  </ItemGroup>
+
 
 
 </Project>

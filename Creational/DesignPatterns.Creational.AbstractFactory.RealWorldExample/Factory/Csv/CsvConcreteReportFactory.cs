@@ -44,7 +44,6 @@ namespace DesignPatterns.Creational.AbstractFactory.RealWorldExample.Factory.Csv
             StringBuilder csvBuilder = new StringBuilder();
             csvBuilder.Append(GetBooksReportHeader());
             AppendLinesToStringBuilder(GetBooksAsStrings(books), csvBuilder);
-
             return csvBuilder.ToString();
         }
 

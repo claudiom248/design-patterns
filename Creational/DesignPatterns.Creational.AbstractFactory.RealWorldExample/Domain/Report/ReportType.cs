@@ -13,7 +13,7 @@ namespace DesignPatterns.Creational.AbstractFactory.RealWorldExample.Domain.Repo
         public string GetFileName(ReportFormatType format)
         {
             string extension = format == ReportFormatType.Csv ? "csv" : "pdf";
-            return $"{ReportName}-{DateTime.Now.ToString("yyyyMMddHHmmss")}.{extension}";
+            return $"{ReportName}-{DateTime.Now:yyyyMMddHHmmss}.{extension}";
         }
     }
 }

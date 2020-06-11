@@ -14,7 +14,7 @@ namespace DesignPatterns.Creational.AbstractFactory.RealWorldExample.Domain.Repo
 
         public string Path { get; set; }
 
-        public BaseReport(ReportType type)
+        protected BaseReport(ReportType type)
         {
             Type = type;
         }

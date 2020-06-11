@@ -5,7 +5,7 @@ using DesignPatterns.Creational.AbstractFactory.RealWorldExample.Factory.Pdf;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 
-namespace DesignPatterns.Creational.AbstractFactory.RealWorldExample.Infrastructure
+namespace DesignPatterns.Creational.AbstractFactory.RealWorldExample.Factory
 {
     public class ContainerBasedReportFactoryGenerator : IReportFactoryGenerator
     {

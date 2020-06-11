@@ -1,6 +1,7 @@
+using DesignPatterns.Creational.AbstractFactory.RealWorldExample.Factory;
+using DesignPatterns.Creational.AbstractFactory.RealWorldExample.Factory.Abstract;
 using DesignPatterns.Creational.AbstractFactory.RealWorldExample.Factory.Csv;
 using DesignPatterns.Creational.AbstractFactory.RealWorldExample.Factory.Pdf;
-using DesignPatterns.Creational.AbstractFactory.RealWorldExample.Infrastructure;
 using DesignPatterns.Creational.AbstractFactory.RealWorldExample.Service;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -22,22 +23,28 @@ namespace DesignPatterns.Creational.AbstractFactory.RealWorldExample
         }
 
         public IConfiguration Configuration { get; }
+
         public IWebHostEnvironment Environment { get; }
 
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddRazorPages();
 
-            var wkhtmlRelativePath = Path.Combine(@"..\..\..\", Configuration.GetValue<string>("WkhtmltopdfFolder"));
-            services.AddWkhtmltopdf(wkhtmlRelativePath);
-
             services.AddSingleton(Environment.ContentRootFileProvider);
-            AddReportFactories(services);
             services.AddSingleton<IBookService, BookService>();
             services.AddScoped<IReportService, ReportService>();
+
+            AddPdfGenerator(services);
+            AddReportFactories(services);
         }
 
-        public void AddReportFactories(IServiceCollection services)
+        private void AddPdfGenerator(IServiceCollection services)
+        {
+            var wkhtmlRelativePath = Path.Combine(@"..\..\..\", Configuration.GetValue<string>("WkhtmltopdfFolder"));
+            services.AddWkhtmltopdf(wkhtmlRelativePath);
+        }
+
+        private void AddReportFactories(IServiceCollection services)
         {
             var reportsTemplatesFolderPath = Configuration.GetValue<string>("ReportsTemplatesFolder");
             var reportsStagingFolderPath = Configuration.GetValue<string>("ReportsStagingFolder");
@@ -48,6 +55,7 @@ namespace DesignPatterns.Creational.AbstractFactory.RealWorldExample
                     serviceProvider.GetService<IFileProvider>(),
                     reportsStagingFolderPath);
             });
+
 
             services.AddScoped<PdfConcreteReportFactory, PdfConcreteReportFactory>(serviceProvider =>
             {
@@ -75,6 +83,8 @@ namespace DesignPatterns.Creational.AbstractFactory.RealWorldExample
             app.UseStaticFiles();
 
             app.UseRouting();
+
+            app.UseAuthorization();
 
             app.UseAuthorization();
 
