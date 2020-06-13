@@ -1,4 +1,4 @@
-﻿using DesignPatterns.Creational.FactoryMethod;
+using DesignPatterns.Creational.FactoryMethod;
 using DesignPatterns.Creational.FactoryMethod.Discounts;
 using NUnit.Framework;
 using System;
@@ -117,12 +117,6 @@ namespace DesignPatterns.Tests.Creational.FactoryMethod
                     BasePrice = 25.00
                 },
                 _discountFactory);
-        }
-
-        public class PromotionExpectedTotalDiscount
-        {
-            public Promotion Promotion;
-            public double ExpectedTotalDiscount;
         }
     }
 }
