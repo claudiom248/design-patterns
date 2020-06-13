@@ -1,4 +1,4 @@
-using DesignPatterns.Creational.FactoryMethod.Discounts;
+﻿using DesignPatterns.Creational.FactoryMethod.Discounts;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -23,10 +23,7 @@ namespace DesignPatterns.Creational.FactoryMethod
         public Cart()
             : this(null) { }
 
-        public Cart(ICollection<Product> products = null)
-        {
-            _products = products ?? new List<Product>();
-        }
+        public Cart(ICollection<Product> products = null) => _products = products ?? new List<Product>();
 
         public void AddProduct(Product product, IDiscountFactory discountFactory)
         {
@@ -62,28 +59,22 @@ namespace DesignPatterns.Creational.FactoryMethod
 
         private void ApplyDiscountOnProducts(Discount discount)
         {
-            foreach (Product product in _products)
+            foreach (var product in _products)
             {
                 ApplyDiscountOnProduct(product, discount);
             }
         }
 
-        private void ApplyDiscountOnProduct(Product product, Discount discount)
-        {
-            product.AppliedDiscount = discount.GetDiscountValue(product);
-        }
+        private void ApplyDiscountOnProduct(Product product, Discount discount) => product.AppliedDiscount = discount.GetDiscountValue(product);
 
         private void UnapplyDiscountOnProducts()
         {
-            foreach (Product product in _products)
+            foreach (var product in _products)
             {
                 product.AppliedDiscount = 0;
             }
         }
 
-        private Discount GetDiscount(IDiscountFactory discountFactory)
-        {
-            return discountFactory.GetDiscount(_appliedPromotion);
-        }
+        private Discount GetDiscount(IDiscountFactory discountFactory) => discountFactory.GetDiscount(_appliedPromotion);
     }
 }

@@ -6,6 +6,6 @@
 
         public double AppliedDiscount { get; set; }
 
-        public double Price { get => BasePrice - AppliedDiscount; }
+        public double Price => BasePrice - AppliedDiscount;
     }
 }

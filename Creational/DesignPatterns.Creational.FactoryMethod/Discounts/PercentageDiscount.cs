@@ -1,15 +1,9 @@
-namespace DesignPatterns.Creational.FactoryMethod.Discounts
+﻿namespace DesignPatterns.Creational.FactoryMethod.Discounts
 {
     public class PercentageDiscount : Discount
     {
-        public PercentageDiscount(double value)
-        {
-            DiscountValue = value;
-        }
+        public PercentageDiscount(double value) => DiscountValue = value;
 
-        public override double GetDiscountValue(Product product)
-        {
-            return (product.BasePrice * DiscountValue) / 100;
-        }
+        public override double GetDiscountValue(Product product) => (product.BasePrice * DiscountValue) / 100;
     }
 }

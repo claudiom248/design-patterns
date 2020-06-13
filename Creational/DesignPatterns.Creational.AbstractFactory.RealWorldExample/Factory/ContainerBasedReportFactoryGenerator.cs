@@ -11,10 +11,7 @@ namespace DesignPatterns.Creational.AbstractFactory.RealWorldExample.Factory
     {
         private readonly IServiceProvider _serviceProvider;
 
-        public ContainerBasedReportFactoryGenerator(IServiceProvider serviceProvider)
-        {
-            _serviceProvider = serviceProvider;
-        }
+        public ContainerBasedReportFactoryGenerator(IServiceProvider serviceProvider) => _serviceProvider = serviceProvider;
 
         public IAbstractReportFactory GetFactory(ReportFormatType format) =>
             format switch

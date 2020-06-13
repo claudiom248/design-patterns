@@ -7,27 +7,16 @@ namespace DesignPatterns.Creational.FactoryMethod
         private readonly Cart _cart;
         private readonly IDiscountFactory _discountFactory;
 
-        public Cart Cart => _cart;
-
         public CartService(Cart cart, IDiscountFactory discountFactory)
         {
             _cart = cart;
             _discountFactory = discountFactory;
         }
 
-        public void AddProduct(Product product)
-        {
-            _cart.AddProduct(product, _discountFactory);
-        }
+        public void AddProduct(Product product) => _cart.AddProduct(product, _discountFactory);
 
-        public void ApplyPromotion(Promotion promotion)
-        {
-            _cart.ApplyPromotion(promotion, _discountFactory);
-        }
+        public void ApplyPromotion(Promotion promotion) => _cart.ApplyPromotion(promotion, _discountFactory);
 
-        public void UnapplyPromotion()
-        {
-            _cart.UnapplyPromotion();
-        }
+        public void UnapplyPromotion() => _cart.UnapplyPromotion();
     }
 }

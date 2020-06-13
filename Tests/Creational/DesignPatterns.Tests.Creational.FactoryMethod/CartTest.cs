@@ -1,4 +1,4 @@
-using DesignPatterns.Creational.FactoryMethod;
+﻿using DesignPatterns.Creational.FactoryMethod;
 using DesignPatterns.Creational.FactoryMethod.Discounts;
 using NUnit.Framework;
 using System;
@@ -53,10 +53,7 @@ namespace DesignPatterns.Tests.Creational.FactoryMethod
                 UndiscountedProductsTotalValue);
         }
 
-        public void Cart_Total_Should_Be_Sum_Of_Products_Price_Without_Discount()
-        {
-            Assert.AreEqual(UndiscountedProductsTotalValue, _cart.GrandTotal);
-        }
+        public void Cart_Total_Should_Be_Sum_Of_Products_Price_Without_Discount() => Assert.AreEqual(UndiscountedProductsTotalValue, _cart.GrandTotal);
 
         [TestCaseSource("PromotionExpectedDiscountsTestCaseSource1")]
         public void Cart_Total_Should_Be_Sum_Of_Products_Prices_Discounted_By_Applied_Promotion_Discount_Value(Promotion promotion, double expectedGrandTotal)
@@ -90,10 +87,8 @@ namespace DesignPatterns.Tests.Creational.FactoryMethod
         }
 
         [Test]
-        public void Should_Throw_When_Trying_To_Unapply_Promotion_And_No_Promotion_Is_Applied()
-        {
+        public void Should_Throw_When_Trying_To_Unapply_Promotion_And_No_Promotion_Is_Applied() => 
             Assert.Throws(typeof(InvalidOperationException), () => _cart.UnapplyPromotion());
-        }
 
         private void FillCartWithProducts()
         {

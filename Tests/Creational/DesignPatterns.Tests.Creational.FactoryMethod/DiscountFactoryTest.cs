@@ -11,10 +11,7 @@ namespace DesignPatterns.Tests.Creational.FactoryMethod
     {
         private readonly IDiscountFactory _discountFactory;
 
-        public DiscountFactoryTest()
-        {
-            _discountFactory = new DiscountFactory();
-        }
+        public DiscountFactoryTest() => _discountFactory = new DiscountFactory();
 
         public static IEnumerable<TestCaseData> PromotionDiscountTypeTestCaseSource
         {

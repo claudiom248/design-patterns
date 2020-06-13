@@ -7,7 +7,7 @@ namespace DesignPatterns.Creational.AbstractFactory.Windows
     {
         public TComponent Create<TComponent>(params object[] args) where TComponent : class, IGuiComponent
         {
-            Type componentType = typeof(TComponent);
+            var componentType = typeof(TComponent);
 
             if (typeof(WindowsButtonComponent) == componentType)
             {
@@ -22,20 +22,14 @@ namespace DesignPatterns.Creational.AbstractFactory.Windows
             throw new NotSupportedException($"{typeof(TComponent)} component type cannot be provided.");
         }
 
-        public IButtonComponent CreateButton(string text = "")
+        public IButtonComponent CreateButton(string text = "") => new WindowsButtonComponent
         {
-            return new WindowsButtonComponent
-            {
-                Text = text
-            };
-        }
+            Text = text
+        };
 
-        public ITextBoxComponent CreateTextBox(string value = "")
+        public ITextBoxComponent CreateTextBox(string value = "") => new WindowsTextBoxComponent
         {
-            return new WindowsTextBoxComponent
-            {
-                Value = value
-            };
-        }
+            Value = value
+        };
     }
 }

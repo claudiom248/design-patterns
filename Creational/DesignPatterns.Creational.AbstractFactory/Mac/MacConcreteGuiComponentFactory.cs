@@ -10,14 +10,11 @@ namespace DesignPatterns.Creational.AbstractFactory.Mac
         private static readonly Type _type = typeof(MacConcreteGuiComponentFactory);
         private readonly IDictionary<Type, MethodBase> _componentResolvers;
 
-        public MacConcreteGuiComponentFactory()
+        public MacConcreteGuiComponentFactory() => _componentResolvers = new Dictionary<Type, MethodBase>
         {
-            _componentResolvers = new Dictionary<Type, MethodBase>
-            {
-                [typeof(MacButtonComponent)] = _type.GetMethod(nameof(this.CreateButton)),
-                [typeof(MacTextBoxComponent)] = _type.GetMethod(nameof(this.CreateTextBox))
-            };
-        }
+            [typeof(MacButtonComponent)] = _type.GetMethod(nameof(this.CreateButton)),
+            [typeof(MacTextBoxComponent)] = _type.GetMethod(nameof(this.CreateTextBox))
+        };
 
         public TComponent Create<TComponent>(params object[] args) where TComponent : class, IGuiComponent
         {
@@ -29,20 +26,14 @@ namespace DesignPatterns.Creational.AbstractFactory.Mac
             return (TComponent)componentResolver.Invoke(this, args);
         }
 
-        public IButtonComponent CreateButton(string text = "")
+        public IButtonComponent CreateButton(string text = "") => new MacButtonComponent
         {
-            return new MacButtonComponent
-            {
-                Text = text
-            };
-        }
+            Text = text
+        };
 
-        public ITextBoxComponent CreateTextBox(string value = "")
+        public ITextBoxComponent CreateTextBox(string value = "") => new MacTextBoxComponent
         {
-            return new MacTextBoxComponent
-            {
-                Value = value
-            };
-        }
+            Value = value
+        };
     }
 }
