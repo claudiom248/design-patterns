@@ -1,7 +1,5 @@
-﻿using DesignPatterns.Creational.AbstractFactory.RealWorldExample.Domain;
-using DesignPatterns.Creational.AbstractFactory.RealWorldExample.Domain.Report;
+﻿using DesignPatterns.Creational.AbstractFactory.RealWorldExample.Domain.Report;
 using DesignPatterns.Creational.AbstractFactory.RealWorldExample.Factory.Abstract;
-using System.Collections.Generic;
 
 namespace DesignPatterns.Creational.AbstractFactory.RealWorldExample.Service
 {
@@ -20,8 +18,8 @@ namespace DesignPatterns.Creational.AbstractFactory.RealWorldExample.Service
 
         public IReport CreateBooksReport(ReportFormatType format)
         {
-            IEnumerable<Book> books = _bookService.GetAll();
-            IAbstractReportFactory factory = _reportFactoryGenerator.GetFactory(format);
+            var books = _bookService.GetAll();
+            var factory = _reportFactoryGenerator.GetFactory(format);
             return factory.CreateBooksReport(books);
         }
     }
