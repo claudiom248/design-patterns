@@ -24,14 +24,11 @@ namespace DesignPatterns.Creational.AbstractFactory.RealWorldExample.Pages
             _fileProvider = fileProvider;
         }
 
-        public void OnGet()
-        {
-            Books = _bookService.GetAll();
-        }
+        public void OnGet() => Books = _bookService.GetAll();
 
         public ActionResult OnGetExportReport(ReportFormatType format)
         {
-            IReport report = _reportService.CreateBooksReport(format);
+            var report = _reportService.CreateBooksReport(format);
             var file = _fileProvider.GetFileInfo(report.Path);
             return File(file.CreateReadStream(), ContentType, report.Name);
         }

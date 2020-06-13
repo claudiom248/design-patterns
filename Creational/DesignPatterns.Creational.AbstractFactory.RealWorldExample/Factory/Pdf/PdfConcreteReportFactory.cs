@@ -25,11 +25,6 @@ namespace DesignPatterns.Creational.AbstractFactory.RealWorldExample.Factory.Pdf
             _generatePdf = generatePdf;
             _stagingFolderPath = stagingFolderPath;
             _templatesFolderPath = templatesFolderPath;
-
-            if (!_fileProvider.GetFileInfo(stagingFolderPath).Exists)
-            {
-                Directory.CreateDirectory(_fileProvider.GetCombinedPath(stagingFolderPath));
-            }
         }
 
         public IReport CreateBooksReport(IEnumerable<Book> books) =>
@@ -40,14 +35,13 @@ namespace DesignPatterns.Creational.AbstractFactory.RealWorldExample.Factory.Pdf
 
         private string CreateBooksReportFile(IEnumerable<Book> books)
         {
-            byte[] pdfByteArray = _generatePdf.GetByteArray(GetBooksTemplateFile(), books).Result;
-            var relativePath = GetTempFilePath();
-            File.WriteAllBytes(_fileProvider.GetCombinedPath(relativePath), pdfByteArray);
-            return relativePath;
+            var reportPath = Path.Combine(_stagingFolderPath, $"{Guid.NewGuid()}.pdf");
+            File.WriteAllBytes(_fileProvider.GetCombinedPath(reportPath), GetPdfByteArray(books));
+            return reportPath;
         }
 
-        private string GetBooksTemplateFile() => Path.Combine(_templatesFolderPath, AllBooksTemplateFilePath);
+        private byte[] GetPdfByteArray(IEnumerable<Book> books) => _generatePdf.GetByteArray(GetBooksTemplateFilePath(), books).Result;
 
-        private string GetTempFilePath() => Path.Combine(_stagingFolderPath, $"{Guid.NewGuid()}.pdf");
+        private string GetBooksTemplateFilePath() => Path.Combine(_templatesFolderPath, AllBooksTemplateFilePath);
     }
 }

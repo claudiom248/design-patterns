@@ -1,5 +1,4 @@
-﻿using DesignPatterns.Creational.AbstractFactory.RealWorldExample.Domain;
-using System;
+﻿using System;
 
 namespace DesignPatterns.Creational.AbstractFactory.RealWorldExample.Domain.Report
 {

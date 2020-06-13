@@ -20,28 +20,24 @@ namespace DesignPatterns.Creational.AbstractFactory.RealWorldExample.Factory.Csv
         {
             _stagingFolderPath = stagingFolderPath;
             _fileProvider = fileProvider;
-
-            if (!_fileProvider.GetFileInfo(stagingFolderPath).Exists)
-            {
-                Directory.CreateDirectory(_fileProvider.GetCombinedPath(stagingFolderPath));
-            }
         }
 
-        public IReport CreateBooksReport(IEnumerable<Book> books) => 
-            new CsvReport(ReportType.AllBooks) {
+        public IReport CreateBooksReport(IEnumerable<Book> books) =>
+            new CsvReport(ReportType.AllBooks)
+            {
                 Path = CreateBooksReportFile(books)
             };
 
         private string CreateBooksReportFile(IEnumerable<Book> books)
         {
-            var relativePath = GetTempFilePath();
-            File.WriteAllText(_fileProvider.GetCombinedPath(relativePath), GetBooksReportCsv(books));
-            return relativePath;
+            var reportPath = Path.Combine(_stagingFolderPath, $"{Guid.NewGuid()}.csv");
+            File.WriteAllText(_fileProvider.GetCombinedPath(reportPath), GetBooksReportCsv(books));
+            return reportPath;
         }
 
         private string GetBooksReportCsv(IEnumerable<Book> books)
         {
-            StringBuilder csvBuilder = new StringBuilder();
+            var csvBuilder = new StringBuilder();
             csvBuilder.Append(GetBooksReportHeader());
             AppendLinesToStringBuilder(GetBooksAsStrings(books), csvBuilder);
             return csvBuilder.ToString();
@@ -49,17 +45,15 @@ namespace DesignPatterns.Creational.AbstractFactory.RealWorldExample.Factory.Csv
 
         private string GetBooksReportHeader() => "ISBN,Title,Price,Author,CopiesSold\n";
 
-        private string[] GetBooksAsStrings(IEnumerable<Book> books) => 
+        private string[] GetBooksAsStrings(IEnumerable<Book> books) =>
             books.Select(b => string.Join(",", b.Isbn, b.Title, b.Price, b.Author, b.CopiesSold)).ToArray();
 
         private void AppendLinesToStringBuilder(IEnumerable<string> lines, StringBuilder stringBuilder)
         {
-            foreach (string line in lines)
+            foreach (var line in lines)
             {
                 stringBuilder.Append($"{line}\n");
             }
         }
-
-        private string GetTempFilePath() => Path.Combine(_stagingFolderPath, $"{Guid.NewGuid()}.csv");
     }
 }

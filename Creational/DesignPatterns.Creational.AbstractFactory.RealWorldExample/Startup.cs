@@ -1,8 +1,9 @@
-using DesignPatterns.Creational.AbstractFactory.RealWorldExample.Factory;
+﻿using DesignPatterns.Creational.AbstractFactory.RealWorldExample.Factory;
 using DesignPatterns.Creational.AbstractFactory.RealWorldExample.Factory.Abstract;
 using DesignPatterns.Creational.AbstractFactory.RealWorldExample.Factory.Csv;
 using DesignPatterns.Creational.AbstractFactory.RealWorldExample.Factory.Pdf;
 using DesignPatterns.Creational.AbstractFactory.RealWorldExample.Service;
+using DesignPatterns.Creational.AbstractFactory.RealWorldExample.Utility;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -31,42 +32,12 @@ namespace DesignPatterns.Creational.AbstractFactory.RealWorldExample
             services.AddRazorPages();
 
             services.AddSingleton(Environment.ContentRootFileProvider);
+
             services.AddSingleton<IBookService, BookService>();
             services.AddScoped<IReportService, ReportService>();
 
             AddPdfGenerator(services);
             AddReportFactories(services);
-        }
-
-        private void AddPdfGenerator(IServiceCollection services)
-        {
-            var wkhtmlRelativePath = Path.Combine(@"..\..\..\", Configuration.GetValue<string>("WkhtmltopdfFolder"));
-            services.AddWkhtmltopdf(wkhtmlRelativePath);
-        }
-
-        private void AddReportFactories(IServiceCollection services)
-        {
-            var reportsTemplatesFolderPath = Configuration.GetValue<string>("ReportsTemplatesFolder");
-            var reportsStagingFolderPath = Configuration.GetValue<string>("ReportsStagingFolder");
-
-            services.AddScoped<CsvConcreteReportFactory, CsvConcreteReportFactory>(serviceProvider =>
-            {
-                return new CsvConcreteReportFactory(
-                    serviceProvider.GetService<IFileProvider>(),
-                    reportsStagingFolderPath);
-            });
-
-
-            services.AddScoped<PdfConcreteReportFactory, PdfConcreteReportFactory>(serviceProvider =>
-            {
-                return new PdfConcreteReportFactory(
-                    serviceProvider.GetService<IFileProvider>(),
-                    serviceProvider.GetService<IGeneratePdf>(),
-                    reportsTemplatesFolderPath,
-                    reportsStagingFolderPath);
-            });
-
-            services.AddScoped<IReportFactoryGenerator, ContainerBasedReportFactoryGenerator>();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -92,6 +63,43 @@ namespace DesignPatterns.Creational.AbstractFactory.RealWorldExample
             {
                 endpoints.MapRazorPages();
             });
+        }
+
+        private void AddPdfGenerator(IServiceCollection services)
+        {
+            var wkhtmlRelativePath = Path.Combine(@"..\..\..\", Configuration.GetValue<string>("WkhtmltopdfFolder"));
+            services.AddWkhtmltopdf(wkhtmlRelativePath);
+        }
+
+        private void AddReportFactories(IServiceCollection services)
+        {
+            var fileProvider = services.BuildServiceProvider().GetService<IFileProvider>();
+            var templatesFolderPath = Configuration.GetValue<string>("ReportsTemplatesFolder");
+            var stagingFolderPath = Configuration.GetValue<string>("ReportsStagingFolder");
+
+            if (!fileProvider.GetFileInfo(stagingFolderPath).Exists)
+            {
+                Directory.CreateDirectory(fileProvider.GetCombinedPath(stagingFolderPath));
+            }
+
+            services.AddScoped<CsvConcreteReportFactory, CsvConcreteReportFactory>(serviceProvider =>
+            {
+                return new CsvConcreteReportFactory(
+                    fileProvider,
+                    stagingFolderPath);
+            });
+
+
+            services.AddScoped<PdfConcreteReportFactory, PdfConcreteReportFactory>(serviceProvider =>
+            {
+                return new PdfConcreteReportFactory(
+                    fileProvider,
+                    serviceProvider.GetService<IGeneratePdf>(),
+                    templatesFolderPath,
+                    stagingFolderPath);
+            });
+
+            services.AddScoped<IReportFactoryGenerator, ContainerBasedReportFactoryGenerator>();
         }
     }
 }
