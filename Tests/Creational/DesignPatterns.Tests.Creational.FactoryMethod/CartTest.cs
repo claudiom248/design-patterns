@@ -11,24 +11,17 @@ namespace DesignPatterns.Tests.Creational.FactoryMethod
     {
         private const double UndiscountedProductsTotalValue = 97;
 
-        private readonly Cart _cart;
+        private Cart _cart;
         private readonly IDiscountFactory _discountFactory;
 
-        public CartTest()
+        public CartTest() => _discountFactory = new DiscountFactory();
+
+        [SetUp]
+        public void Setup()
         {
             _cart = new Cart();
-            _discountFactory = new DiscountFactory();
 
             FillCartWithProducts();
-        }
-
-        [TearDown]
-        public void TearDown()
-        {
-            if (_cart.IsPromotionApplied)
-            {
-                _cart.UnapplyPromotion();
-            }
         }
 
         public static IEnumerable<TestCaseData> PromotionExpectedDiscountsTestCaseSource1()
@@ -53,7 +46,7 @@ namespace DesignPatterns.Tests.Creational.FactoryMethod
                 UndiscountedProductsTotalValue);
         }
 
-        public void Cart_Total_Should_Be_Sum_Of_Products_Price_Without_Discount() => Assert.AreEqual(UndiscountedProductsTotalValue, _cart.GrandTotal);
+        public void Cart_Total_Should_Be_Sum_Of_Products_Prices_Without_Discount() => Assert.AreEqual(UndiscountedProductsTotalValue, _cart.GrandTotal);
 
         [TestCaseSource("PromotionExpectedDiscountsTestCaseSource1")]
         public void Cart_Total_Should_Be_Sum_Of_Products_Prices_Discounted_By_Applied_Promotion_Discount_Value(Promotion promotion, double expectedGrandTotal)
@@ -75,7 +68,7 @@ namespace DesignPatterns.Tests.Creational.FactoryMethod
         }
 
         [Test]
-        public void Should_Throw_When_Trying_To_Apply_Promotion_More_Than_Once()
+        public void Should_Throw_When_Applying_Promotion_More_Than_Once()
         {
             var promotion = new Promotion(DiscountType.Percentage, 10.00);
 
@@ -87,7 +80,7 @@ namespace DesignPatterns.Tests.Creational.FactoryMethod
         }
 
         [Test]
-        public void Should_Throw_When_Trying_To_Unapply_Promotion_And_No_Promotion_Is_Applied() => 
+        public void Should_Throw_When_Unapplying_Promotion_On_Cart_Without_Applied_Promotion() =>
             Assert.Throws(typeof(InvalidOperationException), () => _cart.UnapplyPromotion());
 
         private void FillCartWithProducts()
