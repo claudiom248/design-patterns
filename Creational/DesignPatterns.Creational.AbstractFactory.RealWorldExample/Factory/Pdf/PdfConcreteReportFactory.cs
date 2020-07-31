@@ -36,7 +36,7 @@ namespace DesignPatterns.Creational.AbstractFactory.RealWorldExample.Factory.Pdf
         private string CreateBooksReportFile(IEnumerable<Book> books)
         {
             var reportPath = Path.Combine(_stagingFolderPath, $"{Guid.NewGuid()}.pdf");
-            File.WriteAllBytes(_fileProvider.GetCombinedPath(reportPath), GetPdfByteArray(books));
+            File.WriteAllBytes(_fileProvider.GetFullPath(reportPath), GetPdfByteArray(books));
             return reportPath;
         }
 

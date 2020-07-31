@@ -79,7 +79,7 @@ namespace DesignPatterns.Creational.AbstractFactory.RealWorldExample
 
             if (!fileProvider.GetFileInfo(stagingFolderPath).Exists)
             {
-                Directory.CreateDirectory(fileProvider.GetCombinedPath(stagingFolderPath));
+                Directory.CreateDirectory(fileProvider.GetFullPath(stagingFolderPath));
             }
 
             services.AddScoped<CsvConcreteReportFactory, CsvConcreteReportFactory>(serviceProvider =>
@@ -88,7 +88,6 @@ namespace DesignPatterns.Creational.AbstractFactory.RealWorldExample
                     fileProvider,
                     stagingFolderPath);
             });
-
 
             services.AddScoped<PdfConcreteReportFactory, PdfConcreteReportFactory>(serviceProvider =>
             {
