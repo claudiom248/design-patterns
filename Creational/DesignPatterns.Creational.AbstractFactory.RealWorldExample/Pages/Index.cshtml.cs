@@ -3,8 +3,8 @@ using DesignPatterns.Creational.AbstractFactory.RealWorldExample.Domain.Report;
 using DesignPatterns.Creational.AbstractFactory.RealWorldExample.Service;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.Extensions.FileProviders;
 using System.Collections.Generic;
+using System.IO;
 
 namespace DesignPatterns.Creational.AbstractFactory.RealWorldExample.Pages
 {
@@ -13,24 +13,27 @@ namespace DesignPatterns.Creational.AbstractFactory.RealWorldExample.Pages
         private const string ContentType = "application/octet-stream";
         private readonly IBookService _bookService;
         private readonly IReportService _reportService;
-        private readonly IFileProvider _fileProvider;
 
         public IEnumerable<Book> Books { get; set; }
 
-        public IndexModel(IBookService bookService, IReportService reportService, IFileProvider fileProvider)
+        public IndexModel(IBookService bookService, IReportService reportService)
         {
             _bookService = bookService;
             _reportService = reportService;
-            _fileProvider = fileProvider;
         }
 
-        public void OnGet() => Books = _bookService.GetAll();
+        public IActionResult OnGet()
+        {
+            Books = _bookService.GetAll();
+            return Page();
+        }
 
-        public ActionResult OnGetExportReport(ReportFormatType format)
+        public IActionResult OnGetExportReport(ReportFormatType format)
         {
             var report = _reportService.CreateBooksReport(format);
-            var file = _fileProvider.GetFileInfo(report.Path);
-            return File(file.CreateReadStream(), ContentType, report.Name);
+            return DownloadReport(report);
         }
+
+        private IActionResult DownloadReport(IReport report) => File(new FileStream(report.Path, FileMode.Open), ContentType, report.Name);
     }
 }

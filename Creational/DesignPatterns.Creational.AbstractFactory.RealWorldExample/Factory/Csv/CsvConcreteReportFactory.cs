@@ -30,9 +30,9 @@ namespace DesignPatterns.Creational.AbstractFactory.RealWorldExample.Factory.Csv
 
         private string CreateBooksReportFile(IEnumerable<Book> books)
         {
-            var reportPath = Path.Combine(_stagingFolderPath, $"{Guid.NewGuid()}.csv");
-            File.WriteAllText(_fileProvider.GetFullPath(reportPath), GetBooksReportCsv(books));
-            return reportPath;
+            var reportRelativePath = Path.Combine(_stagingFolderPath, $"{Guid.NewGuid()}.csv");
+            File.WriteAllText(_fileProvider.GetFullPath(reportRelativePath), GetBooksReportCsv(books));
+            return _fileProvider.GetFullPath(reportRelativePath);
         }
 
         private string GetBooksReportCsv(IEnumerable<Book> books)
