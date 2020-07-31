@@ -7,12 +7,11 @@ namespace DesignPatterns.Creational.FactoryMethod
 {
     public class Cart
     {
-        private Promotion _appliedPromotion;
         private readonly ICollection<Product> _products;
 
-        public bool IsPromotionApplied => _appliedPromotion != null;
+        public bool IsPromotionApplied => AppliedPromotion != null;
 
-        public Promotion AppliedPromotion => _appliedPromotion;
+        public Promotion AppliedPromotion { get; private set; }
 
         public IEnumerable<Product> Products => _products.ToList();
 
@@ -42,7 +41,7 @@ namespace DesignPatterns.Creational.FactoryMethod
                 throw new InvalidOperationException("A promotion has already been applied to the cart.");
             }
 
-            _appliedPromotion = promotion;
+            AppliedPromotion = promotion;
             ApplyDiscountOnProducts(GetDiscount(discountFactory));
         }
 
@@ -53,7 +52,7 @@ namespace DesignPatterns.Creational.FactoryMethod
                 throw new InvalidOperationException("No promotion applied to the cart.");
             }
 
-            _appliedPromotion = null;
+            AppliedPromotion = null;
             UnapplyDiscountOnProducts();
         }
 
@@ -75,6 +74,6 @@ namespace DesignPatterns.Creational.FactoryMethod
             }
         }
 
-        private Discount GetDiscount(IDiscountFactory discountFactory) => discountFactory.GetDiscount(_appliedPromotion);
+        private Discount GetDiscount(IDiscountFactory discountFactory) => discountFactory.GetDiscount(AppliedPromotion);
     }
 }
