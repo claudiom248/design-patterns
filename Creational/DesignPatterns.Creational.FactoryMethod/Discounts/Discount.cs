@@ -2,8 +2,8 @@
 {
     public abstract class Discount
     {
-        public double DiscountValue { get; set; }
+        public double Value { get; set; }
 
-        public abstract double GetDiscountValue(Product product);
+        public abstract double Calculate(Product product);
     }
 }

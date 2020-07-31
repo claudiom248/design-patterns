@@ -2,8 +2,8 @@
 {
     public class AbsoluteValueDiscount : Discount
     {
-        public AbsoluteValueDiscount(double value) => DiscountValue = value;
+        public AbsoluteValueDiscount(double value) => Value = value;
 
-        public override double GetDiscountValue(Product product) => DiscountValue;
+        public override double Calculate(Product product) => Value;
     }
 }

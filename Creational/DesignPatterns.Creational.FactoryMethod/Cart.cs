@@ -64,7 +64,7 @@ namespace DesignPatterns.Creational.FactoryMethod
             }
         }
 
-        private void ApplyDiscountOnProduct(Product product, Discount discount) => product.AppliedDiscount = discount.GetDiscountValue(product);
+        private void ApplyDiscountOnProduct(Product product, Discount discount) => product.AppliedDiscount = discount.Calculate(product);
 
         private void UnapplyDiscountOnProducts()
         {
