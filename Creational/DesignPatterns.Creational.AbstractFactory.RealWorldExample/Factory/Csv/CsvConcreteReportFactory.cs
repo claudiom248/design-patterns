@@ -11,7 +11,7 @@ using System.Text;
 
 namespace DesignPatterns.Creational.AbstractFactory.RealWorldExample.Factory.Csv
 {
-    internal class CsvConcreteReportFactory : IAbstractReportFactory
+    internal class CsvConcreteReportFactory : IReportFactory
     {
         private readonly IFileProvider _fileProvider;
         private readonly string _stagingFolderPath;

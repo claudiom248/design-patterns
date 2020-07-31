@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace DesignPatterns.Creational.AbstractFactory.RealWorldExample.Factory.Abstract
 {
-    public interface IAbstractReportFactory
+    public interface IReportFactory
     {
         public IReport CreateBooksReport(IEnumerable<Book> books);
     }

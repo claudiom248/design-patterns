@@ -13,7 +13,7 @@ namespace DesignPatterns.Creational.AbstractFactory.RealWorldExample.Factory
 
         public ContainerBasedReportFactoryGenerator(IServiceProvider serviceProvider) => _serviceProvider = serviceProvider;
 
-        public IAbstractReportFactory GetFactory(ReportFormatType format) =>
+        public IReportFactory GetFactory(ReportFormatType format) =>
             format switch
             {
                 ReportFormatType.Csv => _serviceProvider.GetService<CsvConcreteReportFactory>(),

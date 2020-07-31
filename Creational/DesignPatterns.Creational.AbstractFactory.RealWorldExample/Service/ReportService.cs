@@ -19,8 +19,9 @@ namespace DesignPatterns.Creational.AbstractFactory.RealWorldExample.Service
         public IReport CreateBooksReport(ReportFormatType format)
         {
             var books = _bookService.GetAll();
-            var factory = _reportFactoryGenerator.GetFactory(format);
-            return factory.CreateBooksReport(books);
+            return GetReportFactory(format).CreateBooksReport(books);
         }
+
+        public IReportFactory GetReportFactory(ReportFormatType format) => _reportFactoryGenerator.GetFactory(format);
     }
 }

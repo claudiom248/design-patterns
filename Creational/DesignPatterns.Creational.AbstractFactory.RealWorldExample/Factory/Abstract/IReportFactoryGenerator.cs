@@ -4,6 +4,6 @@ namespace DesignPatterns.Creational.AbstractFactory.RealWorldExample.Factory.Abs
 {
     public interface IReportFactoryGenerator
     {
-        IAbstractReportFactory GetFactory(ReportFormatType format);
+        IReportFactory GetFactory(ReportFormatType format);
     }
 }

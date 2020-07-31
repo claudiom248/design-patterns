@@ -10,7 +10,7 @@ using Wkhtmltopdf.NetCore;
 
 namespace DesignPatterns.Creational.AbstractFactory.RealWorldExample.Factory.Pdf
 {
-    public class PdfConcreteReportFactory : IAbstractReportFactory
+    public class PdfConcreteReportFactory : IReportFactory
     {
         private const string AllBooksTemplateFilePath = "AllBooks.cshtml";
 
