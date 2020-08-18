@@ -339,4 +339,5 @@ ASALocalRun/
 # BeatPulse healthcheck temp database
 healthchecksdb
 
+# Generated reports folder
 /Creational/DesignPatterns.Creational.AbstractFactory.RealWorldExample/Files/Reports/Generated
