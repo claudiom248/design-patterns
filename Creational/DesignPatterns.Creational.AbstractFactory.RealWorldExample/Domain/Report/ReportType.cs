@@ -10,10 +10,7 @@ namespace DesignPatterns.Creational.AbstractFactory.RealWorldExample.Domain.Repo
 
         public string ReportName { get; set; }
 
-        public string GetFileName(ReportFormatType format)
-        {
-            var extension = format == ReportFormatType.Csv ? "csv" : "pdf";
-            return $"{ReportName}-{DateTime.Now:yyyyMMddHHmmss}.{extension}";
-        }
+        public string GetFileName(FileFormatType format)
+            => $"{ReportName}-{DateTime.Now:yyyyMMddHHmmss}.{format.Extension}";
     }
 }

@@ -1,4 +1,5 @@
-﻿using DesignPatterns.Creational.AbstractFactory.RealWorldExample.Domain.Report;
+﻿using DesignPatterns.Creational.AbstractFactory.RealWorldExample.Domain;
+using DesignPatterns.Creational.AbstractFactory.RealWorldExample.Domain.Report;
 using DesignPatterns.Creational.AbstractFactory.RealWorldExample.Factory.Abstract;
 
 namespace DesignPatterns.Creational.AbstractFactory.RealWorldExample.Service
@@ -16,12 +17,13 @@ namespace DesignPatterns.Creational.AbstractFactory.RealWorldExample.Service
             _reportFactoryGenerator = reportFactoryActivator;
         }
 
-        public IReport CreateBooksReport(ReportFormatType format)
+        public IReport CreateBooksReport(FileFormatType format)
         {
             var books = _bookService.GetAll();
             return GetReportFactory(format).CreateBooksReport(books);
         }
 
-        public IReportFactory GetReportFactory(ReportFormatType format) => _reportFactoryGenerator.GetFactory(format);
+        public IReportFactory GetReportFactory(FileFormatType format) 
+            => _reportFactoryGenerator.GetFactory(format);
     }
 }

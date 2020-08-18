@@ -1,9 +1,9 @@
-﻿using DesignPatterns.Creational.AbstractFactory.RealWorldExample.Domain.Report;
+﻿using DesignPatterns.Creational.AbstractFactory.RealWorldExample.Domain;
 
 namespace DesignPatterns.Creational.AbstractFactory.RealWorldExample.Factory.Abstract
 {
     public interface IReportFactoryGenerator
     {
-        IReportFactory GetFactory(ReportFormatType format);
+        IReportFactory GetFactory(FileFormatType format);
     }
 }

@@ -6,12 +6,12 @@ namespace DesignPatterns.Creational.AbstractFactory.RealWorldExample.Domain.Repo
     {
         public string Name { get; }
 
-        public ReportType Type { get; set; }
+        public ReportType Type { get; }
 
-        public ReportFormatType Format { get; set; }
+        public FileFormatType Format { get; }
 
-        public DateTime CreationDate { get; set; }
+        public DateTime CreationDate { get; }
 
-        public string Path { get; set; }
+        public string Path { get; }
     }
 }

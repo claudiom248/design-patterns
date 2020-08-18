@@ -1,6 +1,4 @@
-﻿using Microsoft.Extensions.Primitives;
-
-namespace DesignPatterns.Creational.AbstractFactory.RealWorldExample.Domain
+﻿namespace DesignPatterns.Creational.AbstractFactory.RealWorldExample.Domain
 {
     public class Book
     {

@@ -1,4 +1,4 @@
-﻿using DesignPatterns.Creational.AbstractFactory.RealWorldExample.Domain.Report;
+﻿using DesignPatterns.Creational.AbstractFactory.RealWorldExample.Domain;
 using DesignPatterns.Creational.AbstractFactory.RealWorldExample.Factory.Abstract;
 using DesignPatterns.Creational.AbstractFactory.RealWorldExample.Factory.Csv;
 using DesignPatterns.Creational.AbstractFactory.RealWorldExample.Factory.Pdf;
@@ -13,12 +13,21 @@ namespace DesignPatterns.Creational.AbstractFactory.RealWorldExample.Factory
 
         public ContainerBasedReportFactoryGenerator(IServiceProvider serviceProvider) => _serviceProvider = serviceProvider;
 
-        public IReportFactory GetFactory(ReportFormatType format) =>
-            format switch
+        public IReportFactory GetFactory(FileFormatType format)
+        {
+            if (format == FileFormatType.Csv)
             {
-                ReportFormatType.Csv => _serviceProvider.GetService<CsvConcreteReportFactory>(),
-                ReportFormatType.Pdf => _serviceProvider.GetService<PdfConcreteReportFactory>(),
-                _ => throw new NotSupportedException($"Invalid format type {format}")
-            };
+                return _serviceProvider.GetService<CsvConcreteReportFactory>();
+            }
+            else if (format == FileFormatType.Pdf)
+            {
+                return _serviceProvider.GetService<PdfConcreteReportFactory>();
+            }
+            else
+            {
+                throw new NotSupportedException($"Invalid format type {format}");
+            }
+        }
     }
+
 }

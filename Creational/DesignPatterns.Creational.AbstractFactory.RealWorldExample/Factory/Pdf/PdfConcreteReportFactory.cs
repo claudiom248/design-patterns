@@ -28,20 +28,19 @@ namespace DesignPatterns.Creational.AbstractFactory.RealWorldExample.Factory.Pdf
         }
 
         public IReport CreateBooksReport(IEnumerable<Book> books) =>
-            new PdfReport(ReportType.AllBooks)
-            {
-                Path = CreateBooksReportFile(books)
-            };
+            new PdfReport(ReportType.AllBooks, BuildFile(books));
 
-        private string CreateBooksReportFile(IEnumerable<Book> books)
+        private string BuildFile(IEnumerable<Book> books)
         {
             var reportRelativePath = Path.Combine(_stagingFolderPath, $"{Guid.NewGuid()}.pdf");
             File.WriteAllBytes(_fileProvider.GetFullPath(reportRelativePath), GetPdfByteArray(books));
             return _fileProvider.GetFullPath(reportRelativePath);
         }
 
-        private byte[] GetPdfByteArray(IEnumerable<Book> books) => _generatePdf.GetByteArray(GetBooksTemplateFilePath(), books).Result;
+        private byte[] GetPdfByteArray(IEnumerable<Book> books) => 
+            _generatePdf.GetByteArray(GetBooksTemplateFilePath(), books).Result;
 
-        private string GetBooksTemplateFilePath() => Path.Combine(_templatesFolderPath, AllBooksTemplateFilePath);
+        private string GetBooksTemplateFilePath() 
+            => Path.Combine(_templatesFolderPath, AllBooksTemplateFilePath);
     }
 }

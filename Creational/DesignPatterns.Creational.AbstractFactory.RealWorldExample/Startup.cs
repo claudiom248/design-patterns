@@ -38,6 +38,11 @@ namespace DesignPatterns.Creational.AbstractFactory.RealWorldExample
 
             AddPdfGenerator(services);
             AddReportFactories(services);
+
+            services.AddMvc(opt =>
+            {
+                opt.ModelBinderProviders.Insert(0, new ModelBinder.ReportFormatTypeModelBinderProvider());
+            });
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)

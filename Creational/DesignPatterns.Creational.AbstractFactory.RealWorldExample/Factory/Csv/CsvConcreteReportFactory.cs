@@ -23,12 +23,9 @@ namespace DesignPatterns.Creational.AbstractFactory.RealWorldExample.Factory.Csv
         }
 
         public IReport CreateBooksReport(IEnumerable<Book> books) =>
-            new CsvReport(ReportType.AllBooks)
-            {
-                Path = CreateBooksReportFile(books)
-            };
+            new CsvReport(ReportType.AllBooks, BuildFile(books));
 
-        private string CreateBooksReportFile(IEnumerable<Book> books)
+        private string BuildFile(IEnumerable<Book> books)
         {
             var reportRelativePath = Path.Combine(_stagingFolderPath, $"{Guid.NewGuid()}.csv");
             File.WriteAllText(_fileProvider.GetFullPath(reportRelativePath), GetBooksReportCsv(books));
@@ -39,13 +36,15 @@ namespace DesignPatterns.Creational.AbstractFactory.RealWorldExample.Factory.Csv
         {
             var csvBuilder = new StringBuilder();
             csvBuilder.Append(GetBooksReportHeader());
-            AppendLinesToStringBuilder(GetBooksAsStrings(books), csvBuilder);
+            AppendLinesToStringBuilder(GetBookAsCsvValue(books), csvBuilder);
+
             return csvBuilder.ToString();
         }
 
-        private string GetBooksReportHeader() => "ISBN,Title,Price,Author,CopiesSold\n";
+        private string GetBooksReportHeader() 
+            => "ISBN,Title,Price,Author,CopiesSold\n";
 
-        private string[] GetBooksAsStrings(IEnumerable<Book> books) =>
+        private string[] GetBookAsCsvValue(IEnumerable<Book> books) =>
             books.Select(b => string.Join(",", b.Isbn, b.Title, b.Price, b.Author, b.CopiesSold)).ToArray();
 
         private void AppendLinesToStringBuilder(IEnumerable<string> lines, StringBuilder stringBuilder)
