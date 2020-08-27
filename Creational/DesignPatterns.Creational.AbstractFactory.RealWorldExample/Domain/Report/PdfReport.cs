@@ -3,7 +3,6 @@
     public class PdfReport : BaseReport
     {
         public PdfReport(ReportType type, string path)
-            : base(type, path) 
-                => Format = FileFormatType.Pdf;
+            : base(type, path) => Format = FileFormatType.Pdf;
     }
 }

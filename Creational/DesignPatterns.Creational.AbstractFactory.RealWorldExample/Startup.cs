@@ -1,7 +1,6 @@
-﻿using DesignPatterns.Creational.AbstractFactory.RealWorldExample.Factory;
-using DesignPatterns.Creational.AbstractFactory.RealWorldExample.Factory.Abstract;
-using DesignPatterns.Creational.AbstractFactory.RealWorldExample.Factory.Csv;
+﻿using DesignPatterns.Creational.AbstractFactory.RealWorldExample.Factory.Csv;
 using DesignPatterns.Creational.AbstractFactory.RealWorldExample.Factory.Pdf;
+using DesignPatterns.Creational.AbstractFactory.RealWorldExample.Provider;
 using DesignPatterns.Creational.AbstractFactory.RealWorldExample.Service;
 using DesignPatterns.Creational.AbstractFactory.RealWorldExample.Utility;
 using Microsoft.AspNetCore.Builder;
@@ -103,7 +102,7 @@ namespace DesignPatterns.Creational.AbstractFactory.RealWorldExample
                     stagingFolderPath);
             });
 
-            services.AddScoped<IReportFactoryGenerator, ContainerBasedReportFactoryGenerator>();
+            services.AddScoped<IReportFactoryProvider, ContainerBasedReportFactoryProvider>();
         }
     }
 }

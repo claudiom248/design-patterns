@@ -5,13 +5,14 @@ using DesignPatterns.Creational.AbstractFactory.RealWorldExample.Factory.Pdf;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 
-namespace DesignPatterns.Creational.AbstractFactory.RealWorldExample.Factory
+namespace DesignPatterns.Creational.AbstractFactory.RealWorldExample.Provider
 {
-    public class ContainerBasedReportFactoryGenerator : IReportFactoryGenerator
+    public class ContainerBasedReportFactoryProvider : IReportFactoryProvider
     {
         private readonly IServiceProvider _serviceProvider;
 
-        public ContainerBasedReportFactoryGenerator(IServiceProvider serviceProvider) => _serviceProvider = serviceProvider;
+        public ContainerBasedReportFactoryProvider(IServiceProvider serviceProvider) 
+            => _serviceProvider = serviceProvider;
 
         public IReportFactory GetFactory(FileFormatType format)
         {
@@ -29,5 +30,4 @@ namespace DesignPatterns.Creational.AbstractFactory.RealWorldExample.Factory
             }
         }
     }
-
 }

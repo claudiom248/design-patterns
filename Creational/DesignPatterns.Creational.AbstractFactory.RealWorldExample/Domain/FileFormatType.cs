@@ -2,11 +2,10 @@
 {
     public class FileFormatType
     {
-        public static FileFormatType Csv = new FileFormatType("csv");
-        public static FileFormatType Pdf = new FileFormatType("pdf");
+        public static FileFormatType Csv => new FileFormatType("csv");
+        public static FileFormatType Pdf => new FileFormatType("pdf");
 
-        private FileFormatType(string extension)
-            => Extension = extension;
+        private FileFormatType(string extension) => Extension = extension;
 
         public string Extension { get; private set; }
     }

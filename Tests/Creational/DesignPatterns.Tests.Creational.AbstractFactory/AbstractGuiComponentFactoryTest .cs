@@ -84,8 +84,8 @@ namespace DesignPatterns.Tests.Creational.AbstractFactory
             Assert.That(ex.InnerException, Is.TypeOf<NotSupportedException>());
         }
 
-        private MethodInfo GetCreateGenericMethod(IAbstractGuiComponentFactory factory, Type methodReturnType) =>
-            factory.GetType().GetMethod(nameof(factory.Create)).MakeGenericMethod(methodReturnType);
+        private MethodInfo GetCreateGenericMethod(IAbstractGuiComponentFactory factory, Type methodReturnType) 
+            => factory.GetType().GetMethod(nameof(factory.Create)).MakeGenericMethod(methodReturnType);
 
         private IAbstractGuiComponentFactory GetFactory(string os) => _factories[os];
     }

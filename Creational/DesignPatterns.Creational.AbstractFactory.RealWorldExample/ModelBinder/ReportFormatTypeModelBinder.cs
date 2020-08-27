@@ -12,22 +12,24 @@ namespace DesignPatterns.Creational.AbstractFactory.RealWorldExample.ModelBinder
 
             if (original != ValueProviderResult.None)
             {
-                var format = original.FirstValue;
-                FileFormatType result = null;
+                return Task.CompletedTask;
+            }
 
-                if (format == FileFormatType.Csv.Extension)
-                {
-                    result = FileFormatType.Csv;
-                }
-                else if (format == FileFormatType.Pdf.Extension)
-                {
-                    result = FileFormatType.Pdf;
-                }
+            var format = original.FirstValue;
+            FileFormatType result = null;
 
-                if (format != null)
-                {
-                    bindingContext.Result = ModelBindingResult.Success(result);
-                }
+            if (format == FileFormatType.Csv.Extension)
+            {
+                result = FileFormatType.Csv;
+            }
+            else if (format == FileFormatType.Pdf.Extension)
+            {
+                result = FileFormatType.Pdf;
+            }
+
+            if (format != null)
+            {
+                bindingContext.Result = ModelBindingResult.Success(result);
             }
 
             return Task.CompletedTask;

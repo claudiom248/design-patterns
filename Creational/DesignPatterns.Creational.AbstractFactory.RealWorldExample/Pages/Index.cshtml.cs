@@ -34,7 +34,6 @@ namespace DesignPatterns.Creational.AbstractFactory.RealWorldExample.Pages
             return DownloadReport(report);
         }
 
-        private IActionResult DownloadReport(IReport report) 
-            => File(new FileStream(report.Path, FileMode.Open), ContentType, report.Name);
+        private IActionResult DownloadReport(IReport report) => File(new FileStream(report.Path, FileMode.Open), ContentType, report.Name);
     }
 }

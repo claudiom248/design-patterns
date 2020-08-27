@@ -5,8 +5,8 @@ namespace DesignPatterns.Creational.AbstractFactory.RealWorldExample.ModelBinder
 {
     public class ReportFormatTypeModelBinderProvider : IModelBinderProvider
     {
-        public IModelBinder GetBinder(ModelBinderProviderContext context) =>
-            typeof(FileFormatType).IsAssignableFrom(context.Metadata.ModelType)
+        public IModelBinder GetBinder(ModelBinderProviderContext context) 
+            => typeof(FileFormatType).IsAssignableFrom(context.Metadata.ModelType)
                 ? new ReportFormatTypeModelBinder()
                 : null;
     }

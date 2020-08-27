@@ -3,7 +3,6 @@
     public class CsvReport : BaseReport
     {
         public CsvReport(ReportType type, string path)
-            : base(type, path)
-                => Format = FileFormatType.Csv;
+            : base(type, path) => Format = FileFormatType.Csv;
     }
 }

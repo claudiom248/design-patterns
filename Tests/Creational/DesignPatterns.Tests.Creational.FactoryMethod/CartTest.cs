@@ -80,8 +80,8 @@ namespace DesignPatterns.Tests.Creational.FactoryMethod
         }
 
         [Test]
-        public void Should_Throw_When_Unapplying_Promotion_On_Cart_Without_Applied_Promotion() =>
-            Assert.Throws(typeof(InvalidOperationException), () => _cart.UnapplyPromotion());
+        public void Should_Throw_When_Unapplying_Promotion_On_Cart_Without_Applied_Promotion() 
+            => Assert.Throws(typeof(InvalidOperationException), () => _cart.UnapplyPromotion());
 
         private void FillCartWithProducts()
         {

@@ -22,7 +22,8 @@ namespace DesignPatterns.Creational.FactoryMethod
         public Cart()
             : this(null) { }
 
-        public Cart(ICollection<Product> products = null) => _products = products ?? new List<Product>();
+        public Cart(ICollection<Product> products = null) 
+            => _products = products ?? new List<Product>();
 
         public void AddProduct(Product product, IDiscountFactory discountFactory)
         {
@@ -49,7 +50,7 @@ namespace DesignPatterns.Creational.FactoryMethod
         {
             if (!IsPromotionApplied)
             {
-                throw new InvalidOperationException("No promotion applied to the cart.");
+                throw new InvalidOperationException("No promotion is applied to the cart.");
             }
 
             AppliedPromotion = null;
@@ -64,7 +65,8 @@ namespace DesignPatterns.Creational.FactoryMethod
             }
         }
 
-        private void ApplyDiscountOnProduct(Product product, Discount discount) => product.AppliedDiscount = discount.Calculate(product);
+        private void ApplyDiscountOnProduct(Product product, Discount discount) 
+            => product.AppliedDiscount = discount.Calculate(product);
 
         private void UnapplyDiscountOnProducts()
         {
@@ -74,6 +76,7 @@ namespace DesignPatterns.Creational.FactoryMethod
             }
         }
 
-        private Discount GetDiscount(IDiscountFactory discountFactory) => discountFactory.GetDiscount(AppliedPromotion);
+        private Discount GetDiscount(IDiscountFactory discountFactory) 
+            => discountFactory.GetDiscount(AppliedPromotion);
     }
 }
