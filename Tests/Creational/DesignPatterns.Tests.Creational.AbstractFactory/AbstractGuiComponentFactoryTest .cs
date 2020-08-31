@@ -1,10 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Reflection;
-using DesignPatterns.Creational.AbstractFactory.Abstract;
+﻿using DesignPatterns.Creational.AbstractFactory.Abstract;
 using DesignPatterns.Creational.AbstractFactory.Mac;
 using DesignPatterns.Creational.AbstractFactory.Windows;
 using NUnit.Framework;
+using System;
+using System.Collections.Generic;
+using System.Reflection;
 
 namespace DesignPatterns.Tests.Creational.AbstractFactory
 {
@@ -21,39 +21,6 @@ namespace DesignPatterns.Tests.Creational.AbstractFactory
             [WindowsOsName] = new WindowsConcreteGuiComponentFactory(),
             [MacOsName] = new MacConcreteGuiComponentFactory()
         };
-
-        [TestCase(WindowsOsName, typeof(WindowsConcreteGuiComponentFactory))]
-        [TestCase(MacOsName, typeof(MacConcreteGuiComponentFactory))]
-        public void GetType_ReturnsCorrectFactoryType(string os, Type expectedFactoryType)
-        {
-            var factory = GetFactory(os);
-
-            Assert.AreEqual(factory.GetType(), expectedFactoryType);
-        }
-
-        [TestCase(WindowsOsName, typeof(WindowsButtonComponent))]
-        [TestCase(MacOsName, typeof(MacButtonComponent))]
-        public void CreateButton_ReturnsCorrectButtonType(string os, Type expectedButtonType)
-        {
-            var factory = GetFactory(os);
-
-            var button = factory.CreateButton();
-
-            Assert.AreEqual(expectedButtonType, button.GetType());
-            Assert.AreEqual(os, button.OperatingSystem);
-        }
-
-        [TestCase(WindowsOsName, typeof(WindowsTextBoxComponent))]
-        [TestCase(MacOsName, typeof(MacTextBoxComponent))]
-        public void CreateTextBox_ReturnsCorrectTextBoxType(string os, Type expectedTextBoxType)
-        {
-            var factory = GetFactory(os);
-
-            var textBox = factory.CreateTextBox();
-
-            Assert.AreEqual(expectedTextBoxType, textBox.GetType());
-            Assert.AreEqual(os, textBox.OperatingSystem);
-        }
 
         [TestCase(WindowsOsName, typeof(WindowsTextBoxComponent))]
         [TestCase(WindowsOsName, typeof(WindowsButtonComponent))]
@@ -80,7 +47,10 @@ namespace DesignPatterns.Tests.Creational.AbstractFactory
             var methodInfo = GetCreateGenericMethod(factory, otherOsComponentType);
             var methodArgs = new object[] { Type.Missing };
 
-            var ex = Assert.Throws(typeof(TargetInvocationException), () => Convert.ChangeType(methodInfo.Invoke(factory, new object[] { methodArgs }), otherOsComponentType));
+            var ex = Assert.Throws(
+                typeof(TargetInvocationException), 
+                () => Convert.ChangeType(methodInfo.Invoke(factory, new object[] { methodArgs }), otherOsComponentType)
+            );
             Assert.That(ex.InnerException, Is.TypeOf<NotSupportedException>());
         }
 
