@@ -9,7 +9,7 @@ namespace DesignPatterns.Tests.Creational.FactoryMethod
     [TestFixture]
     public class CartTest
     {
-        private const double UndiscountedProductsTotalValue = 97;
+        private const double CartGrandTotalWithoutDiscounts = 97;
 
         private Cart _cart;
         private readonly IDiscountFactory _discountFactory;
@@ -39,36 +39,34 @@ namespace DesignPatterns.Tests.Creational.FactoryMethod
         {
             yield return new TestCaseData(
                 new Promotion(DiscountType.AbsoluteValue, 10.00),
-                UndiscountedProductsTotalValue);
+                CartGrandTotalWithoutDiscounts);
 
             yield return new TestCaseData(
                 new Promotion(DiscountType.Percentage, 5.00),
-                UndiscountedProductsTotalValue);
+                CartGrandTotalWithoutDiscounts);
         }
 
-        public void Cart_Total_Should_Be_Sum_Of_Products_Prices_Without_Discount() => Assert.AreEqual(UndiscountedProductsTotalValue, _cart.GrandTotal);
 
         [TestCaseSource("PromotionExpectedDiscountsTestCaseSource1")]
-        public void Cart_Total_Should_Be_Sum_Of_Products_Prices_Discounted_By_Applied_Promotion_Discount_Value(Promotion promotion, double expectedGrandTotal)
+        public void ApplyPromotion_SetDiscounts(Promotion promotion, double expectedGrandTotal)
         {
             _cart.ApplyPromotion(promotion, _discountFactory);
 
-            Assert.AreNotEqual(UndiscountedProductsTotalValue, _cart.GrandTotal);
             Assert.AreEqual(expectedGrandTotal, _cart.GrandTotal);
         }
 
         [TestCaseSource("PromotionExpectedDiscountsTestCaseSource2")]
-        public void Cart_Total_Should_Be_Sum_Of_Products_Prices_When_Promotion_Is_Unapplied(Promotion promotion, double expectedGrandTotal)
+        public void ApplyPromotion_ThenUnapply_RemoveDisccounts(Promotion promotion, double expectedGrandTotal)
         {
             _cart.ApplyPromotion(promotion, _discountFactory);
-            _cart.UnapplyPromotion();
+            Assert.AreNotEqual(CartGrandTotalWithoutDiscounts, _cart.GrandTotal);
 
-            Assert.AreEqual(UndiscountedProductsTotalValue, _cart.GrandTotal);
+            _cart.UnapplyPromotion();
             Assert.AreEqual(expectedGrandTotal, _cart.GrandTotal);
         }
 
         [Test]
-        public void Should_Throw_When_Applying_Promotion_More_Than_Once()
+        public void ApplyPromotion_CallTwice_Throws()
         {
             var promotion = new Promotion(DiscountType.Percentage, 10.00);
 
@@ -80,7 +78,7 @@ namespace DesignPatterns.Tests.Creational.FactoryMethod
         }
 
         [Test]
-        public void Should_Throw_When_Unapplying_Promotion_On_Cart_Without_Applied_Promotion() 
+        public void UnapplyPromotion_CartWithoutPromotion_Throws() 
             => Assert.Throws(typeof(InvalidOperationException), () => _cart.UnapplyPromotion());
 
         private void FillCartWithProducts()

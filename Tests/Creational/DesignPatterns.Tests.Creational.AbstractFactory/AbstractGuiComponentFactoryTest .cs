@@ -24,7 +24,7 @@ namespace DesignPatterns.Tests.Creational.AbstractFactory
 
         [TestCase(WindowsOsName, typeof(WindowsConcreteGuiComponentFactory))]
         [TestCase(MacOsName, typeof(MacConcreteGuiComponentFactory))]
-        public void Should_Be_Correct_Factory_Type(string os, Type expectedFactoryType)
+        public void GetType_ReturnsCorrectFactoryType(string os, Type expectedFactoryType)
         {
             var factory = GetFactory(os);
 
@@ -33,7 +33,7 @@ namespace DesignPatterns.Tests.Creational.AbstractFactory
 
         [TestCase(WindowsOsName, typeof(WindowsButtonComponent))]
         [TestCase(MacOsName, typeof(MacButtonComponent))]
-        public void Should_Create_Correct_Button_Type_Given_On_Operating_System(string os, Type expectedButtonType)
+        public void CreateButton_ReturnsCorrectButtonType(string os, Type expectedButtonType)
         {
             var factory = GetFactory(os);
 
@@ -45,7 +45,7 @@ namespace DesignPatterns.Tests.Creational.AbstractFactory
 
         [TestCase(WindowsOsName, typeof(WindowsTextBoxComponent))]
         [TestCase(MacOsName, typeof(MacTextBoxComponent))]
-        public void Should_Create_Correct_TextBox_Type_Given_Operating_System(string os, Type expectedTextBoxType)
+        public void CreateTextBox_ReturnsCorrectTextBoxType(string os, Type expectedTextBoxType)
         {
             var factory = GetFactory(os);
 
@@ -59,7 +59,7 @@ namespace DesignPatterns.Tests.Creational.AbstractFactory
         [TestCase(WindowsOsName, typeof(WindowsButtonComponent))]
         [TestCase(MacOsName, typeof(MacTextBoxComponent))]
         [TestCase(MacOsName, typeof(MacButtonComponent))]
-        public void Should_Create_Correct_Component_Type_Given_Operating_System(string os, Type expectedComponentType)
+        public void Create_CompatibleOsFactory_ReturnsCorrectComponentType(string os, Type expectedComponentType)
         {
             var factory = GetFactory(os);
             var methodInfo = GetCreateGenericMethod(factory, expectedComponentType);
@@ -74,7 +74,7 @@ namespace DesignPatterns.Tests.Creational.AbstractFactory
         [TestCase(WindowsOsName, typeof(MacButtonComponent))]
         [TestCase(MacOsName, typeof(WindowsTextBoxComponent))]
         [TestCase(MacOsName, typeof(WindowsButtonComponent))]
-        public void Should_Fail_Creating_Component_Type_Of_Another_Operating_System(string os, Type otherOsComponentType)
+        public void Create_NotCompatibleOsFactory_Throws(string os, Type otherOsComponentType)
         {
             var factory = GetFactory(os);
             var methodInfo = GetCreateGenericMethod(factory, otherOsComponentType);

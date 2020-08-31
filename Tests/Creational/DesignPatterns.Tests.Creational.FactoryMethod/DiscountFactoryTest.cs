@@ -28,7 +28,7 @@ namespace DesignPatterns.Tests.Creational.FactoryMethod
         }
 
         [TestCaseSource("PromotionDiscountTypeTestCaseSource")]
-        public void Should_Create_Discount_Of_Correct_Type_Given_Promotion_Discount_Type(Promotion promotion, Type expectedDiscountType)
+        public void GetDiscount_ReturnsCorrectDiscountType(Promotion promotion, Type expectedDiscountType)
         {
             var discountType = _discountFactory.GetDiscount(promotion).GetType();
 
@@ -36,7 +36,7 @@ namespace DesignPatterns.Tests.Creational.FactoryMethod
         }
 
         [Test]
-        public void Should_Throw_When_Promotion_Has_Invalid_Discount_Type()
+        public void GetDiscount_InvalidPromotion_Throws()
         {
             var invalidPromotion = new Promotion((DiscountType)10000, 5.0);
 
