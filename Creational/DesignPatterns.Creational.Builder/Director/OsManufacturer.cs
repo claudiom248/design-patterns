@@ -16,7 +16,7 @@ namespace DesignPatterns.Creational.Builder.Director
             Builder
                 .WithName(specs.Name)
                 .WithVersion(specs.Version)
-                .WithApps(specs.SystemApps);
+                .WithApps(specs.Apps);
         }
 
         public TElement Get()

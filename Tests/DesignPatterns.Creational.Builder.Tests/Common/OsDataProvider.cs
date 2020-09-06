@@ -9,28 +9,28 @@ namespace DesignPatterns.Creational.Builder.Tests.Common
         {
             Name = "Android",
             Version = "1.0",
-            SystemApps = new List<string> { "Google Play", "Mi Store" }
+            Apps = new List<string> { "Google Play", "Mi Store" }
         };
 
         public static Os Android_2_0 = new Os
         {
             Name = "Android",
             Version = "2.0",
-            SystemApps = new List<string> { "Google Play", "Mi Store", "Mi Fit" }
+            Apps = new List<string> { "Google Play", "Mi Store", "Mi Fit" }
         };
 
         public static Os Ios_1_0 = new Os
         {
             Name = "IOS",
             Version = "1.0",
-            SystemApps = new List<string> { "Apple Store", "iTunes" }
+            Apps = new List<string> { "Apple Store", "iTunes" }
         };
 
         public static Os Ios_2_0 = new Os
         {
             Name = "IOS",
             Version = "2.0",
-            SystemApps = new List<string> { "Apple Store", "iTunes", "Maps" }
+            Apps = new List<string> { "Apple Store", "iTunes", "Maps" }
         };
     }
 }

@@ -8,6 +8,6 @@ namespace DesignPatterns.Creational.Builder.Director
 
         public string Version { get; set; }
 
-        public List<string> SystemApps { get; set; }
+        public List<string> Apps { get; set; }
     }
 }
