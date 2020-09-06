@@ -12,8 +12,6 @@ namespace DesignPatterns.Creational.Builder.Domain
 
         public List<string> SystemApps { get; set; }
 
-        public Os() => SystemApps = new List<string>();
-
         public override bool Equals(object obj) 
             => obj is Os os &&
                    Name == os.Name &&
