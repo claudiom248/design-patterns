@@ -3,14 +3,14 @@
     public class XiaomiPhoneBuilder<T> : PhoneBuilder<T>
         where T : Domain.Phone
     {
-        private const string AppleMake = "Xiaomi";
+        private const string XiaomiMake = "Xiaomi";
 
         public XiaomiPhoneBuilder()
             : base() { }
 
         public override PhoneBuilder<T> Make()
         {
-            _phone.Make = AppleMake;
+            _phone.Make = XiaomiMake;
             return this;
         }
     }

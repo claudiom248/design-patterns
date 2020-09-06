@@ -1,5 +1,6 @@
-﻿using System.Collections.Generic;
-using System.Text;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace DesignPatterns.Creational.Builder.Domain
 {
@@ -11,14 +12,17 @@ namespace DesignPatterns.Creational.Builder.Domain
 
         public IEnumerable<string> SystemApps { get; set; }
 
-        public override string ToString()
+        public override bool Equals(object obj)
         {
-            var sb = new StringBuilder();
+            return obj is Os os &&
+                   Name == os.Name &&
+                   Version == os.Version &&
+                   SystemApps.Count() == os.SystemApps.Count() && SystemApps.All(os.SystemApps.Contains);
+        }
 
-            sb.AppendLine($"Name: {Name}");
-            sb.AppendLine($"Version: {Version}");
-
-            return sb.ToString();
+        public override int GetHashCode()
+        {
+            return HashCode.Combine(Name, Version, SystemApps);
         }
     }
 }

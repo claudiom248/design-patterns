@@ -1,4 +1,4 @@
-﻿using System.Text;
+﻿using System;
 
 namespace DesignPatterns.Creational.Builder.Domain
 {
@@ -10,15 +10,17 @@ namespace DesignPatterns.Creational.Builder.Domain
 
         public Os Os { get; set; }
 
-        public override string ToString()
+        public override bool Equals(object obj)
         {
-            var sb = new StringBuilder();
+            return obj is Phone phone &&
+                   Make == phone.Make &&
+                   Model == phone.Model &&
+                   Os.Equals(phone.Os);
+        }
 
-            sb.AppendLine($"Make: {Make}");
-            sb.AppendLine($"Model: {Model}");
-            sb.AppendLine($"Os: {Os}");
-
-            return sb.ToString();
+        public override int GetHashCode()
+        {
+            return HashCode.Combine(Make, Model, Os);
         }
     }
 }
