@@ -340,4 +340,4 @@ ASALocalRun/
 healthchecksdb
 
 # Generated reports folder
-/Creational/DesignPatterns.Creational.AbstractFactory.RealWorldExample/Files/Reports/Generated
+src/Creational/DesignPatterns.Creational.AbstractFactory.RealWorldExample/Files/Reports/Generated
