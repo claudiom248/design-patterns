@@ -13,9 +13,9 @@ namespace DesignPatterns.Creational.Builder.Director
 
         public void Construct(PhoneBuildingSpecifications specs)
             => Builder
-                .Make()
-                .Model(specs.Model)
-                .Os(specs.Os);
+                .WithMake()
+                .WithModel(specs.Model)
+                .WithOs(specs.Os);
 
         public TElement Get()
         {

@@ -8,15 +8,15 @@
         protected PhoneBuilder()
             : base() => _phone = new Domain.Phone() as T;
 
-        public abstract PhoneBuilder<T> Make();
+        public abstract PhoneBuilder<T> WithMake();
 
-        public virtual PhoneBuilder<T> Model(string model)
+        public virtual PhoneBuilder<T> WithModel(string model)
         {
             _phone.Model = model;
             return this;
         }
 
-        public virtual PhoneBuilder<T> Os(Domain.Os os)
+        public virtual PhoneBuilder<T> WithOs(Domain.Os os)
         {
             _phone.Os = os;
             return this;

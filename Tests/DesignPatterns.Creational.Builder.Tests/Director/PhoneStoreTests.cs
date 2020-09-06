@@ -33,15 +33,15 @@ namespace DesignPatterns.Creational.Builder.Tests.Director
                 Os = OsDataProvider.Android_1_0
             };
 
-            _builder.Setup(x => x.Make()).Returns(_builder.Object);
-            _builder.Setup(x => x.Model(It.IsAny<string>())).Returns(_builder.Object);
-            _builder.Setup(x => x.Os(It.IsAny<Os>())).Returns(_builder.Object);
+            _builder.Setup(x => x.WithMake()).Returns(_builder.Object);
+            _builder.Setup(x => x.WithModel(It.IsAny<string>())).Returns(_builder.Object);
+            _builder.Setup(x => x.WithOs(It.IsAny<Os>())).Returns(_builder.Object);
 
             _director.Construct(specs);
 
-            _builder.Verify(x => x.Make(), Times.Once());
-            _builder.Verify(x => x.Model(It.Is<string>(p => p == specs.Model)), Times.Once());
-            _builder.Verify(x => x.Os(It.Is<Os>(p => p == specs.Os)), Times.Once());
+            _builder.Verify(x => x.WithMake(), Times.Once());
+            _builder.Verify(x => x.WithModel(It.Is<string>(p => p == specs.Model)), Times.Once());
+            _builder.Verify(x => x.WithOs(It.Is<Os>(p => p == specs.Os)), Times.Once());
         }
 
         [Test]

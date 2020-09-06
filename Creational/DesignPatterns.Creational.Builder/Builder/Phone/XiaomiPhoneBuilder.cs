@@ -8,7 +8,7 @@
         public XiaomiPhoneBuilder()
             : base() { }
 
-        public override PhoneBuilder<T> Make()
+        public override PhoneBuilder<T> WithMake()
         {
             _phone.Make = XiaomiMake;
             return this;

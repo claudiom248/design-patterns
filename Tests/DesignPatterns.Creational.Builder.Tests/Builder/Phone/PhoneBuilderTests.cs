@@ -78,9 +78,9 @@ namespace DesignPatterns.Creational.Builder.Tests.Builder.Phone
         [TestCaseSource("TestCaseDataSource")]
         public void Build_ReturnsExpectedPhone(PhoneBuilder<Domain.Phone> builder, string model, Os os, Domain.Phone expected)
         {
-            builder.Make();
-            builder.Model(model);
-            builder.Os(os);
+            builder.WithMake();
+            builder.WithModel(model);
+            builder.WithOs(os);
 
             var phone = builder.Build();
 
@@ -93,9 +93,9 @@ namespace DesignPatterns.Creational.Builder.Tests.Builder.Phone
             var builder = new XiaomiPhoneBuilder<Domain.Phone>();
             var defaultPhone = new Domain.Phone();
 
-            builder.Make();
-            builder.Model("model");
-            builder.Os(new Os());
+            builder.WithMake();
+            builder.WithModel("model");
+            builder.WithOs(new Os());
 
             var phone = builder.Build();
             Assert.AreNotEqual(defaultPhone, phone);
