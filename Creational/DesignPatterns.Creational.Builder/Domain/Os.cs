@@ -10,19 +10,16 @@ namespace DesignPatterns.Creational.Builder.Domain
 
         public string Version { get; set; }
 
-        public IEnumerable<string> SystemApps { get; set; }
+        public List<string> SystemApps { get; set; }
 
-        public override bool Equals(object obj)
-        {
-            return obj is Os os &&
+        public Os() => SystemApps = new List<string>();
+
+        public override bool Equals(object obj) 
+            => obj is Os os &&
                    Name == os.Name &&
                    Version == os.Version &&
                    SystemApps.Count() == os.SystemApps.Count() && SystemApps.All(os.SystemApps.Contains);
-        }
 
-        public override int GetHashCode()
-        {
-            return HashCode.Combine(Name, Version, SystemApps);
-        }
+        public override int GetHashCode() => HashCode.Combine(Name, Version, SystemApps);
     }
 }
