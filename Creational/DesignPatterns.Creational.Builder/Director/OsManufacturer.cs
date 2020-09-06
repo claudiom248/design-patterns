@@ -6,19 +6,24 @@ namespace DesignPatterns.Creational.Builder.Director
     public class OsManufacturer<TBuilder, TElement> : IDirector<TBuilder, TElement, OsBuildingSpecifications>
         where
             TElement : Os
-        where 
+        where
             TBuilder : OsBuilder<TElement>
     {
         public TBuilder Builder { get; set; }
 
         public void Construct(OsBuildingSpecifications specs)
         {
-            throw new System.NotImplementedException();
+            Builder
+                .WithName(specs.Name)
+                .WithVersion(specs.Version)
+                .WithApps(specs.SystemApps);
         }
 
         public TElement Get()
         {
-            throw new System.NotImplementedException();
+            var os = Builder.Build();
+            Builder.Reset();
+            return os;
         }
     }
 }
