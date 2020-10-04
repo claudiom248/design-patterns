@@ -16,7 +16,7 @@ namespace DesignPatterns.Creational.Builder.Domain
             => obj is Os os &&
                    Name == os.Name &&
                    Version == os.Version &&
-                   Apps.Count() == os.Apps.Count() && Apps.All(os.Apps.Contains);
+                   Apps.Count == os.Apps.Count && Apps.All(os.Apps.Contains);
 
         public override int GetHashCode() => HashCode.Combine(Name, Version, Apps);
     }

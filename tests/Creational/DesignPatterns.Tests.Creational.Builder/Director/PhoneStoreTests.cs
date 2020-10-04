@@ -1,11 +1,11 @@
 ﻿using DesignPatterns.Creational.Builder.Builder.Phone;
 using DesignPatterns.Creational.Builder.Director;
 using DesignPatterns.Creational.Builder.Domain;
-using DesignPatterns.Creational.Builder.Tests.Common;
+using DesignPatterns.Tests.Creational.Builder.Common;
 using Moq;
 using NUnit.Framework;
 
-namespace DesignPatterns.Creational.Builder.Tests.Director
+namespace DesignPatterns.Tests.Creational.Builder.Director
 {
     [TestFixture]
     public class PhoneStoreTests
@@ -30,7 +30,7 @@ namespace DesignPatterns.Creational.Builder.Tests.Director
             var specs = new PhoneBuildingSpecifications
             {
                 Model = "Model1",
-                Os = OsDataProvider.Android_1_0
+                Os = OsDataProvider.Android10
             };
 
             _builder.Setup(x => x.WithMake()).Returns(_builder.Object);
@@ -41,7 +41,7 @@ namespace DesignPatterns.Creational.Builder.Tests.Director
 
             _builder.Verify(x => x.WithMake(), Times.Once());
             _builder.Verify(x => x.WithModel(It.Is<string>(p => p == specs.Model)), Times.Once());
-            _builder.Verify(x => x.WithOs(It.Is<Os>(p => p == specs.Os)), Times.Once());
+            _builder.Verify(x => x.WithOs(It.Is<Os>(p => Equals(p, specs.Os))), Times.Once());
         }
 
         [Test]

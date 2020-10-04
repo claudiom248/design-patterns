@@ -5,8 +5,7 @@
     {
         protected T _phone;
 
-        protected PhoneBuilder()
-            : base() => _phone = new Domain.Phone() as T;
+        protected PhoneBuilder() => _phone = new Domain.Phone() as T;
 
         public abstract PhoneBuilder<T> WithMake();
 

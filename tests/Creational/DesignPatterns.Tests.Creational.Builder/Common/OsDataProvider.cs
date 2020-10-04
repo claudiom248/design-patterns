@@ -1,36 +1,28 @@
-﻿using DesignPatterns.Creational.Builder.Domain;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using DesignPatterns.Creational.Builder.Domain;
 
-namespace DesignPatterns.Creational.Builder.Tests.Common
+namespace DesignPatterns.Tests.Creational.Builder.Common
 {
     public static class OsDataProvider
     {
-        public static Os Android_1_0 = new Os
+        public static Os Android10 { get; } = new Os
         {
-            Name = "Android",
-            Version = "1.0",
-            Apps = new List<string> { "Google Play", "Mi Store" }
+            Name = "Android", Version = "1.0", Apps = new List<string> {"Google Play", "Mi Store"}
         };
 
-        public static Os Android_2_0 = new Os
+        public static Os Android20 { get; } = new Os
         {
-            Name = "Android",
-            Version = "2.0",
-            Apps = new List<string> { "Google Play", "Mi Store", "Mi Fit" }
+            Name = "Android", Version = "2.0", Apps = new List<string> {"Google Play", "Mi Store", "Mi Fit"}
         };
 
-        public static Os Ios_1_0 = new Os
+        public static Os Ios10 { get; } = new Os
         {
-            Name = "IOS",
-            Version = "1.0",
-            Apps = new List<string> { "Apple Store", "iTunes" }
+            Name = "IOS", Version = "1.0", Apps = new List<string> {"Apple Store", "iTunes"}
         };
 
-        public static Os Ios_2_0 = new Os
+        public static Os Ios20 { get; } = new Os
         {
-            Name = "IOS",
-            Version = "2.0",
-            Apps = new List<string> { "Apple Store", "iTunes", "Maps" }
+            Name = "IOS", Version = "2.0", Apps = new List<string> {"Apple Store", "iTunes", "Maps"}
         };
     }
 }

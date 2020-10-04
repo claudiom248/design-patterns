@@ -33,10 +33,7 @@ namespace DesignPatterns.Creational.Builder.Builder.Os
 
         public OsBuilder<T> WithApp(string app)
         {
-            if (_os.Apps == null)
-            {
-                _os.Apps = new List<string>();
-            }
+            _os.Apps ??= new List<string>();
 
             _os.Apps.Add(app);
 

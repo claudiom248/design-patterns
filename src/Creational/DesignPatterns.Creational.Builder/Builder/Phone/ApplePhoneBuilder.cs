@@ -5,9 +5,6 @@
     {
         private const string AppleMake = "Apple";
 
-        public ApplePhoneBuilder()
-            : base() { }
-
         public override PhoneBuilder<T> WithMake()
         {
             _phone.Make = AppleMake;

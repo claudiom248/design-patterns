@@ -1,6 +1,6 @@
 ﻿namespace DesignPatterns.Creational.Builder.Builder
 {
-    public interface IBuilder<T>
+    public interface IBuilder<out T>
     {
         void Reset();
 

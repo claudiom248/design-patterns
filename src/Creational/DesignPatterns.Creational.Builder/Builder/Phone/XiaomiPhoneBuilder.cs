@@ -5,9 +5,6 @@
     {
         private const string XiaomiMake = "Xiaomi";
 
-        public XiaomiPhoneBuilder()
-            : base() { }
-
         public override PhoneBuilder<T> WithMake()
         {
             _phone.Make = XiaomiMake;

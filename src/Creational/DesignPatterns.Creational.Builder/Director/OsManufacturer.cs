@@ -11,13 +11,11 @@ namespace DesignPatterns.Creational.Builder.Director
     {
         public TBuilder Builder { get; set; }
 
-        public void Construct(OsBuildingSpecifications specs)
-        {
+        public void Construct(OsBuildingSpecifications specs) =>
             Builder
                 .WithName(specs.Name)
                 .WithVersion(specs.Version)
                 .WithApps(specs.Apps);
-        }
 
         public TElement Get()
         {

@@ -1,82 +1,82 @@
-﻿using DesignPatterns.Creational.Builder.Builder.Phone;
+﻿using System.Collections.Generic;
+using DesignPatterns.Creational.Builder.Builder.Phone;
 using DesignPatterns.Creational.Builder.Domain;
-using DesignPatterns.Creational.Builder.Tests.Common;
+using DesignPatterns.Tests.Creational.Builder.Common;
 using NUnit.Framework;
-using System.Collections.Generic;
 
-namespace DesignPatterns.Creational.Builder.Tests.Builder.Phone
+namespace DesignPatterns.Tests.Creational.Builder.Builder.Phone
 {
     [TestFixture]
     public class PhoneBuilderTests
     {
         public static IEnumerable<TestCaseData> TestCaseDataSource()
         {
-            var XiaomiBuilder = new XiaomiPhoneBuilder<Domain.Phone>();
-            var AppleBuilder = new ApplePhoneBuilder<Domain.Phone>();
+            var xiaomiBuilder = new XiaomiPhoneBuilder<DesignPatterns.Creational.Builder.Domain.Phone>();
+            var appleBuilder = new ApplePhoneBuilder<DesignPatterns.Creational.Builder.Domain.Phone>();
 
             yield return new TestCaseData(
-                XiaomiBuilder,
+                xiaomiBuilder,
                 "Model1",
-                OsDataProvider.Android_1_0,
-                new Domain.Phone
+                OsDataProvider.Android10,
+                new DesignPatterns.Creational.Builder.Domain.Phone
                 {
                     Make = "Xiaomi",
                     Model = "Model1",
-                    Os = OsDataProvider.Android_1_0
+                    Os = OsDataProvider.Android10
                 }
             );
 
             yield return new TestCaseData(
-                XiaomiBuilder,
+                xiaomiBuilder,
                 "Model2",
-                OsDataProvider.Android_1_0,
-                new Domain.Phone
+                OsDataProvider.Android10,
+                new DesignPatterns.Creational.Builder.Domain.Phone
                 {
                     Make = "Xiaomi",
                     Model = "Model2",
-                    Os = OsDataProvider.Android_1_0
+                    Os = OsDataProvider.Android10
                 }
             );
 
             yield return new TestCaseData(
-                XiaomiBuilder,
+                xiaomiBuilder,
                 "Model3",
-                OsDataProvider.Android_2_0,
-                new Domain.Phone
+                OsDataProvider.Android20,
+                new DesignPatterns.Creational.Builder.Domain.Phone
                 {
                     Make = "Xiaomi",
                     Model = "Model3",
-                    Os = OsDataProvider.Android_2_0
+                    Os = OsDataProvider.Android20
                 }
             );
 
             yield return new TestCaseData(
-                AppleBuilder,
+                appleBuilder,
                 "Model1",
-                OsDataProvider.Ios_1_0,
-                new Domain.Phone
+                OsDataProvider.Ios10,
+                new DesignPatterns.Creational.Builder.Domain.Phone
                 {
                     Make = "Apple",
                     Model = "Model1",
-                    Os = OsDataProvider.Ios_1_0
+                    Os = OsDataProvider.Ios10
                 }
             );
 
             yield return new TestCaseData(
-                AppleBuilder,
+                appleBuilder,
                 "Model2",
-                OsDataProvider.Ios_2_0,
-                new Domain.Phone
+                OsDataProvider.Ios20,
+                new DesignPatterns.Creational.Builder.Domain.Phone
                 {
                     Make = "Apple",
                     Model = "Model2",
-                    Os = OsDataProvider.Ios_2_0
+                    Os = OsDataProvider.Ios20
                 }
             );
         }
 
-        [TestCaseSource("TestCaseDataSource")]
-        public void Build_ReturnsExpectedPhone(PhoneBuilder<Domain.Phone> builder, string model, Os os, Domain.Phone expected)
+        [TestCaseSource(nameof(TestCaseDataSource))]
+        public void Build_ReturnsExpectedPhone(PhoneBuilder<DesignPatterns.Creational.Builder.Domain.Phone> builder, string model, Os os, DesignPatterns.Creational.Builder.Domain.Phone expected)
         {
             builder.WithMake();
             builder.WithModel(model);
@@ -90,8 +90,8 @@ namespace DesignPatterns.Creational.Builder.Tests.Builder.Phone
         [Test]
         public void Reset_SetPhonePropertiesToDefaultValues()
         {
-            var builder = new XiaomiPhoneBuilder<Domain.Phone>();
-            var defaultPhone = new Domain.Phone();
+            var builder = new XiaomiPhoneBuilder<DesignPatterns.Creational.Builder.Domain.Phone>();
+            var defaultPhone = new DesignPatterns.Creational.Builder.Domain.Phone();
 
             builder.WithMake();
             builder.WithModel("model");
