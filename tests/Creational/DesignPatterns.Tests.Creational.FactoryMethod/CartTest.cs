@@ -1,16 +1,14 @@
-﻿using DesignPatterns.Creational.FactoryMethod;
+﻿using System;
+using System.Collections.Generic;
+using DesignPatterns.Creational.FactoryMethod;
 using DesignPatterns.Creational.FactoryMethod.Discounts;
 using NUnit.Framework;
-using System;
-using System.Collections.Generic;
 
 namespace DesignPatterns.Tests.Creational.FactoryMethod
 {
     [TestFixture]
     public class CartTest
     {
-        private const double CartGrandTotalWithoutDiscounts = 97;
-
         private Cart _cart;
         private readonly IDiscountFactory _discountFactory;
 
@@ -38,31 +36,34 @@ namespace DesignPatterns.Tests.Creational.FactoryMethod
         public static IEnumerable<TestCaseData> PromotionExpectedDiscountsTestCaseSource2()
         {
             yield return new TestCaseData(
-                new Promotion(DiscountType.AbsoluteValue, 10.00),
-                CartGrandTotalWithoutDiscounts);
+                new Promotion(DiscountType.AbsoluteValue, 10.00));
 
             yield return new TestCaseData(
-                new Promotion(DiscountType.Percentage, 5.00),
-                CartGrandTotalWithoutDiscounts);
+                new Promotion(DiscountType.Percentage, 5.00));
         }
 
 
-        [TestCaseSource("PromotionExpectedDiscountsTestCaseSource1")]
+        [TestCaseSource(nameof(PromotionExpectedDiscountsTestCaseSource1))]
         public void ApplyPromotion_SetDiscounts(Promotion promotion, double expectedGrandTotal)
         {
             _cart.ApplyPromotion(promotion, _discountFactory);
 
             Assert.AreEqual(expectedGrandTotal, _cart.GrandTotal);
+            Assert.AreNotEqual(_cart.SubTotal, _cart.GrandTotal);
+            Assert.IsTrue(_cart.IsPromotionApplied);
         }
 
-        [TestCaseSource("PromotionExpectedDiscountsTestCaseSource2")]
-        public void ApplyPromotion_ThenUnapply_RemoveDisccounts(Promotion promotion, double expectedGrandTotal)
+        [TestCaseSource(nameof(PromotionExpectedDiscountsTestCaseSource2))]
+        public void ApplyPromotion_ThenUnapply_RemoveDisccounts(Promotion promotion)
         {
             _cart.ApplyPromotion(promotion, _discountFactory);
-            Assert.AreNotEqual(CartGrandTotalWithoutDiscounts, _cart.GrandTotal);
+            Assert.AreNotEqual(97, _cart.GrandTotal);
+            Assert.IsTrue(_cart.IsPromotionApplied);
 
             _cart.UnapplyPromotion();
-            Assert.AreEqual(expectedGrandTotal, _cart.GrandTotal);
+            Assert.AreEqual(97, _cart.GrandTotal);
+            Assert.AreEqual(_cart.SubTotal, _cart.GrandTotal);
+            Assert.IsFalse(_cart.IsPromotionApplied);
         }
 
         [Test]
@@ -84,21 +85,21 @@ namespace DesignPatterns.Tests.Creational.FactoryMethod
         private void FillCartWithProducts()
         {
             _cart.AddProduct(
-                new Product()
+                new Product
                 {
                     BasePrice = 30.00
                 },
                 _discountFactory);
 
             _cart.AddProduct(
-                new Product()
+                new Product
                 {
                     BasePrice = 42.00
                 },
                 _discountFactory);
 
             _cart.AddProduct(
-                new Product()
+                new Product
                 {
                     BasePrice = 25.00
                 },

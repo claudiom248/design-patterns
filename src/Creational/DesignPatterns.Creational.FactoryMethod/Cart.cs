@@ -65,9 +65,6 @@ namespace DesignPatterns.Creational.FactoryMethod
             }
         }
 
-        private void ApplyDiscountOnProduct(Product product, Discount discount) 
-            => product.AppliedDiscount = discount.Calculate(product);
-
         private void UnapplyDiscountOnProducts()
         {
             foreach (var product in _products)
@@ -78,5 +75,8 @@ namespace DesignPatterns.Creational.FactoryMethod
 
         private Discount GetDiscount(IDiscountFactory discountFactory) 
             => discountFactory.GetDiscount(AppliedPromotion);
+
+        private static void ApplyDiscountOnProduct(Product product, Discount discount)
+            => product.AppliedDiscount = discount.Calculate(product);
     }
 }

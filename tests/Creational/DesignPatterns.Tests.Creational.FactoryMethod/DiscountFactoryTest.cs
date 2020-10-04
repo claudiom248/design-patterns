@@ -27,8 +27,8 @@ namespace DesignPatterns.Tests.Creational.FactoryMethod
             }
         }
 
-        [TestCaseSource("PromotionDiscountTypeTestCaseSource")]
-        public void GetDiscount_ReturnsCorrectDiscountType(Promotion promotion, Type expectedDiscountType)
+        [TestCaseSource(nameof(PromotionDiscountTypeTestCaseSource))]
+        public void GetDiscount_ReturnsDiscountOfExpectedType(Promotion promotion, Type expectedDiscountType)
         {
             var discountType = _discountFactory.GetDiscount(promotion).GetType();
 
