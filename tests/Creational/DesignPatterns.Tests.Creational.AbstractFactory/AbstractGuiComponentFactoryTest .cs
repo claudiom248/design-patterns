@@ -26,15 +26,16 @@ namespace DesignPatterns.Tests.Creational.AbstractFactory
         [TestCase(WindowsOsName, typeof(WindowsButtonComponent))]
         [TestCase(MacOsName, typeof(MacTextBoxComponent))]
         [TestCase(MacOsName, typeof(MacButtonComponent))]
-        public void Create_CompatibleOsFactory_ReturnsCorrectComponentType(string os, Type expectedComponentType)
+        public void Create_CompatibleOsFactory_ReturnsComponentOfExpectedType(string os, Type expectedComponentType)
         {
             var factory = GetFactory(os);
             var methodInfo = GetCreateGenericMethod(factory, expectedComponentType);
-            var methodArgs = new object[] { Type.Missing };
+            var methodArgs = new[] { Type.Missing };
 
-            var component = Convert.ChangeType(methodInfo.Invoke(factory, new object[] { methodArgs }), expectedComponentType);
+            var component = Convert.ChangeType(methodInfo.Invoke(factory, new object[] { methodArgs }), expectedComponentType) as IGuiComponent;
 
-            Assert.AreEqual(expectedComponentType, component.GetType());
+            Assert.AreEqual(expectedComponentType, component?.GetType());
+            Assert.AreEqual(os, component?.OperatingSystem);
         }
 
         [TestCase(WindowsOsName, typeof(MacTextBoxComponent))]
@@ -45,17 +46,40 @@ namespace DesignPatterns.Tests.Creational.AbstractFactory
         {
             var factory = GetFactory(os);
             var methodInfo = GetCreateGenericMethod(factory, otherOsComponentType);
-            var methodArgs = new object[] { Type.Missing };
+            var methodArgs = new[] { Type.Missing };
 
             var ex = Assert.Throws(
                 typeof(TargetInvocationException), 
                 () => Convert.ChangeType(methodInfo.Invoke(factory, new object[] { methodArgs }), otherOsComponentType)
             );
+
             Assert.That(ex.InnerException, Is.TypeOf<NotSupportedException>());
         }
 
-        private MethodInfo GetCreateGenericMethod(IAbstractGuiComponentFactory factory, Type methodReturnType) 
-            => factory.GetType().GetMethod(nameof(factory.Create)).MakeGenericMethod(methodReturnType);
+        [TestCase(WindowsOsName)]
+        [TestCase(MacOsName)]
+        public void CreateButton_ReturnsButtonWithExpectedOperatingSystem(string os)
+        {
+            var factory = GetFactory(os);
+
+            var button = factory.CreateButton();
+
+            Assert.AreEqual(button.OperatingSystem, os);
+        }
+
+        [TestCase(WindowsOsName)]
+        [TestCase(MacOsName)]
+        public void CreateButton_ReturnsTextBoxWithExpectedOperatingSystem(string os)
+        {
+            var factory = GetFactory(os);
+
+            var button = factory.CreateTextBox();
+
+            Assert.AreEqual(button.OperatingSystem, os);
+        }
+
+        private static MethodInfo GetCreateGenericMethod(IAbstractGuiComponentFactory factory, Type methodReturnType) 
+            => factory.GetType().GetMethod(nameof(factory.Create))?.MakeGenericMethod(methodReturnType);
 
         private IAbstractGuiComponentFactory GetFactory(string os) => _factories[os];
     }
