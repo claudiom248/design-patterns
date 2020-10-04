@@ -20,14 +20,13 @@ namespace DesignPatterns.Creational.AbstractFactory.RealWorldExample.Provider
             {
                 return _serviceProvider.GetService<CsvConcreteReportFactory>();
             }
-            else if (format == FileFormatType.Pdf)
+
+            if (format == FileFormatType.Pdf)
             {
                 return _serviceProvider.GetService<PdfConcreteReportFactory>();
             }
-            else
-            {
-                throw new NotSupportedException($"Invalid format type {format}");
-            }
+
+            throw new NotSupportedException($"Invalid format type {format}");
         }
     }
 }

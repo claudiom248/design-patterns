@@ -86,21 +86,15 @@ namespace DesignPatterns.Creational.AbstractFactory.RealWorldExample
                 Directory.CreateDirectory(fileProvider.GetFullPath(stagingFolderPath));
             }
 
-            services.AddScoped<CsvConcreteReportFactory, CsvConcreteReportFactory>(serviceProvider =>
-            {
-                return new CsvConcreteReportFactory(
-                    fileProvider,
-                    stagingFolderPath);
-            });
+            services.AddScoped<CsvConcreteReportFactory, CsvConcreteReportFactory>(serviceProvider => new CsvConcreteReportFactory(
+                fileProvider,
+                stagingFolderPath));
 
-            services.AddScoped<PdfConcreteReportFactory, PdfConcreteReportFactory>(serviceProvider =>
-            {
-                return new PdfConcreteReportFactory(
-                    fileProvider,
-                    serviceProvider.GetService<IGeneratePdf>(),
-                    templatesFolderPath,
-                    stagingFolderPath);
-            });
+            services.AddScoped<PdfConcreteReportFactory, PdfConcreteReportFactory>(serviceProvider => new PdfConcreteReportFactory(
+                fileProvider,
+                serviceProvider.GetService<IGeneratePdf>(),
+                templatesFolderPath,
+                stagingFolderPath));
 
             services.AddScoped<IReportFactoryProvider, ContainerBasedReportFactoryProvider>();
         }

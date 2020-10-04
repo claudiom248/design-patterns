@@ -32,7 +32,7 @@ namespace DesignPatterns.Creational.AbstractFactory.RealWorldExample.Factory.Csv
             return _fileProvider.GetFullPath(reportRelativePath);
         }
 
-        private string GetBooksReportCsv(IEnumerable<Book> books)
+        private static string GetBooksReportCsv(IEnumerable<Book> books)
         {
             var csvBuilder = new StringBuilder();
             csvBuilder.Append(GetBooksReportHeader());
@@ -41,12 +41,12 @@ namespace DesignPatterns.Creational.AbstractFactory.RealWorldExample.Factory.Csv
             return csvBuilder.ToString();
         }
 
-        private string GetBooksReportHeader() => "ISBN,Title,Price,Author,CopiesSold\n";
+        private static string GetBooksReportHeader() => "ISBN,Title,Price,Author,CopiesSold\n";
 
-        private string[] GetBookAsCsvValue(IEnumerable<Book> books) 
+        private static IEnumerable<string> GetBookAsCsvValue(IEnumerable<Book> books) 
             => books.Select(b => string.Join(",", b.Isbn, b.Title, b.Price, b.Author, b.CopiesSold)).ToArray();
 
-        private void AppendLinesToStringBuilder(IEnumerable<string> lines, StringBuilder stringBuilder)
+        private static void AppendLinesToStringBuilder(IEnumerable<string> lines, StringBuilder stringBuilder)
         {
             foreach (var line in lines)
             {

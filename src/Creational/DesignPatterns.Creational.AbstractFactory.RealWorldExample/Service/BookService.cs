@@ -1,5 +1,5 @@
-﻿using DesignPatterns.Creational.AbstractFactory.RealWorldExample.Domain;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using DesignPatterns.Creational.AbstractFactory.RealWorldExample.Domain;
 
 namespace DesignPatterns.Creational.AbstractFactory.RealWorldExample.Service
 {
@@ -8,7 +8,7 @@ namespace DesignPatterns.Creational.AbstractFactory.RealWorldExample.Service
         public IEnumerable<Book> GetAll() 
             => new List<Book>
             {
-                new Book()
+                new Book
                 {
                     Author = "Author1",
                     CopiesSold = 20,
@@ -16,7 +16,7 @@ namespace DesignPatterns.Creational.AbstractFactory.RealWorldExample.Service
                     Price = 20.43M,
                     Title = "Title1"
                 },
-                new Book()
+                new Book
                 {
                     Author = "Author2",
                     CopiesSold = 56,
@@ -24,7 +24,7 @@ namespace DesignPatterns.Creational.AbstractFactory.RealWorldExample.Service
                     Price = 43.23M,
                     Title = "Title2"
                 },
-                new Book()
+                new Book
                 {
                     Author = "Author3",
                     CopiesSold = 1240,
@@ -32,7 +32,7 @@ namespace DesignPatterns.Creational.AbstractFactory.RealWorldExample.Service
                     Price = 25.70M,
                     Title = "Title3"
                 },
-                new Book()
+                new Book
                 {
                     Author = "Author4",
                     CopiesSold = 632,

@@ -7,6 +7,6 @@
 
         private FileFormatType(string extension) => Extension = extension;
 
-        public string Extension { get; private set; }
+        public string Extension { get; }
     }
 }
