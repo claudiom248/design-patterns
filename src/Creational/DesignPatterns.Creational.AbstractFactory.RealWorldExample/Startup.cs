@@ -10,6 +10,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.FileProviders;
 using Microsoft.Extensions.Hosting;
 using System.IO;
+using DesignPatterns.Creational.AbstractFactory.RealWorldExample.ModelBinder;
 using Wkhtmltopdf.NetCore;
 
 namespace DesignPatterns.Creational.AbstractFactory.RealWorldExample
@@ -38,10 +39,7 @@ namespace DesignPatterns.Creational.AbstractFactory.RealWorldExample
             AddPdfGenerator(services);
             AddReportFactories(services);
 
-            services.AddMvc(opt =>
-            {
-                opt.ModelBinderProviders.Insert(0, new ModelBinder.ReportFormatTypeModelBinderProvider());
-            });
+            services.AddMvc(opt => { opt.ModelBinderProviders.Insert(0, new ReportFormatTypeModelBinderProvider()); });
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -63,10 +61,7 @@ namespace DesignPatterns.Creational.AbstractFactory.RealWorldExample
 
             app.UseAuthorization();
 
-            app.UseEndpoints(endpoints =>
-            {
-                endpoints.MapRazorPages();
-            });
+            app.UseEndpoints(endpoints => { endpoints.MapRazorPages(); });
         }
 
         private void AddPdfGenerator(IServiceCollection services)
@@ -86,15 +81,17 @@ namespace DesignPatterns.Creational.AbstractFactory.RealWorldExample
                 Directory.CreateDirectory(fileProvider.GetFullPath(stagingFolderPath));
             }
 
-            services.AddScoped<CsvConcreteReportFactory, CsvConcreteReportFactory>(serviceProvider => new CsvConcreteReportFactory(
-                fileProvider,
-                stagingFolderPath));
+            services.AddScoped<CsvConcreteReportFactory, CsvConcreteReportFactory>(
+                serviceProvider => new CsvConcreteReportFactory(
+                    fileProvider,
+                    stagingFolderPath));
 
-            services.AddScoped<PdfConcreteReportFactory, PdfConcreteReportFactory>(serviceProvider => new PdfConcreteReportFactory(
-                fileProvider,
-                serviceProvider.GetService<IGeneratePdf>(),
-                templatesFolderPath,
-                stagingFolderPath));
+            services.AddScoped<PdfConcreteReportFactory, PdfConcreteReportFactory>(
+                serviceProvider => new PdfConcreteReportFactory(
+                    fileProvider,
+                    serviceProvider.GetService<IGeneratePdf>(),
+                    templatesFolderPath,
+                    stagingFolderPath));
 
             services.AddScoped<IReportFactoryProvider, ContainerBasedReportFactoryProvider>();
         }

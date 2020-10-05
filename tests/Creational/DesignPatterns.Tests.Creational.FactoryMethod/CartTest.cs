@@ -9,11 +9,6 @@ namespace DesignPatterns.Tests.Creational.FactoryMethod
     [TestFixture]
     public class CartTest
     {
-        private Cart _cart;
-        private readonly IDiscountFactory _discountFactory;
-
-        public CartTest() => _discountFactory = new DiscountFactory();
-
         [SetUp]
         public void Setup()
         {
@@ -21,6 +16,11 @@ namespace DesignPatterns.Tests.Creational.FactoryMethod
 
             FillCartWithProducts();
         }
+
+        private Cart _cart;
+        private readonly IDiscountFactory _discountFactory;
+
+        public CartTest() => _discountFactory = new DiscountFactory();
 
         public static IEnumerable<TestCaseData> PromotionExpectedDiscountsTestCaseSource1()
         {
@@ -71,15 +71,17 @@ namespace DesignPatterns.Tests.Creational.FactoryMethod
         {
             var promotion = new Promotion(DiscountType.Percentage, 10.00);
 
-            Assert.Throws(typeof(InvalidOperationException), () =>
-            {
-                _cart.ApplyPromotion(promotion, _discountFactory);
-                _cart.ApplyPromotion(promotion, _discountFactory);
-            });
+            Assert.Throws(
+                typeof(InvalidOperationException),
+                () =>
+                {
+                    _cart.ApplyPromotion(promotion, _discountFactory);
+                    _cart.ApplyPromotion(promotion, _discountFactory);
+                });
         }
 
         [Test]
-        public void UnapplyPromotion_CartWithoutPromotion_Throws() 
+        public void UnapplyPromotion_CartWithoutPromotion_Throws()
             => Assert.Throws(typeof(InvalidOperationException), () => _cart.UnapplyPromotion());
 
         private void FillCartWithProducts()

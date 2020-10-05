@@ -2,7 +2,8 @@
 {
     public interface IAbstractGuiComponentFactory
     {
-        TComponent Create<TComponent>(params object[] args) where TComponent : class, IGuiComponent;
+        TComponent Create<TComponent>(params object[] args)
+            where TComponent : class, IGuiComponent;
 
         public IButtonComponent CreateButton(string text = "");
 

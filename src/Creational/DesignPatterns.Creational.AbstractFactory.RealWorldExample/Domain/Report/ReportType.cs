@@ -4,12 +4,17 @@ namespace DesignPatterns.Creational.AbstractFactory.RealWorldExample.Domain.Repo
 {
     public class ReportType
     {
-        public static ReportType AllBooks => new ReportType { ReportId = "AllBooks", ReportName = "AllBooks" };
+        public static ReportType AllBooks => new ReportType
+        {
+            ReportId = "AllBooks",
+            ReportName = "AllBooks"
+        };
 
         public string ReportId { get; set; }
 
         public string ReportName { get; set; }
 
-        public string GetFileName(FileFormatType format) => $"{ReportName}-{DateTime.Now:yyyyMMddHHmmss}.{format.Extension}";
+        public string GetFileName(FileFormatType format) =>
+            $"{ReportName}-{DateTime.Now:yyyyMMddHHmmss}.{format.Extension}";
     }
 }

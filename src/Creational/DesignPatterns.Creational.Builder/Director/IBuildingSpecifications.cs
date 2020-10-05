@@ -1,4 +1,6 @@
 ﻿namespace DesignPatterns.Creational.Builder.Director
 {
-    public interface IBuildingSpecifications { }
+    public interface IBuildingSpecifications
+    {
+    }
 }

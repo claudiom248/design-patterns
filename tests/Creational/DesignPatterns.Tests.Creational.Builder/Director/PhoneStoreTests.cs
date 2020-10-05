@@ -10,9 +10,6 @@ namespace DesignPatterns.Tests.Creational.Builder.Director
     [TestFixture]
     public class PhoneStoreTests
     {
-        private Mock<PhoneBuilder<Phone>> _builder;
-        private PhoneStore<PhoneBuilder<Phone>, Phone> _director;
-
         [OneTimeSetUp]
         public void SetupFixture()
         {
@@ -23,6 +20,9 @@ namespace DesignPatterns.Tests.Creational.Builder.Director
                 Builder = _builder.Object
             };
         }
+
+        private Mock<PhoneBuilder<Phone>> _builder;
+        private PhoneStore<PhoneBuilder<Phone>, Phone> _director;
 
         [Test]
         public void Construct_AssemblePhoneAccordingToSpecs()

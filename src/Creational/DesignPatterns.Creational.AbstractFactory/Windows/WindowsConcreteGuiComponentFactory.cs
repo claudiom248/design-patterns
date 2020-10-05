@@ -5,18 +5,19 @@ namespace DesignPatterns.Creational.AbstractFactory.Windows
 {
     public class WindowsConcreteGuiComponentFactory : IAbstractGuiComponentFactory
     {
-        public TComponent Create<TComponent>(params object[] args) where TComponent : class, IGuiComponent
+        public TComponent Create<TComponent>(params object[] args)
+            where TComponent : class, IGuiComponent
         {
             var componentType = typeof(TComponent);
 
             if (typeof(WindowsButtonComponent) == componentType)
             {
-                return (TComponent)CreateButton();
+                return (TComponent) CreateButton();
             }
 
             if (typeof(WindowsTextBoxComponent) == componentType)
             {
-                return (TComponent)CreateTextBox();
+                return (TComponent) CreateTextBox();
             }
 
             throw new NotSupportedException($"{typeof(TComponent)} component type cannot be provided.");

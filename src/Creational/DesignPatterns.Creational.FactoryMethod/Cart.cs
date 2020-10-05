@@ -9,6 +9,14 @@ namespace DesignPatterns.Creational.FactoryMethod
     {
         private readonly ICollection<Product> _products;
 
+        public Cart()
+            : this(null)
+        {
+        }
+
+        public Cart(ICollection<Product> products = null)
+            => _products = products ?? new List<Product>();
+
         public bool IsPromotionApplied => AppliedPromotion != null;
 
         public Promotion AppliedPromotion { get; private set; }
@@ -18,12 +26,6 @@ namespace DesignPatterns.Creational.FactoryMethod
         public double SubTotal => _products.Sum(p => p.BasePrice);
 
         public double GrandTotal => _products.Sum(p => p.Price);
-
-        public Cart()
-            : this(null) { }
-
-        public Cart(ICollection<Product> products = null) 
-            => _products = products ?? new List<Product>();
 
         public void AddProduct(Product product, IDiscountFactory discountFactory)
         {
@@ -73,7 +75,7 @@ namespace DesignPatterns.Creational.FactoryMethod
             }
         }
 
-        private Discount GetDiscount(IDiscountFactory discountFactory) 
+        private Discount GetDiscount(IDiscountFactory discountFactory)
             => discountFactory.GetDiscount(AppliedPromotion);
 
         private static void ApplyDiscountOnProduct(Product product, Discount discount)

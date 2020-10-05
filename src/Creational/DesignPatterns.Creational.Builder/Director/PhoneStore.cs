@@ -5,9 +5,9 @@ namespace DesignPatterns.Creational.Builder.Director
 {
     public class PhoneStore<TBuilder, TElement> : IDirector<TBuilder, TElement, PhoneBuildingSpecifications>
         where
-            TElement : Phone
+        TElement : Phone
         where
-            TBuilder : PhoneBuilder<TElement>
+        TBuilder : PhoneBuilder<TElement>
     {
         public TBuilder Builder { get; set; }
 

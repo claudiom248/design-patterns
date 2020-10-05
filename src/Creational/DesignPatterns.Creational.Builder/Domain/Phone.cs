@@ -10,14 +10,14 @@ namespace DesignPatterns.Creational.Builder.Domain
 
         public Os Os { get; set; }
 
-        public override bool Equals(object obj) 
+        public override bool Equals(object obj)
             => obj is Phone other &&
-                    Make == other.Make &&
-                    Model == other.Model &&
-                    (
-                        ReferenceEquals(Os, other.Os) ||
-                        Os != null && Os.Equals(other.Os)
-                    );
+               Make == other.Make &&
+               Model == other.Model &&
+               (
+                   ReferenceEquals(Os, other.Os) ||
+                   Os != null && Os.Equals(other.Os)
+               );
 
         public override int GetHashCode() => HashCode.Combine(Make, Model, Os);
     }

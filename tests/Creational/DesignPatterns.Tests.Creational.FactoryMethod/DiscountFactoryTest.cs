@@ -38,7 +38,7 @@ namespace DesignPatterns.Tests.Creational.FactoryMethod
         [Test]
         public void GetDiscount_InvalidPromotion_Throws()
         {
-            var invalidPromotion = new Promotion((DiscountType)10000, 5.0);
+            var invalidPromotion = new Promotion((DiscountType) 10000, 5.0);
 
             Assert.Throws(typeof(NotSupportedException), () => _discountFactory.GetDiscount(invalidPromotion));
         }

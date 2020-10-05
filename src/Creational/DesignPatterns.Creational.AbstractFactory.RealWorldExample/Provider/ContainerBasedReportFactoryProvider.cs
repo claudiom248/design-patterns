@@ -11,7 +11,7 @@ namespace DesignPatterns.Creational.AbstractFactory.RealWorldExample.Provider
     {
         private readonly IServiceProvider _serviceProvider;
 
-        public ContainerBasedReportFactoryProvider(IServiceProvider serviceProvider) 
+        public ContainerBasedReportFactoryProvider(IServiceProvider serviceProvider)
             => _serviceProvider = serviceProvider;
 
         public IReportFactory GetFactory(FileFormatType format)

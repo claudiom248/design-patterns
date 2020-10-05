@@ -5,11 +5,7 @@ namespace DesignPatterns.Creational.FactoryMethod
 {
     public class Promotion
     {
-        public DiscountType Type { get; set; }
-
-        public double Value { get; set; }
-
-        public Promotion(DiscountType discountType, double value) 
+        public Promotion(DiscountType discountType, double value)
         {
             if (value <= default(double))
             {
@@ -19,5 +15,9 @@ namespace DesignPatterns.Creational.FactoryMethod
             Type = discountType;
             Value = value;
         }
+
+        public DiscountType Type { get; set; }
+
+        public double Value { get; set; }
     }
 }

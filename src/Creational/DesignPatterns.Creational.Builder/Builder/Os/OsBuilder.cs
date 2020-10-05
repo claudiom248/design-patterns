@@ -9,6 +9,10 @@ namespace DesignPatterns.Creational.Builder.Builder.Os
 
         public OsBuilder() => _os = new Domain.Os() as T;
 
+        public void Reset() => _os = new Domain.Os() as T;
+
+        public T Build() => _os;
+
         public OsBuilder<T> WithName(string name)
         {
             _os.Name = name;
@@ -39,9 +43,5 @@ namespace DesignPatterns.Creational.Builder.Builder.Os
 
             return this;
         }
-
-        public void Reset() => _os = new Domain.Os() as T;
-
-        public T Build() => _os;
     }
 }

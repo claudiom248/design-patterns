@@ -4,7 +4,7 @@ namespace DesignPatterns.Creational.FactoryMethod.Discounts
 {
     public class DiscountFactory : IDiscountFactory
     {
-        public Discount GetDiscount(Promotion promotion) 
+        public Discount GetDiscount(Promotion promotion)
             => promotion.Type switch
             {
                 DiscountType.AbsoluteValue => new AbsoluteValueDiscount(promotion.Value),

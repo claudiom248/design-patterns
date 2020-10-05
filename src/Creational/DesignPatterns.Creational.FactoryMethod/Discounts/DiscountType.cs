@@ -2,7 +2,7 @@
 {
     public enum DiscountType
     {
-        AbsoluteValue, 
+        AbsoluteValue,
         Percentage
     }
 }

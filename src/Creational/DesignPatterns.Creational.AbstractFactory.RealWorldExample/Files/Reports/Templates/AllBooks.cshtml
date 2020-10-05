@@ -17,24 +17,24 @@
     </style>
 </head>
 <body>
-    <table>
+<table>
+    <tr>
+        <th>ISBN</th>
+        <th>Title</th>
+        <th>Price</th>
+        <th>Author</th>
+        <th>CopiesSold</th>
+    </tr>
+    @foreach (var book in Model)
+    {
         <tr>
-            <th>ISBN</th>
-            <th>Title</th>
-            <th>Price</th>
-            <th>Author</th>
-            <th>CopiesSold</th>
+            <td>@Html.DisplayFor(m => book.Isbn)</td>
+            <td>@Html.DisplayFor(m => book.Title)</td>
+            <td>@Html.DisplayFor(m => book.Price)</td>
+            <td>@Html.DisplayFor(m => book.Author)</td>
+            <td>@Html.DisplayFor(m => book.CopiesSold)</td>
         </tr>
-        @foreach (var book in Model)
-        {
-            <tr>
-                <td>@Html.DisplayFor(m => book.Isbn)</td>
-                <td>@Html.DisplayFor(m => book.Title)</td>
-                <td>@Html.DisplayFor(m => book.Price)</td>
-                <td>@Html.DisplayFor(m => book.Author)</td>
-                <td>@Html.DisplayFor(m => book.CopiesSold)</td>
-            </tr>
-        }
-    </table>
+    }
+</table>
 </body>
 </html>

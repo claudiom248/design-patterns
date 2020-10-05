@@ -12,18 +12,19 @@ namespace DesignPatterns.Creational.AbstractFactory.Mac
 
         public MacConcreteGuiComponentFactory() => _componentResolvers = new Dictionary<Type, MethodBase>
         {
-            [typeof(MacButtonComponent)] = _type.GetMethod(nameof(this.CreateButton)),
-            [typeof(MacTextBoxComponent)] = _type.GetMethod(nameof(this.CreateTextBox))
+            [typeof(MacButtonComponent)] = _type.GetMethod(nameof(CreateButton)),
+            [typeof(MacTextBoxComponent)] = _type.GetMethod(nameof(CreateTextBox))
         };
 
-        public TComponent Create<TComponent>(params object[] args) where TComponent : class, IGuiComponent
+        public TComponent Create<TComponent>(params object[] args)
+            where TComponent : class, IGuiComponent
         {
             if (!_componentResolvers.TryGetValue(typeof(TComponent), out var componentResolver))
             {
                 throw new NotSupportedException($"{typeof(TComponent)} component type cannot be provided.");
             }
 
-            return (TComponent)componentResolver.Invoke(this, args);
+            return (TComponent) componentResolver.Invoke(this, args);
         }
 
         public IButtonComponent CreateButton(string text = "") => new MacButtonComponent

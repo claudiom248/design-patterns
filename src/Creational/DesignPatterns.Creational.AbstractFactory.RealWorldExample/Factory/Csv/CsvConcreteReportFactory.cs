@@ -22,7 +22,7 @@ namespace DesignPatterns.Creational.AbstractFactory.RealWorldExample.Factory.Csv
             _fileProvider = fileProvider;
         }
 
-        public IReport CreateBooksReport(IEnumerable<Book> books) 
+        public IReport CreateBooksReport(IEnumerable<Book> books)
             => new CsvReport(ReportType.AllBooks, BuildFile(books));
 
         private string BuildFile(IEnumerable<Book> books)
@@ -43,7 +43,7 @@ namespace DesignPatterns.Creational.AbstractFactory.RealWorldExample.Factory.Csv
 
         private static string GetBooksReportHeader() => "ISBN,Title,Price,Author,CopiesSold\n";
 
-        private static IEnumerable<string> GetBookAsCsvValue(IEnumerable<Book> books) 
+        private static IEnumerable<string> GetBookAsCsvValue(IEnumerable<Book> books)
             => books.Select(b => string.Join(",", b.Isbn, b.Title, b.Price, b.Author, b.CopiesSold)).ToArray();
 
         private static void AppendLinesToStringBuilder(IEnumerable<string> lines, StringBuilder stringBuilder)

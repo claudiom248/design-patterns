@@ -7,6 +7,10 @@
 
         protected PhoneBuilder() => _phone = new Domain.Phone() as T;
 
+        public virtual void Reset() => _phone = new Domain.Phone() as T;
+
+        public virtual T Build() => _phone;
+
         public abstract PhoneBuilder<T> WithMake();
 
         public virtual PhoneBuilder<T> WithModel(string model)
@@ -20,9 +24,5 @@
             _phone.Os = os;
             return this;
         }
-
-        public virtual void Reset() => _phone = new Domain.Phone() as T;
-
-        public virtual T Build() => _phone;
     }
 }

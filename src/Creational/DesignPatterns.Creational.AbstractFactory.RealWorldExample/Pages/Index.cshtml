@@ -4,29 +4,29 @@
     ViewData["Title"] = "Books";
 }
 
-    <div class="text-center">
-        <table>
+<div class="text-center">
+    <table>
+        <tr>
+            <th>ISBN</th>
+            <th>Title</th>
+            <th>Price</th>
+            <th>Author</th>
+            <th>CopiesSold</th>
+        </tr>
+        @foreach (var book in Model.Books)
+        {
             <tr>
-                <th>ISBN</th>
-                <th>Title</th>
-                <th>Price</th>
-                <th>Author</th>
-                <th>CopiesSold</th>
+                <td>@Html.DisplayFor(m => book.Isbn)</td>
+                <td>@Html.DisplayFor(m => book.Title)</td>
+                <td>@Html.DisplayFor(m => book.Price)</td>
+                <td>@Html.DisplayFor(m => book.Author)</td>
+                <td>@Html.DisplayFor(m => book.CopiesSold)</td>
             </tr>
-            @foreach (var book in Model.Books)
-            {
-                <tr>
-                    <td>@Html.DisplayFor(m => book.Isbn)</td>
-                    <td>@Html.DisplayFor(m => book.Title)</td>
-                    <td>@Html.DisplayFor(m => book.Price)</td>
-                    <td>@Html.DisplayFor(m => book.Author)</td>
-                    <td>@Html.DisplayFor(m => book.CopiesSold)</td>
-                </tr>
-            }
-        </table>
-    </div>
+        }
+    </table>
+</div>
 
-    <div style="margin-top: 16px;">
-        <a class="btn btn-success btn-sm" asp-page-handler="ExportReport" asp-route-format="csv">Export as CSV</a>
-        <a class="btn btn-danger btn-sm" asp-page-handler="ExportReport" asp-route-format="pdf">Export as PDF</a>
-    </div>
+<div style="margin-top: 16px;">
+    <a class="btn btn-success btn-sm" asp-page-handler="ExportReport" asp-route-format="csv">Export as CSV</a>
+    <a class="btn btn-danger btn-sm" asp-page-handler="ExportReport" asp-route-format="pdf">Export as PDF</a>
+</div>

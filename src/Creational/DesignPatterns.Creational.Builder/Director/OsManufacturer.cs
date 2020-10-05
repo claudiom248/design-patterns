@@ -5,9 +5,9 @@ namespace DesignPatterns.Creational.Builder.Director
 {
     public class OsManufacturer<TBuilder, TElement> : IDirector<TBuilder, TElement, OsBuildingSpecifications>
         where
-            TElement : Os
+        TElement : Os
         where
-            TBuilder : OsBuilder<TElement>
+        TBuilder : OsBuilder<TElement>
     {
         public TBuilder Builder { get; set; }
 

@@ -76,7 +76,11 @@ namespace DesignPatterns.Tests.Creational.Builder.Builder.Phone
         }
 
         [TestCaseSource(nameof(TestCaseDataSource))]
-        public void Build_ReturnsExpectedPhone(PhoneBuilder<DesignPatterns.Creational.Builder.Domain.Phone> builder, string model, Os os, DesignPatterns.Creational.Builder.Domain.Phone expected)
+        public void Build_ReturnsExpectedPhone(
+            PhoneBuilder<DesignPatterns.Creational.Builder.Domain.Phone> builder,
+            string model,
+            Os os,
+            DesignPatterns.Creational.Builder.Domain.Phone expected)
         {
             builder.WithMake();
             builder.WithModel(model);

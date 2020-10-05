@@ -5,7 +5,7 @@ namespace DesignPatterns.Creational.AbstractFactory.RealWorldExample.Service
 {
     public class BookService : IBookService
     {
-        public IEnumerable<Book> GetAll() 
+        public IEnumerable<Book> GetAll()
             => new List<Book>
             {
                 new Book
@@ -41,5 +41,5 @@ namespace DesignPatterns.Creational.AbstractFactory.RealWorldExample.Service
                     Title = "Title4"
                 }
             };
-        }
+    }
 }

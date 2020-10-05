@@ -12,11 +12,11 @@ namespace DesignPatterns.Creational.Builder.Domain
 
         public List<string> Apps { get; set; }
 
-        public override bool Equals(object obj) 
+        public override bool Equals(object obj)
             => obj is Os os &&
-                   Name == os.Name &&
-                   Version == os.Version &&
-                   Apps.Count == os.Apps.Count && Apps.All(os.Apps.Contains);
+               Name == os.Name &&
+               Version == os.Version &&
+               Apps.Count == os.Apps.Count && Apps.All(os.Apps.Contains);
 
         public override int GetHashCode() => HashCode.Combine(Name, Version, Apps);
     }

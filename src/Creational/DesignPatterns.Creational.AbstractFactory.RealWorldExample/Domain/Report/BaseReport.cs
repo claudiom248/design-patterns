@@ -4,6 +4,12 @@ namespace DesignPatterns.Creational.AbstractFactory.RealWorldExample.Domain.Repo
 {
     public abstract class BaseReport : IReport
     {
+        protected BaseReport(ReportType type, string path)
+        {
+            Type = type;
+            Path = path;
+        }
+
         public string Name => Type.GetFileName(Format);
 
         public ReportType Type { get; protected set; }
@@ -13,11 +19,5 @@ namespace DesignPatterns.Creational.AbstractFactory.RealWorldExample.Domain.Repo
         public DateTime CreationDate { get; protected set; }
 
         public string Path { get; protected set; }
-
-        protected BaseReport(ReportType type, string path)
-        {
-            Type = type;
-            Path = path;
-        }
     }
 }
